@@ -1,0 +1,5 @@
+# ~/.zshenv
+#
+# Zsh-ism for setting nested Zsh source location from default ~/.zshenv
+# # https://www.khasegawa.net/posts/2018/12/fix-zsh-environment-variables/
+export ZDOTDIR=${HOME}/.config/zsh; source -- ${ZDOTDIR}/.zshenv
