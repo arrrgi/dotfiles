@@ -45,4 +45,11 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https:/github.com/arrrgi
+      link: https://github.com/arrrgi
+      name: Rowan Gillson on GitHub
+    - icon: fontawesome/brands/instagram
+      link: https://instagram.com/r0b0tn11k
+      name: Rowan Gillson on Instagram
+    - icon: fontawesome/brands/linkedin
+      link: https://au.linkedin.com/in/rowangillson
+      name: Rowan Gillson on LinkedIn
