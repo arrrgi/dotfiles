@@ -48,6 +48,7 @@
   {{-   else -}}
   {{-     $stringDevopsOrg = promptString "Provide your Azure Devops organization short name" -}}
   {{-   end -}}
+  {{- /* default to Linux server config if other scenarios are unmatched */}}
   {{- else -}}
   {{-   $envBoolServer = true -}}
   {{- end -}}
