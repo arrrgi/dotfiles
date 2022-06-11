@@ -9,48 +9,46 @@
   {{- $stringGithubUser := "" -}}{{- /* set by interactive prompt, otherwise inherited from context config */}}
   {{- $stringDevopsOrg := "" -}}{{- /* set by interactive prompt, otherwise inherited from context config */}}
   {{- /* end variable declarations */}}
-  {{- /* handle personal environment decisions and inputs */}}
-  {{- if eq .chezmoi.os "darwin" -}}
-  {{-   $envBoolPersonal = true -}}
-  {{-   if (hasKey . "stringName") -}}
-  {{-     $stringName = .stringName -}}
-  {{-   else -}}
-  {{-     $stringName = promptString "Provide a fullname or handle for .gitconfig" -}}
-  {{-   end -}}
-  {{-   if (hasKey . "stringEmail") -}}
-  {{-     $stringEmail = .stringEmail -}}
-  {{-   else -}}
-  {{-     $stringEmail = promptString "Provide an email address for .gitconfig" -}}
-  {{-   end -}}
-  {{-   if (hasKey . "stringGithubUser") -}}
-  {{-     $stringGithubUser = .stringGithubUser -}}
-  {{-   else -}}
-  {{-     $stringGithubUser = promptString "Provide your Github username" -}}
-  {{-   end -}}
-  {{- /* handle container and VM environment decision */}}
-  {{- else if or (env "CODESPACES") (env "REMOTE_CONTAINERS") (eq .chezmoi.username "root" "ubuntu" "vscode") -}}
-  {{-   $envBoolDisposable = true -}}
-  {{- /* handle work environment decisions and inputs */}}
-  {{- else if env "#FIXME" -}}
-  {{-   $envBoolWork = true -}}
-  {{-   if (hasKey . "stringName") -}}
-  {{-     $stringName = .stringName -}}
-  {{-   else -}}
-  {{-     $stringName = promptString "Provide a fullname or handle for .gitconfig" -}}
-  {{-   end -}}
-  {{-   if (hasKey . "stringEmail") -}}
-  {{-     $stringEmail = .stringEmail -}}
-  {{-   else -}}
-  {{-     $stringEmail = promptString "Provide an email address for .gitconfig" -}}
-  {{-   end -}}
-  {{-   if (hasKey . "stringDevopsOrg") -}}
-  {{-     $stringDevopsOrg = .stringDevopsOrg -}}
-  {{-   else -}}
-  {{-     $stringDevopsOrg = promptString "Provide your Azure Devops organization short name" -}}
-  {{-   end -}}
-  {{- /* default to Linux server config if other scenarios are unmatched */}}
-  {{- else -}}
-  {{-   $envBoolServer = true -}}
+  {{- /* first handle container and VM environment decision */}}
+  {{- if or (env "REMOTE_CONTAINERS") (env "VSCODE_REMOTE_CONTAINER_SESSION") (env "CODESPACES") (eq .chezmoi.username "ubuntu" "vscode") -}}
+    {{- $envBoolDisposable = true -}}
+  {{- /* now handle interactive inputs */}}  
+  {{- else if stdinIsATTY -}}
+    {{- if (hasKey . "stringName") -}}
+      {{- $stringName = .stringName -}}
+    {{- else -}}
+      {{- $stringName = promptString "Provide a fullname or handle for .gitconfig" -}}
+    {{- end -}}
+    {{- /* handle personal dev environment variables */}}
+    {{- if eq .chezmoi.os "darwin" -}}
+      {{- $envBoolPersonal = true -}}
+      {{- if (hasKey . "stringEmail") -}}
+        {{- $stringEmail = .stringEmail -}}
+      {{- else -}}
+        {{- $stringEmail = promptString "Provide an email address for .gitconfig" -}}
+      {{- end -}}
+      {{- if (hasKey . "stringGithubUser") -}}
+        {{- $stringGithubUser = .stringGithubUser -}}
+      {{- else -}}
+        {{- $stringGithubUser = promptString "Provide your Github username" -}}
+      {{- end -}}
+    {{- /* handle work dev environment inputs */}}
+    {{- else if (env "WSL_DISTRO_NAME") -}}
+      {{- $envBoolWork = true -}}
+      {{- if (hasKey . "stringEmail") -}}
+        {{- $stringEmail = .stringEmail -}}
+      {{- else -}}
+        {{- $stringEmail = promptString "Provide an email address for .gitconfig" -}}
+      {{- end -}}
+      {{- if (hasKey . "stringDevopsOrg") -}}
+        {{- $stringDevopsOrg = .stringDevopsOrg -}}
+      {{- else -}}
+        {{- $stringDevopsOrg = promptString "Provide your Azure Devops organization short name" -}}
+      {{- end -}}
+    {{- /* default to Linux server config if other scenarios are unmatched */}}
+    {{- else -}}
+      {{- $envBoolServer = true -}}
+    {{- end -}}
   {{- end -}}
   "diff": {
     "pager": "less -FX",
