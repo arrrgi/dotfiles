@@ -1,0 +1,69 @@
+[user]
+	name = {{ .stringname }}
+	### email handling
+	signingKey = ### handle with 1password document
+
+[core]
+	###pager = delta
+	excludesfile = ### path to gitignore
+	autocrlf = input
+
+[init]
+	defaultBranch = main
+
+[commit]
+	gpgsign = ### do this in personal dev space only
+
+[color]
+	ui = true
+
+[log]
+	date = iso
+
+[pull]
+	rebase = true
+	autostash = true
+
+[fetch]
+	prune - true
+
+[rebase]
+	autostash = true
+
+[diff]
+  tool = vscode
+
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+
+[merge]
+  tool = vscode
+
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
+
+[include]
+	path = ### to aliases
+
+#[delta]
+#	line-numbers = true
+#	syntax-theme = ###TODO
+
+[rerere]
+	enabled = true
+
+[credential]
+	### set helper and store based on environment
+	### WSL
+	helper = /usr/local/bin/git-credential-manager-core
+	credentialStore = wincredman
+	### Linux
+	helper = ###path to 
+	credentialStore = cache
+	### MacOS
+	helper = ###path to
+	credentialStore = keychain
+	cacheOptions = "--timeout 1800"
+
+[credential "https://dev.azure.com"]
+  useHttpPath = true

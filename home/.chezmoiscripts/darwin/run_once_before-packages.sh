@@ -1,0 +1,154 @@
+#!/usr/bin/env sh
+
+# Packages to install for MacOS
+
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+tap "homebrew/core"
+tap "microsoft/git"
+
+brew "alacritty"
+brew "coreutils"
+#brew 'diff-so-fancy'
+brew 'direnv'
+brew "dive"
+#brew "fzf"
+brew 'git'
+brew "gnu-sed"
+brew 'gnu-tar'
+brew 'grc'
+brew "grep"
+brew 'iperf3'
+brew "jq"
+#brew "mosh"
+brew "neovim"
+brew 'netcat'
+brew "p7zip"
+brew "peco"
+brew "python3"
+brew "pipx"
+#brew "rust"
+brew "shellcheck"
+brew 'socat'
+brew 'ssh-copy-id'
+brew 'tcpdump'
+brew 'telnet'
+brew "tmux"
+brew "tree"
+brew 'whois'
+
+# cask "docker"
+# cask "iterm2"
+cask "font-jetbrains-mono-nerd-font"
+cask "git-credential-manager-core"
+cask "gpg-suite-no-mail"
+
+##########################################################################
+##########################################################################
+##########################################################################
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/sh
+
+# Install common macOS packages
+
+source /tmp/chezmoi-utils.sh
+
+printf "${green}[10 - macOS] ${reset}"
+{{- if or (lt 10 (atoi (env "SCRIPTS_START_AT"))) (env "SKIP_BREW") }}
+echo "Skip installing common macOS packages"
+exit 0
+{{ else }}
+echo "Install common macOS packages"
+{{- end }}
+
+set -eufo pipefail
+
+{{ $taps := list
+  "homebrew/cask"
+  "homebrew/cask-fonts"
+  "koekeishiya/formulae"
+  "yqrashawn/goku"
+-}}
+
+{{ $brews := list
+  "gh"
+  "ghq"
+  "git"
+  "git-delta"
+
+  "mackup"
+  "mas"
+
+  "mpc"
+  "mpd"
+  "ncmpcpp"
+
+  "neofetch"
+  "neovim"
+  "reattach-to-user-namespace"
+  "terminal-notifier"
+  "tmux"
+  "tree"
+  "watch"
+  "zsh"
+
+  "helm"
+  "kubernetes-cli"
+  "kubectx"
+  "stern"
+
+  "koekeishiya/formulae/skhd"
+  "koekeishiya/formulae/yabai"
+  "yqrashawn/goku/goku"
+  "FelixKratz/formulae/sketchybar"
+
+  "bat"
+  "chezmoi"
+  "exa"
+  "ffmpeg"
+  "gpg"
+  "jq"
+  "fzf"
+  "fzy"
+  "shellcheck"
+  "switchaudio-osx"
+  "zoxide"
+  "task"
+-}}
+
+{{ $casks := list
+  "font-comic-mono"
+  "font-fira-code-nerd-font"
+  "font-fantasque-sans-mono"
+  "font-fantasque-sans-mono-nerd-font"
+
+  "qlmarkdown"
+  "quicklook-json"
+  "qlimagesize"
+  "suspicious-package"
+  "quicklookase"
+  "qlvideo"
+-}}
+
+brew bundle --no-lock --file=/dev/stdin <<EOF || :
+{{ range ($taps | sortAlpha | uniq) -}}
+tap "{{ . }}"
+{{ end }}
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end }}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end }}
+EOF
+
+echo "Start services..."
+
+# {{- if not (eq .computer_name "narze-m1-pro") }}
+# brew services start skhd
+# brew services start yabai
+# {{- end }}
+brew services start goku
+
+{{ end -}}

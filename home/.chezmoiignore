@@ -1,9 +1,43 @@
 # Specific directories to ignore
-.github/
-docs/
+.github/*
+docs/*
 
 # Specific files to ignore
 .editorconfig
 install.sh
 LICENSE
 README.md
+TODO.md
+
+# Files to ignore in devcontainer environments
+{{ if .envbooldisposable -}}
+.chezmoiscripts/*
+!.chezmoiscripts/disposable/*
+.config/*
+!.config/zsh/*
+{{- end }}
+
+# Files to ignore in WSL environments
+{{ if .envboolwork -}}
+.chezmoiscripts/*
+!.chezmoiscripts/wsl/*
+.config/*
+!.config/tmux/*
+{{- end }}
+
+# Files to ignore on server environments
+{{ if .envboolserver -}}
+.chezmoiscripts/*
+!.chezmoiscripts/linux/*
+.config/*
+!.config/nvim/*
+!.config/tmux/*
+!.config/rclone/*
+{{- end }}
+
+# Files to ignore on personal environments
+{{ if .envboolpersonal -}}
+.chezmoiscripts/*
+!.chezmoiscripts/darwin/*
+.config/rclone/*
+{{- end }}

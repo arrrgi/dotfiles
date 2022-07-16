@@ -1,0 +1,12 @@
+VisualHostKey=yes
+
+Host *
+    ControlMaster auto
+    ControlPersist 720
+    IdentityFile ~/.ssh/id_ed25519
+    SendEnv LANG LC_*
+    ServerAliveCountMax 10
+    ServerAliveInterval 30
+    StrictHostKeyChecking no
+
+{{/* Restrict FQDN external access to laptop */}}

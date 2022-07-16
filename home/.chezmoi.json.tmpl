@@ -10,7 +10,7 @@
   {{- $stringDevopsOrg := "" -}}{{- /* set by interactive prompt, otherwise inherited from context config */}}
   {{- /* end variable declarations */}}
   {{- /* first handle container and VM environment decision */}}
-  {{- if or (env "REMOTE_CONTAINERS") (env "VSCODE_REMOTE_CONTAINER_SESSION") (env "CODESPACES") (eq .chezmoi.username "ubuntu" "vscode") -}}
+  {{- if or (env "REMOTE_CONTAINERS") (env "VSCODE_REMOTE_CONTAINER_SESSION") (eq .chezmoi.username "ubuntu" "vscode") -}}
     {{- $envBoolDisposable = true -}}
   {{- /* now handle interactive inputs */}}  
   {{- else if stdinIsATTY -}}
