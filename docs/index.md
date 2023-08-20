@@ -57,9 +57,6 @@ closely to the way the Chezmoi base template evaluates conditions, captures
 necessary inputs from _**stdin**_ during installation and then executes context
 and OS specific scripts and config to the target environment.
 
-Additional detail on the conditional logic and inputs required is available in
-the [documentation](https://dotfiles.bald.engineer) for this repo.
-
 ```bash
 #!/bin/bash
 

@@ -31,6 +31,13 @@ theme:
     - navigation.expand
     - navigation.tabs
 
+nav:
+  - Home: "index.md"
+  - Usage: "usage.md"
+  - About:
+      - Design: "design.md"
+      - Colophon: "colophon.md"
+
 markdown_extensions:
   - admonition
   - pymdownx.highlight
