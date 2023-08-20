@@ -1,28 +1,41 @@
 name: Publish docs to gh-pages
 on:
-  push:
+  pull_request:
     branches:
       - "main"
     paths:
       - "docs/**"
       - ".github/mkdocs.yml"
   workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
-  deploy:
+  documentation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python runtime
+        uses: actions/setup-python@v4
         with:
           python-version: 3.x
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
-      - uses: actions/cache@v3
+
+      - name: Set the date environment variable for cache keying
+        run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+
+      - name: Setup build cache
+        uses: actions/cache@v3
         with:
           key: mkdocs-material-${{ env.cache_id }}
           path: .cache
           restore-keys: |
             mkdocs-material-
-      - run: pip install mkdocs-material
-      - run: mkdocs gh-deploy --config-file ./.github/mkdocs.yml --force
+
+      - name: Install dependencies
+        run: pip install mkdocs-material pillow cairosvg
+
+      - name: Publish documentation
+        run: mkdocs gh-deploy --config-file ./.github/mkdocs.yml --force
