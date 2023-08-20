@@ -2,7 +2,8 @@
 
 ## Description
 
-Opinionated dotfiles for \*nix based personal and work development environments.
+Opinionated dotfiles for \*nix based personal and work development environments,
+managed by [Chezmoi](https://www.chezmoi.io).
 
 ## Installation
 
@@ -14,13 +15,13 @@ Opinionated dotfiles for \*nix based personal and work development environments.
 **Run:**
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply arrrgi [--branch main|development]
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply arrrgi [--branch main|development]
 ```
 
 ## Dotfiles Decision Tree
 
-The installation of Chezmoi runs context/OS specific scripts and applies
-relevant dotfiles using the logic outlined:
+Chezmoi runs context/OS specific scripts and applies relevant dotfiles using the
+high-level logic outlined.
 
 ```mermaid
 flowchart TD
@@ -46,6 +47,8 @@ LoadRootlessConfig --> ExecScripts;
 MacOSCheck --> |No| Error;
 WSLCheck --> |No| Error;
 UbuntuCheck --> |No| Error;
+Context[Context =<br>Personal OR<br>Work];
+Target[Target =<br>Container, MacOS<br>WSL or Ubuntu];
 ```
 
 This could be interpreted as the following pseudo-Bash script which minimises
@@ -54,7 +57,8 @@ closely to the way the Chezmoi base template evaluates conditions, captures
 necessary inputs from _**stdin**_ during installation and then executes context
 and OS specific scripts and config to the target environment.
 
-Eg.
+Additional detail on the conditional logic and inputs required is available in
+the [documentation](https://dotfiles.bald.engineer) for this repo.
 
 ```bash
 #!/bin/bash
@@ -103,5 +107,8 @@ fi
 
 # Other platform - Error
 echo "Error: Unsupported platform"
-
 ```
+
+## License
+
+MIT
