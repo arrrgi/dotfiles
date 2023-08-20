@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "dotfiles"
+version = "0.1.0"
+description = "Opinionated dotfiles managed by Chezmoi"
+authors = ["Rowan Gillson <devops@the.bald.engineer>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+commitizen = "^3.6.0"
+pre-commit = "^3.3.3"
+mkdocs-material = "^9.1.21"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.0"
+tag_format = "$version"
+update_changelog_on_bump = "true"
+annotated_tag = "true"
+version_files = [
+  "pyproject.toml:version"
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
