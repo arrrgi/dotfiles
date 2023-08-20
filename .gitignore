@@ -1,0 +1,11 @@
+### Sensitive files
+*.crt
+*.key
+*.pem
+*.cer
+id_ed25519
+id_rsa
+
+### Project files
+.venv
+.cache
