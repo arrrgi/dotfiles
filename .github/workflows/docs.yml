@@ -1,0 +1,18 @@
+name: Publish docs to gh-pages
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "docs/**"
+      - ".github/mkdocs.yml"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material
+      - run: mkdocs gh-deploy --config-file ./.github/mkdocs.yml --force

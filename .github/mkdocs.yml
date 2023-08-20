@@ -1,0 +1,61 @@
+docs_dir: ../docs
+site_name: Only the dotfiles
+site_url: https://dotfiles.bald.engineer
+repo_url: https://github.com/arrrgi/dotfiles
+repo_name: arrrgi/dotfiles
+copyright: Copyright &copy; 2022 Rowan Gillson
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  language: en
+  font:
+    text: Raleway
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.instant
+    - navigation.expand
+    - navigation.tabs
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.keys
+  - toc:
+      permalink: true
+
+plugins:
+  - search:
+      lang: en
+  - social
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/arrrgi
+      name: Rowan Gillson on GitHub
+    - icon: fontawesome/brands/instagram
+      link: https://instagram.com/r0b0tn11k
+      name: Rowan Gillson on Instagram
+    - icon: fontawesome/brands/linkedin
+      link: https://au.linkedin.com/in/rowangillson
+      name: Rowan Gillson on LinkedIn
