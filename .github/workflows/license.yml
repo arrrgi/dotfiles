@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 12 1 1 *" # 12:00 PM on January 1
 
+permissions:
+  contents: write
+
 jobs:
   update-license-year:
     runs-on: ubuntu-latest
