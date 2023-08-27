@@ -1,9 +1,9 @@
 docs_dir: ../docs
-site_name: Only the dotfiles
+site_name: Only the Dotfiles
 site_url: https://dotfiles.bald.engineer
 repo_url: https://github.com/arrrgi/dotfiles
 repo_name: arrrgi/dotfiles
-copyright: Copyright &copy; 2022 Rowan Gillson
+copyright: Copyright &copy; 2023 Rowan Gillson
 
 theme:
   name: material
@@ -22,7 +22,7 @@ theme:
         name: Switch to light mode
   language: en
   font:
-    text: Raleway
+    text: Poppins
     code: JetBrains Mono
   icon:
     repo: fontawesome/brands/github
@@ -30,6 +30,13 @@ theme:
     - navigation.instant
     - navigation.expand
     - navigation.tabs
+
+nav:
+  - Home: "index.md"
+  - Usage: "usage.md"
+  - About:
+      - Design: "design.md"
+      - Colophon: "colophon.md"
 
 markdown_extensions:
   - admonition
