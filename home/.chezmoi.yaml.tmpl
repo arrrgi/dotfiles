@@ -21,13 +21,13 @@
     {{- $_ := set $secrets "apikeys" true -}}
   {{- else -}}
     {{/* Notify that the target environment isn't supported and exit with an error */}}
-    {{- writeToStdout "Error: Container environment not detected. Exiting.\n" -}}
+    {{- writeToStdout "🛑 Error: Container environment not detected. Exiting.\n" -}}
     {{- exit 1 -}}
   {{- end -}}
 {{- else -}}
   {{/* Notify the user that the session is interactive and prompt for the users full name */}}
   {{- writeToStdout "Info: Session is interactive.\n" -}}
-  {{- writeToStdout "Info: You can re-enter prompted inputs with `chezmoi init --data=false`.\n" -}}
+  {{- writeToStdout "💡 Tip: You can re-enter prompted inputs with `chezmoi init --data=false`.\n" -}}
   {{/* Get full name from user to populate Git config */}}
   {{- $_ := set $git "name" (promptStringOnce $git "name" "What is your full name") -}}
   {{/* use conditionals and Chezmoi builtin variable to determine which operating system the user is on */}}
@@ -44,7 +44,7 @@
     {{- $_ := set $environment "personal" true -}}
     {{- $_ := set $secrets "apikeys" true -}}
     {{- $_ := set $secrets "storagekeys" true -}}
-    {{- writeToStdout "Info: Done with MacOS config.\n" -}}
+    {{- writeToStdout "🌟 Info: Done with MacOS config.\n" -}}
   {{/* check for WSL */}}
   {{- else if and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
     {{/* prompt for additional Git config data */}}
@@ -57,7 +57,7 @@
     {{- $_ := set $environment "work" true -}}
     {{- $_ := set $secrets "sshkeys" true -}}
     {{- $_ := set $secrets "apikeys" true -}}
-    {{- writeToStdout "Info: Done with WSL config.\n" -}}
+    {{- writeToStdout "🌟 Info: Done with WSL config.\n" -}}
   {{/* check for Ubuntu */}}
   {{- else if (eq .chezmoi.osRelease.id "ubuntu") -}}
     {{- writeToStdout "Info: Enter your password when prompted to confirm you have sudo privileges.\n" -}}
@@ -70,7 +70,7 @@
       {{- $_ := set $privileges "controlled" true -}}
       {{- $_ := set $environment "personal" true -}}
       {{- $_ := set $secrets "storagekeys" true -}}
-      {{- writeToStdout "Info: Done with Ubuntu privileged access config.\n" -}}
+      {{- writeToStdout "🌟 Info: Done with Ubuntu privileged access config.\n" -}}
     {{- else -}}
       {{/* Notify user the target is a server with restricted access */}}
       {{- writeToStdout "Info: Target is an Ubuntu server with restricted access.\n" -}}
@@ -78,17 +78,19 @@
       {{- $_ := set $target "ubuntu" true -}}
       {{- $_ := set $privileges "restricted" true -}}
       {{- $_ := set $environment "untrusted" true -}}
-      {{- writeToStdout "Info: Done with Ubuntu rootless config.\n" -}}
+      {{- writeToStdout "🌟 Info: Done with Ubuntu rootless config.\n" -}}
     {{- end -}}
   {{- else -}}
     {{/* Notify user that the target environment is not supported */}}
-    {{- writeToStdout "Error: Target environment not supported. Exiting.\n" -}}
+    {{- writeToStdout "🛑 Error: Target environment not supported. Exiting.\n" -}}
     {{/* exit with an error code */}}
     {{- exit 1 -}}
   {{- end -}}
 {{- end -}}
 
 {{/* Write out the config as YAML with variable substitution */}}
+diff:
+  pager: delta
 encryption: age
 age:
   identity: "{{ $.chezmoi.homeDir }}/.config/age/key.txt"
