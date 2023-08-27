@@ -24,31 +24,34 @@ Chezmoi runs context/OS specific scripts and applies relevant dotfiles using the
 high-level logic outlined.
 
 ```mermaid
-flowchart TD
-Start[Start] --> TTYCheck{Is this a<br>TTY session?};
-TTYCheck --> |No| ContainerCheck{Is this a<br>container?};
-TTYCheck --> |Yes| AskName[Ask for full name];
-ContainerCheck --> |Yes| LoadContainerConfig[Set context<br>Set target<br>Set values];
-LoadContainerConfig --> ExecScripts;
-ExecScripts --> Exit[Finished];
-ContainerCheck --> |No| Error[End with error!];
-AskName --> MacOSCheck{Is this MacOS?};
-AskName --> WSLCheck{Is this WSL?};
-AskName --> UbuntuCheck{Is this Ubuntu?};
-MacOSCheck --> |Yes| LoadMacOSConfig[Set context<br>Set target<br>Set values];
-LoadMacOSConfig --> ExecScripts[Run scripts<br>Copy files];
-WSLCheck --> |Yes| LoadWSLConfig[Set context<br>Set target<br>Set values];
-LoadWSLConfig --> ExecScripts;
-UbuntuCheck --> |Yes| SudoCheck{Do you have<br>sudo access?};
-SudoCheck --> |Yes| LoadRootConfig[Set context<br>Set target<br>Set values];
-SudoCheck --> |No| LoadRootlessConfig[Set context<br>Set target<br>Set values];
-LoadRootConfig --> ExecScripts;
-LoadRootlessConfig --> ExecScripts;
-MacOSCheck --> |No| Error;
-WSLCheck --> |No| Error;
-UbuntuCheck --> |No| Error;
-Context[Context =<br>Personal OR<br>Work];
-Target[Target =<br>Container, MacOS<br>WSL or Ubuntu];
+graph TD
+  Start((Start))
+  Start --> TTY{Is the session a TTY?}
+  TTY -- False --> checkContainer{Is the session within<br>a Docker container?}
+  checkContainer -- True --> setContainer[Set Container<br>context Variables]
+  setContainer --> Success[End logic with<br>success message]
+  checkContainer -- False --> Error[Exit with error message]
+  Error --> Finish((Finish))
+  Success --> ApplyTemplate[Apply Chezmoi Template]
+  ApplyTemplate --> Finish
+  TTY -- True --> promptName[Prompt for full name]
+  promptName --> whichOS{Check OS Logic}
+  whichOS --> checkMacOS{Is the OS MacOS?}
+  whichOS --> checkWSL{Is the OS WSL?}
+  whichOS --> checkUbuntu{Is the OS Ubuntu?}
+  whichOS -- Other --> Error
+  checkWSL -- False --> Error
+  checkUbuntu -- False --> Error
+  checkMacOS -- True --> setMacOS[Set MacOS<br>context Variables]
+  checkMacOS -- False --> Error
+  checkWSL -- True --> setWSL[Set WSL<br>context Variables]
+  checkUbuntu -- True --> checkRootAccess{Do you have root access?}
+  checkRootAccess -- True --> setUbuntuRoot[Set Ubuntu with root<br>context Variables]
+  checkRootAccess -- False --> setUbuntuNormal[Set Ubuntu without root<br>context Variables]
+  setMacOS --> Success
+  setWSL --> Success
+  setUbuntuRoot --> Success
+  setUbuntuNormal --> Success
 ```
 
 This could be interpreted as the following pseudo-Bash script which minimises
@@ -63,50 +66,87 @@ the [documentation](https://dotfiles.bald.engineer) for this repo.
 ```bash
 #!/bin/bash
 
-# Check if not in a TTY session
-if [ ! -t 0 ]; then
-    # Not in a TTY session - Check if within a container
-    if grep -q "docker" /proc/1/cgroup; then
-        # Within a container - LoadContainerConfig
-        echo "Setting context, target, and values within a container"
+echo "Start"
+echo "-----"
+
+# Check if the session is a TTY
+echo "Is this a TTY session? (y/n)"
+read is_tty
+
+if [ "$is_tty" == "n" ]; then
+    # Check if the session is within a Docker container
+    echo "Is the session within a Docker container? (y/n)"
+    read is_container
+
+    if [ "$is_container" == "y" ]; then
+        # Set container context variables
+        echo "Setting Container context variables..."
+        # Perform necessary operations
+
+        echo "End logic with success message"
+        echo "Apply Chezmoi Template"
     else
-        # Not within a container - Error
-        echo "Error: Not in a TTY session and not within a container"
+        echo "Exit with error message"
+        echo "Finish"
     fi
-    exit
-fi
+else
+    echo "Is the OS MacOS? (y/n)"
+    read is_macos
 
-# Ask for the user's full name
-echo "Please enter your full name:"
-read full_name
+    if [ "$is_macos" == "y" ]; then
+        # Set MacOS context variables
+        echo "Setting MacOS context variables..."
+        # Perform necessary operations
 
-# Determine the user's platform
-if [ "$(uname)" == "Darwin" ]; then
-    # MacOS - LoadMacOSConfig
-    echo "Setting context, target, and values for $full_name on MacOS"
-    exit
-fi
+        echo "End logic with success message"
+        echo "Apply Chezmoi Template"
+    elif [ "$is_macos" == "n" ]; then
+        echo "Is the OS WSL? (y/n)"
+        read is_wsl
 
-if [ -f "/proc/version" ] && grep -qi "Microsoft" /proc/version; then
-    # WSL - LoadWSLConfig
-    echo "Setting context, target, and values for $full_name on WSL"
-    exit
-fi
+        if [ "$is_wsl" == "y" ]; then
+            # Set WSL context variables
+            echo "Setting WSL context variables..."
+            # Perform necessary operations
 
-if [ "$(lsb_release -is)" == "Ubuntu" ]; then
-    # Ubuntu - Check sudo access
-    if sudo -n true 2>/dev/null; then
-        # Ubuntu with sudo access - LoadRootConfig
-        echo "Setting context, target, and values for $full_name on Ubuntu (sudo)"
+            echo "End logic with success message"
+            echo "Apply Chezmoi Template"
+        else
+            echo "Is the OS Ubuntu? (y/n)"
+            read is_ubuntu
+
+            if [ "$is_ubuntu" == "y" ]; then
+                echo "Do you have root access? (y/n)"
+                read has_root_access
+
+                if [ "$has_root_access" == "y" ]; then
+                    # Set Ubuntu context variables with root
+                    echo "Setting Ubuntu with root context variables..."
+                    # Perform necessary operations
+
+                    echo "End logic with success message"
+                    echo "Apply Chezmoi Template"
+                elif [ "$has_root_access" == "n" ]; then
+                    # Set Ubuntu context variables without root
+                    echo "Setting Ubuntu without root context variables..."
+                    # Perform necessary operations
+
+                    echo "End logic with success message"
+                    echo "Apply Chezmoi Template"
+                else
+                    echo "Exit with error message"
+                    echo "Finish"
+                fi
+            else
+                echo "Exit with error message"
+                echo "Finish"
+            fi
+        fi
     else
-        # Ubuntu without sudo access - LoadRootlessConfig
-        echo "Setting context, target, and values for $full_name on Ubuntu (no sudo)"
+        echo "Exit with error message"
+        echo "Finish"
     fi
-    exit
 fi
-
-# Other platform - Error
-echo "Error: Unsupported platform"
 ```
 
 ## License
