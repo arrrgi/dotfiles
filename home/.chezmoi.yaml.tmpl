@@ -7,11 +7,11 @@
 {{- $git := dict -}}
 
 {{/* Test if we are in a non-interactive shell session with the stdinIsATTY function */}}
-{{/* if the session is not interactive, then check test whether the env has CODESPACES or REMOT_CONTAINER_SESSION, and the username is "vscode" or "ubuntu" */}}
+{{/* if the session is not interactive, then check test whether the env has CODESPACES or REMOTE_CONTAINERS, and the username is "vscode" or "ubuntu" */}}
 {{/* if the results are true, then set the target, access, environment and secrets variables */}}
 {{/* if the results are false, then exit with an error code */}}
 {{- if not stdinIsATTY -}}
-  {{- if and (or (env "CODESPACES") (env "VSCODE_REMOTE_CONTAINER")) (eq .chezmoi.username "vscode") | not | not -}}
+  {{- if and (or (env "CODESPACES") (env "REMOTE_CONTAINERS")) (eq .chezmoi.username "vscode" "ubuntu") | not | not -}}
     {{/* Notify user target is an ephemeral container */}}
     {{- writeToStdout "Info: Target is a container.\n" -}}
     {{/* Set target, access, environment and secrets values. Git data is not required for Codespaces or Devcontainers */}}
@@ -21,7 +21,7 @@
     {{- $_ := set $secrets "apikeys" true -}}
   {{- else -}}
     {{/* Notify that the target environment isn't supported and exit with an error */}}
-    {{- writeToStdout "Error: Target environment not supported. Exiting.\n" -}}
+    {{- writeToStdout "Error: Container environment not detected. Exiting.\n" -}}
     {{- exit 1 -}}
   {{- end -}}
 {{- else -}}
