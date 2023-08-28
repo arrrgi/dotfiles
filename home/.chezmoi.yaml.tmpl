@@ -74,7 +74,7 @@
       {{- $_ := set $secrets "sshkeys" true -}}
       {{- writeToStdout "🌟 Info: Done with WSL config.\n" -}}
     {{/* Check for Ubuntu with standard login equals personal server */}}
-    {{- else if and (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.username "sysadm") -}}
+    {{- else if and (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.username "sysadm") (not (.chezmoi.hostname | lower | hasPrefix "vps")) -}}
       {{- writeToStdout "Info: Target is Ubuntu-based home lab.\n" -}}
       {{/* Set context specific dict values */}}
       {{- $_ := set $target "ubuntu" true -}}
