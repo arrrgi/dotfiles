@@ -1,89 +1,130 @@
 {{/* Chezmoi config template */}}
-{{/* define dictionaries */}}
-{{- $target := dict "macos" false "wsl" false "container" false "ubuntu" false -}}
-{{- $privileges := dict "controlled" false "restricted" false -}}
-{{- $environment := dict "personal" false "work" false "ephemeral" false "untrusted" false -}}
-{{- $secrets := dict "sshkeys" false "apikeys" false "storagekeys" false -}}
+{{/* Define dictionaries */}}
+{{- $target := dict "darwin" false "wsl" false "devcontainer" false "ubuntu" false "debian" false -}}
+{{- $function := dict "personal" false "work" false "hybrid" false -}}
+{{- $access := dict "controlled" false "restricted" false -}}
+{{- $privacy := dict "private" false "public" false -}}
+{{- $state := dict "persistent" false "ephemeral" false -}}
+{{- $secrets := dict "apikeys" false "sshkeys" false "storagekeys" false -}}
 {{- $git := dict -}}
 
-{{/* Test if we are in a non-interactive shell session with the stdinIsATTY function */}}
-{{/* if the session is not interactive, then check test whether the env has CODESPACES or REMOTE_CONTAINERS, and the username is "vscode" or "ubuntu" */}}
-{{/* if the results are true, then set the target, access, environment and secrets variables */}}
-{{/* if the results are false, then exit with an error code */}}
+{{/* Test if the user is in a container by checking that a TTY is not present */}}
 {{- if not stdinIsATTY -}}
+  {{/* If the session is not in a TTY evaluates as true, then test for container specific environment variables and usernames */}}
   {{- if and (or (env "CODESPACES") (env "REMOTE_CONTAINERS")) (eq .chezmoi.username "vscode" "ubuntu") | not | not -}}
     {{/* Notify user target is an ephemeral container */}}
     {{- writeToStdout "Info: Target is a container.\n" -}}
     {{/* Set target, access, environment and secrets values. Git data is not required for Codespaces or Devcontainers */}}
-    {{- $_ := set $target "container" true -}}
-    {{- $_ := set $privileges "controlled" true -}}
-    {{- $_ := set $environment "ephemeral" true -}}
+    {{- $_ := set $target "devcontainer" true -}}
+    {{- $_ := set $function "hybrid" true -}}
+    {{- $_ := set $access "controlled" true -}}
+    {{- $_ := set $privacy "private" true -}}
+    {{- $_ := set $state "ephemeral" true -}}
+    {{/* Enable container context secrets */}}
     {{- $_ := set $secrets "apikeys" true -}}
+    {{- writeToStdout "🌟 Info: Done with container config.\n" -}}
+  {{/* If the results are false, notify the user the target environment is not supported and exit with an error */}}
   {{- else -}}
     {{/* Notify that the target environment isn't supported and exit with an error */}}
     {{- writeToStdout "🛑 Error: Container environment not detected. Exiting.\n" -}}
     {{- exit 1 -}}
   {{- end -}}
 {{- else -}}
-  {{/* Notify the user that the session is interactive and prompt for the users full name */}}
+{{/* As the user is in an interactive TTY session, test for the target environment */}}
+{{/* Notify the user that the session is interactive and prompt for the users full name */}}
   {{- writeToStdout "Info: Session is interactive.\n" -}}
   {{- writeToStdout "💡 Tip: You can re-enter prompted inputs with `chezmoi init --data=false`.\n" -}}
   {{/* Get full name from user to populate Git config */}}
   {{- $_ := set $git "name" (promptStringOnce $git "name" "What is your full name") -}}
-  {{/* use conditionals and Chezmoi builtin variable to determine which operating system the user is on */}}
-  {{/* check for MacOS */}}
+  {{/* Begin OS check conditionals and set context specific dictionary variables as true */}}
+  {{/* Check for MacOS */}}
   {{- if eq .chezmoi.os "darwin" -}}
     {{/* Notify user the target is a personal MacOS device */}}
-    {{- writeToStdout "Info: Target is MacOS personal device.\n" -}}
+    {{- writeToStdout "Info: Target is MacOS-based personal device.\n" -}}
     {{/* prompt for additional Git config data */}}
     {{- $_ := set $git "email" (promptStringOnce $git "email" "What is your Git associated email address") -}}
     {{- $_ := set $git "gh_username" (promptStringOnce $git "gh_username" "What is your GitHub username") -}}
     {{/* Set context specific dict values */}}
-    {{- $_ := set $target "macos" true -}}
-    {{- $_ := set $privileges "controlled" true -}}
-    {{- $_ := set $environment "personal" true -}}
+    {{- $_ := set $target "darwin" true -}}
+    {{- $_ := set $function "personal" true -}}
+    {{- $_ := set $access "controlled" true -}}
+    {{- $_ := set $privacy "private" true -}}
+    {{- $_ := set $state "persistent" true -}}
+    {{/* Enable MacOS context secrets */}}
     {{- $_ := set $secrets "apikeys" true -}}
     {{- $_ := set $secrets "storagekeys" true -}}
     {{- writeToStdout "🌟 Info: Done with MacOS config.\n" -}}
-  {{/* check for WSL */}}
-  {{- else if and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
-    {{/* prompt for additional Git config data */}}
-    {{- $_ := set $git "email" (promptStringOnce $git "email" "What is your Git associated email address") -}}
-    {{- $_ := set $git "ado_username" (promptStringOnce $git "ado_username" "What is your Azure DevOps username") -}}
-    {{- $_ := set $git "ado_org" (promptStringOnce $git "ado_org" "What is your Azure DevOps organization") -}}
-    {{/* Set context specific dict values */}}
-    {{- $_ := set $target "wsl" true -}}
-    {{- $_ := set $privileges "controlled" true -}}
-    {{- $_ := set $environment "work" true -}}
-    {{- $_ := set $secrets "sshkeys" true -}}
-    {{- $_ := set $secrets "apikeys" true -}}
-    {{- writeToStdout "🌟 Info: Done with WSL config.\n" -}}
-  {{/* check for Ubuntu */}}
-  {{- else if (eq .chezmoi.osRelease.id "ubuntu") -}}
-    {{- writeToStdout "Info: Enter your password when prompted to confirm you have sudo privileges.\n" -}}
-    {{/* check for sudo access and our standard admin username for servers */}}
-    {{- if and (eq (output "sh" "-c" "sudo -v >/dev/null 2>&1 && true || false") "0") (eq .chezmoi.username "sysadm") | not -}}
-      {{/* Notify user the target is a managed server */}}
-      {{- writeToStdout "Info: Target is an Ubuntu server with privileged access.\n" -}}
+  {{/* Check of Linux variants */}}
+  {{- else if eq .chezmoi.os "linux" -}}
+    {{/* Check for WSL */}}
+    {{- if and (eq .chezmoi.osRelease.id "ubuntu") (.chezmoi.kernel.osrelease | lower | contains "microsoft" ) -}}
+      {{- writeToStdout "Info: Target is WSL-based work device.\n" -}}
+      {{/* Prompt for additional Git config data */}}
+      {{- $_ := set $git "email" (promptStringOnce $git "email" "What is your Git associated email address") -}}
+      {{- $_ := set $git "ado_username" (promptStringOnce $git "ado_username" "What is your Azure DevOps username") -}}
+      {{- $_ := set $git "ado_org" (promptStringOnce $git "ado_org" "What is your Azure DevOps organization") -}}
+      {{/* Set context specific dict values */}}
+      {{- $_ := set $target "wsl" true -}}
+      {{- $_ := set $function "work" true -}}
+      {{- $_ := set $access "controlled" true -}}
+      {{- $_ := set $privacy "private" true -}}
+      {{- $_ := set $state "persistent" true -}}
+      {{/* Enable WSL context secrets */}}
+      {{- $_ := set $secrets "apikeys" true -}}
+      {{- $_ := set $secrets "sshkeys" true -}}
+      {{- writeToStdout "🌟 Info: Done with WSL config.\n" -}}
+    {{/* Check for Ubuntu with standard login equals personal server */}}
+    {{- else if and (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.username "sysadm") -}}
+      {{- writeToStdout "Info: Target is Ubuntu-based home lab.\n" -}}
       {{/* Set context specific dict values */}}
       {{- $_ := set $target "ubuntu" true -}}
-      {{- $_ := set $privileges "controlled" true -}}
-      {{- $_ := set $environment "personal" true -}}
+      {{- $_ := set $function "personal" true -}}
+      {{- $_ := set $access "controlled" true -}}
+      {{- $_ := set $privacy "private" true -}}
+      {{- $_ := set $state "persistent" true -}}
+      {{/* Enable home lab context secrets */}}
+      {{- $_ := set $secrets "apikeys" true -}}
       {{- $_ := set $secrets "storagekeys" true -}}
-      {{- writeToStdout "🌟 Info: Done with Ubuntu privileged access config.\n" -}}
-    {{- else -}}
-      {{/* Notify user the target is a server with restricted access */}}
-      {{- writeToStdout "Info: Target is an Ubuntu server with restricted access.\n" -}}
-      {{/* set context specific dict values */}}
+      {{- writeToStdout "🌟 Info: Done with Ubuntu home lab config.\n" -}}
+    {{/* Check for Ubuntu with non-standard login equals work server */}}
+    {{- else if and (eq .chezmoi.osRelease.id "ubuntu") (ne .chezmoi.username "sysadm") -}}
+      {{- writeToStdout "Info: Target is Ubuntu-based work server.\n" -}}
+      {{/* Set context specific dict values */}}
       {{- $_ := set $target "ubuntu" true -}}
-      {{- $_ := set $privileges "restricted" true -}}
-      {{- $_ := set $environment "untrusted" true -}}
-      {{- writeToStdout "🌟 Info: Done with Ubuntu rootless config.\n" -}}
+      {{- $_ := set $function "work" true -}}
+      {{- $_ := set $access "controlled" true -}}
+      {{- $_ := set $privacy "public" true -}}
+      {{- $_ := set $state "persistent" true -}}
+      {{- writeToStdout "🌟 Info: Done with Ubuntu work server config.\n" -}}
+    {{/* Check for Ubuntu with hostname pattern equals VPS server */}}
+    {{- else if and (eq .chezmoi.osRelease.id "ubuntu") (.chezmoi.hostname | lower | hasPrefix "vps") -}}
+      {{- writeToStdout "Info: Target is Ubuntu-based VPS server.\n" -}}
+      {{/* Set context specific dict values */}}
+      {{- $_ := set $target "ubuntu" true -}}
+      {{- $_ := set $function "personal" true -}}
+      {{- $_ := set $access "controlled" true -}}
+      {{- $_ := set $privacy "public" true -}}
+      {{- $_ := set $state "persistent" true -}}
+      {{- writeToStdout "🌟 Info: Done with Ubuntu VPS server config.\n" -}}
+    {{/* Check for Debian with non-standard login equals media server */}}
+    {{- else if and (eq .chezmoi.osRelease.id "debian") (ne .chezmoi.username "sysadm") -}}
+      {{- writeToStdout "Info: Target is Debian-based media server.\n" -}}
+      {{/* Set context specific dict values */}}
+      {{- $_ := set $target "debian" true -}}
+      {{- $_ := set $function "hybrid" true -}}
+      {{- $_ := set $access "restricted" true -}}
+      {{- $_ := set $privacy "public" true -}}
+      {{- $_ := set $state "persistent" true -}}
+      {{- writeToStdout "🌟 Info: Done with Debian media server config.\n" -}}
+    {{/* Otherwise end with an error message */}}
+    {{- else -}}
+      {{- writeToStdout "🛑 Error: Dotfiles OS target not supported. Exiting.\n" -}}
+      {{- exit 1 -}}
     {{- end -}}
+  {{/* Otherwise end with an error message */}}
   {{- else -}}
-    {{/* Notify user that the target environment is not supported */}}
-    {{- writeToStdout "🛑 Error: Target environment not supported. Exiting.\n" -}}
-    {{/* exit with an error code */}}
+    {{/* Notify user the target is not supported and exit with an error */}}
+    {{- writeToStdout "🛑 Error: Dotfiles target environment not supported. Exiting.\n" -}}
     {{- exit 1 -}}
   {{- end -}}
 {{- end -}}
@@ -91,21 +132,31 @@
 {{/* Write out the config as YAML with variable substitution */}}
 diff:
   pager: delta
+{{ if or $secrets.apikeys $secrets.sshkeys $secrets.storagekeys -}}
 encryption: age
 age:
   identity: "{{ $.chezmoi.homeDir }}/.config/age/key.txt"
   recipient: "age15an97ckm5e5vxu25hwukehkh7u3dh3fuysxx49v4qe0endpsvvas7z53f2"
+{{- end }}
 data:
   target:
     {{- range $key, $value := $target }}
     {{ $key }}: {{ $value }}
     {{- end }}
-  privileges:
-    {{- range $key, $value := $privileges }}
+  function:
+    {{- range $key, $value := $function }}
     {{ $key }}: {{ $value }}
     {{- end }}
-  environment:
-    {{- range $key, $value := $environment }}
+  access:
+    {{- range $key, $value := $access }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+  privacy:
+    {{- range $key, $value := $privacy }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+  state:
+    {{- range $key, $value := $state }}
     {{ $key }}: {{ $value }}
     {{- end }}
   secrets:
