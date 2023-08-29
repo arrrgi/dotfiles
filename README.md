@@ -15,7 +15,7 @@ managed by [Chezmoi](https://www.chezmoi.io).
 **Run:**
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply arrrgi [--branch main|development]
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply arrrgi [--branch=ref] --use-builtin-git=true
 ```
 
 ## Dotfiles Decision Tree
