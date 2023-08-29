@@ -34,13 +34,13 @@
 {{/* Notify the user that the session is interactive and prompt for the users full name */}}
   {{- writeToStdout "Info: Session is interactive.\n" -}}
   {{- writeToStdout "💡 Tip: You can re-enter prompted inputs with `chezmoi init --data=false`.\n" -}}
-  {{/* Get full name from user to populate Git config */}}
-  {{- $_ := set $git "name" (promptStringOnce $git "name" "What is your full name") -}}
   {{/* Begin OS check conditionals and set context specific dictionary variables as true */}}
   {{/* Check for MacOS */}}
   {{- if eq .chezmoi.os "darwin" -}}
     {{/* Notify user the target is a personal MacOS device */}}
     {{- writeToStdout "Info: Target is MacOS-based personal device.\n" -}}
+    {{/* Get full name from user to populate Git config */}}
+    {{- $_ := set $git "name" (promptStringOnce $git "name" "What is your full name") -}}
     {{/* prompt for additional Git config data */}}
     {{- $_ := set $git "email" (promptStringOnce $git "email" "What is your Git associated email address") -}}
     {{- $_ := set $git "gh_username" (promptStringOnce $git "gh_username" "What is your GitHub username") -}}
@@ -59,6 +59,8 @@
     {{/* Check for WSL */}}
     {{- if and (eq .chezmoi.osRelease.id "ubuntu") (.chezmoi.kernel.osrelease | lower | contains "microsoft" ) -}}
       {{- writeToStdout "Info: Target is WSL-based work device.\n" -}}
+      {{/* Get full name from user to populate Git config */}}
+      {{- $_ := set $git "name" (promptStringOnce $git "name" "What is your full name") -}}
       {{/* Prompt for additional Git config data */}}
       {{- $_ := set $git "email" (promptStringOnce $git "email" "What is your Git associated email address") -}}
       {{- $_ := set $git "ado_username" (promptStringOnce $git "ado_username" "What is your Azure DevOps username") -}}
