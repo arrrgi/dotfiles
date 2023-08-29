@@ -13,7 +13,7 @@ if ! xcode-select -p &> /dev/null; then
     echo "Info: XCode CLT are not installed. Installing XCode CLT..."
     xcode-select --install &> /dev/null
     # Wait for the installer to finish and accept the license agreement
-    if installer_pid=$(pgrep -o "[I]nstall Command Line Developer Tools.app"); then
+    if installer_pid=$(pgrep -o "[I]nstall Command Line Developer Tools"); then
         wait_for_process "$installer_pid"
         xcode-select -p &> /dev/null || { echo "Error: XCode Command Line tools installation failed. Exiting."; exit 1; }
         echo "Info: XCode Command Line tools installation successful."
