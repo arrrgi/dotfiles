@@ -1,4 +1,4 @@
-{{- if .target.darwin }}
+{{- if .target.darwin -}}
 #!/usr/bin/env bash
 
 # Check for XCode Command Line tools. If not present, install them, wait for the
@@ -46,4 +46,4 @@ else
     eval $(/usr/local/bin/brew shellenv)
     {{- end }}
 fi
-{{- end }}
+{{- end -}}
