@@ -12,7 +12,7 @@ else
     xcode-select --install &> /dev/null
 
     # Wait for the installation to finish and check that it was successful
-    if installer_pid=$(ps aux | grep -q "[I]nstall Command Line Developer Tools" | awk '{print $2}'); then
+    if installer_pid=$(ps aux | grep "[I]nstall Command Line Developer Tools.app" | awk '{print $2}'); then
         echo "Info: Waiting for XCode Command Line tools to finish installing..."
         wait $installer_pid && xcode-select -p &> /dev/null \
             && echo "Info: XCode Command Line tools installation successful." \
