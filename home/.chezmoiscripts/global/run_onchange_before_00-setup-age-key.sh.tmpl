@@ -1,0 +1,17 @@
+{{- if or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys -}}
+#!/usr/bin/env bash
+
+# This script decrypts the age encrypted key file and places it in the Chezmoi
+# config directory if any of the secrets evaluate as true from the Chezmoi config
+
+# Decrypt the key if it is not already decrypted
+{{- $encryptedKey := joinPath .chezmoi.sourceDir ".keys/key.txt.age" }}
+{{- $decryptedKey := joinPath .chezmoi.homeDir ".config/age/key.txt" }}
+if [ ! -f "{{ $decryptedKey }}" ]; then
+    echo "Info: Decrypting {{ $encryptedKey }}"
+    mkdir -p "{{ .chezmoi.homeDir }}/.config/age"
+    chezmoi age --decrypt --output "{{ $decryptedKey }}" --passphrase "{{ $encryptedKey }}"
+    chmod 600 "{{ $decryptedKey }}"
+    echo "Info: Decrypted key to private key file {{ $decryptedKey }}"
+fi
+{{- end -}}
