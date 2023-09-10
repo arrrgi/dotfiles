@@ -1,0 +1,18 @@
+# Specific directories to ignore
+.devcontainer/*
+.github/*
+.venv/*
+docs/*
+
+# Specific files to ignore
+.editorconfig
+.gitignore
+.pre-commit-config.yaml
+.release-please-manifest.json
+install.sh
+LICENSE
+poetry.lock
+poetry.toml
+pyproject.toml
+README.md
+release-please-config.json
