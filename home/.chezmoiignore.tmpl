@@ -11,7 +11,7 @@
 
 {{/* if target is Linux, ignore Darwin scripts and templates */}}
 {{/* in .chezmoiscripts and .chezmoitemplates */}}
-{{- if .target.linux }}
+{{- if or .target.debian .target.ubuntu .target.wsl }}
 {{ template "linux/ignore" . }}
 {{- end }}
 
