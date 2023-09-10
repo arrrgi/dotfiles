@@ -1,31 +1,4 @@
-{{- if .target.darwin -}}
-#!/usr/bin/env bash
-
-# Function to wait for a process to finish
-wait_for_process() {
-    while pgrep -q "$1"; do
-        sleep 10
-    done
-}
-
-# Check for XCode Command Line Tools and install if not present
-if ! xcode-select -p &> /dev/null; then
-    echo "Info: XCode CLT are not installed. Installing XCode CLT..."
-    xcode-select --install &> /dev/null
-    # Wait for the installer to finish and accept the license agreement
-    if installer_pid=$(pgrep -o "[I]nstall Command Line Developer Tools"); then
-        wait_for_process "$installer_pid"
-        xcode-select -p &> /dev/null || { echo "Error: XCode Command Line tools installation failed. Exiting."; exit 1; }
-        echo "Info: XCode Command Line tools installation successful."
-        sudo xcodebuild -license accept &> /dev/null
-        echo "Info: Accepted XCode Command Line tools license agreement."
-    else
-        echo "Error: Unable to find XCode Command Line tools installer PID. Exiting."
-        exit 1
-    fi
-else
-    echo "Info: XCode Command Line tools are already installed. Continuing..."
-fi
+#!/usr/bin/env sh
 
 # Check for Homebrew
 if ! command -v brew &> /dev/null; then
@@ -36,12 +9,12 @@ else
 fi
 
 # Check the host architecture and evaluate Homebrew path to use
-brew_command="/opt/homebrew/bin/brew"
 {{ if eq .chezmoi.arch "amd64" -}}
 brew_command="/usr/local/bin/brew"
+{{ else }}
+brew_command="/opt/homebrew/bin/brew"
 {{- end }}
 
 # Set Homebrew shellenv
 eval "$($brew_command shellenv)"
-
-{{- end -}}
+echo "Info: Homebrew shellenv set"
