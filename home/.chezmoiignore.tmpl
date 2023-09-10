@@ -17,8 +17,11 @@
 
 {{/* if target has no secrets defined, ignore installing Age decryption key */}}
 {{- if not (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys ) }}
-**/*.age
-.chezmoiscripts/global
+.chezmoiscripts/global/00-setup-age-key.sh
+{{- end }}
+
+{{/* if target is not work, ignore work SSH files */}}
+{{- if not .function.work }}
 {{- end }}
 
 {{/* if target is not work and not WSL or secret sshkeys is false, ignore work SSH files */}}

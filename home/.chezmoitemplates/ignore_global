@@ -5,6 +5,7 @@
 docs/*
 
 # Specific files to ignore
+**/*.age
 .editorconfig
 .gitignore
 .pre-commit-config.yaml
