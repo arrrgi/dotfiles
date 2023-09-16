@@ -1,5 +1,4 @@
-{{- if or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys -}}
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # This script decrypts the age encrypted key file and places it in the Chezmoi
 # config directory if any of the secrets evaluate as true from the Chezmoi config
@@ -13,5 +12,6 @@ if [ ! -f "{{ $decryptedKey }}" ]; then
     chezmoi age decrypt --output "{{ $decryptedKey }}" --passphrase "{{ $encryptedKey }}"
     chmod 600 "{{ $decryptedKey }}"
     echo "Info: Decrypted key to private key file {{ $decryptedKey }}"
+else
+    echo "Info: Private key file {{ $decryptedKey }} already exists. Skipping decryption."
 fi
-{{- end -}}
