@@ -10,11 +10,11 @@ fi
 
 # Check the host architecture and evaluate Homebrew path to use
 {{ if eq .chezmoi.arch "amd64" -}}
-brew_command="/usr/local/bin/brew"
+BREW_PATH="/usr/local/bin/brew"
 {{ else }}
-brew_command="/opt/homebrew/bin/brew"
+BREW_PATH="/opt/homebrew/bin/brew"
 {{- end }}
 
 # Set Homebrew shellenv
-eval "$($brew_command shellenv)"
-echo "Info: Homebrew shellenv set"
+eval "$(${BREW_PATH} shellenv)"
+echo "Info: Homebrew shellenv set with brew located at: ${BREW_PATH}"
