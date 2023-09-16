@@ -70,7 +70,7 @@
       {{- $_ := set $function "work" true -}}
       {{- $_ := set $access "controlled" true -}}
       {{- $_ := set $privacy "private" true -}}
-      {{- $_ := set $state "persistent" true -}}
+      {{- $_ := set $state "ephemeral" true -}}
       {{/* Enable WSL context secrets */}}
       {{- $_ := set $secrets "apikeys" true -}}
       {{- $_ := set $secrets "sshkeys" true -}}
@@ -139,6 +139,14 @@ encryption: age
 age:
   identity: "{{ $.chezmoi.homeDir }}/.config/age/key.txt"
   recipient: "age183zmhhlz4wg0a8qmweyzmm5cf0y0g4tyulxg8ldjzjmkgze2sqlsnvwuqs"
+{{- end }}
+{{ if eq .chezmoi.os "darwin" -}}
+scriptEnv:
+  {{ if eq .chezmoi.arch "arm64" -}}
+  BREW_PATH: "/opt/homebrew/bin/brew"
+  {{- else -}}
+  BREW_PATH: "/usr/local/bin/brew"
+  {{- end }}
 {{- end }}
 data:
   target:
