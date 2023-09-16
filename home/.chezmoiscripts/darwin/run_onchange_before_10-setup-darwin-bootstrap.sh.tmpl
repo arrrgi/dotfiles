@@ -18,3 +18,5 @@ BREW_PATH="/opt/homebrew/bin/brew"
 # Set Homebrew shellenv
 eval "$(${BREW_PATH} shellenv)"
 echo "Info: Homebrew shellenv set with brew located at: ${BREW_PATH}"
+BREW_VERSION="$(brew --version)"
+echo "Info: Successfully installed ${BREW_VERSION}"
