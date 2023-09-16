@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# darwin/packages.def hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/darwin/packages.def") | sha256sum }}
+
+brew update
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ includeTemplate "darwin/packages.def" . -}}
+EOF
+brew upgrade --cask --greedy
+brew cleanup

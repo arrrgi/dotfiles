@@ -1,0 +1,58 @@
+{{ $taps := list
+  "homebrew/bundle"
+  "homebrew/cask-fonts"
+  "sigstore/tap"
+-}}
+
+{{ $brews := list
+  "age"
+  "bat"
+  "broot"
+  "coreutils"
+  "fd"
+  "git"
+  "git-delta"
+  "gnu-sed"
+  "gnu-tar"
+  "grc"
+  "grep"
+  "hadolint"
+  "httpie"
+  "jq"
+  "lsd"
+  "neovim"
+  "peco"
+  "pipx"
+  "rclone"
+  "ripgrep"
+  "shellcheck"
+  "tmux"
+  "volta"
+  "yq"
+  "zoxide"
+  "zsh"
+  "sigstore/tap/gitsign"
+-}}
+
+{{ $casks := list
+  "1password"
+  "1password-cli"
+  "brave-browser"
+  "fig"
+  "font-jetbrains-mono-nerd-font"
+  "git-credential-manager"
+  "obsidian"
+  "raycast"
+  "visual-studio-code"
+  "wezterm"
+-}}
+
+{{ range ($taps | sortAlpha | uniq) -}}
+tap "{{ . }}"
+{{ end -}}
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
