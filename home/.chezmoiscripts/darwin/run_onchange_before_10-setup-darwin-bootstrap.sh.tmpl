@@ -8,15 +8,6 @@ else
     echo "Info: Homebrew is already installed. Continuing..."
 fi
 
-# Check the host architecture and evaluate Homebrew path to use
-{{ if eq .chezmoi.arch "amd64" -}}
-BREW_PATH="/usr/local/bin/brew"
-{{ else }}
-BREW_PATH="/opt/homebrew/bin/brew"
-{{- end }}
-
-# Set Homebrew shellenv
-eval "$(${BREW_PATH} shellenv)"
-echo "Info: Homebrew shellenv set with brew located at: ${BREW_PATH}"
-BREW_VERSION="$(brew --version)"
+# Show Homebrew version
+BREW_VERSION="$(${BREW_PATH} --version)"
 echo "Info: Successfully installed ${BREW_VERSION}"

@@ -2,9 +2,16 @@
 
 # darwin/packages.def hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/darwin/packages.def") | sha256sum }}
 
+# Source Homebrew environment variables
+eval "$(${BREW_PATH} shellenv)"
+
+# Update Homebrew and install packages
+echo "Info: Updating Homebrew."
 brew update
+echo "Info: Installing Homebrew packages."
 brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ includeTemplate "darwin/packages.def" . -}}
 EOF
 brew upgrade --cask --greedy
 brew cleanup
+echo "Info: Homebrew package installation completed."
