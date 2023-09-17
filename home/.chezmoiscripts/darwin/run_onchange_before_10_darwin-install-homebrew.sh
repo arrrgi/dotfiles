@@ -7,12 +7,12 @@ set -euo pipefail
 
 # Check for Homebrew
 if ! command -v brew &> /dev/null; then
-    printf "Info: Homebrew is not installed. Installing Homebrew..."
+    printf "Info: Homebrew is not installed. Installing Homebrew...\n"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-    printf "Info: Homebrew is already installed. Continuing..."
+    printf "Info: Homebrew is already installed. Continuing...\n"
 fi
 
 # Show Homebrew version
 BREW_VERSION="$(${BREW_PATH} --version)"
-printf "Info: Found %s installed." "${BREW_VERSION}"
+printf "Info: Found %s installed.\n" "${BREW_VERSION}"
