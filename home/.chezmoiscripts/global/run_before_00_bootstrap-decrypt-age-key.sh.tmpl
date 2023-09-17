@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# This script decrypts the age encrypted key file and places it in the Chezmoi config
+# directory if any of the secrets evaluated as true from the Chezmoi config. This script
+# is executed before all other templating and script execution.
+
+# Define source and destination paths for the decypted key file
+{{- $encryptedKey := joinPath .chezmoi.sourceDir ".keys/key.txt.age" }}
+{{- $decryptedKey := joinPath .chezmoi.homeDir ".config/age/key.txt" }}
+
+# Check if the key file exists and decrypt it if it does not into the Age config directory
+if [ ! -f "{{ $decryptedKey }}" ]; then
+    printf "Info: Decrypting {{ $encryptedKey }}"
+    mkdir -p "{{ .chezmoi.homeDir }}/.config/age"
+    chezmoi age decrypt --output "{{ $decryptedKey }}" --passphrase "{{ $encryptedKey }}"
+    chmod 600 "{{ $decryptedKey }}"
+    printf "Info: Decrypted key to private key file {{ $decryptedKey }}"
+else
+    printf "Info: Private key file {{ $decryptedKey }} already exists. Skipping decryption."
+fi
