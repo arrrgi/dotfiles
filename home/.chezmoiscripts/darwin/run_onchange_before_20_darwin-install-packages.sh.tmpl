@@ -18,16 +18,16 @@ sudo -v
 eval "$(${BREW_PATH} shellenv)"
 
 # Update Homebrew and install packages
-printf "Info: Updating Homebrew."
+printf "Info: Updating Homebrew.\n"
 brew update
 
-printf "Info: Installing Homebrew packages."
+printf "Info: Installing Homebrew packages.\n"
 brew bundle --no-lock --cleanup --file=/dev/stdin <<EOF
 {{ includeTemplate "darwin/packages.def" . -}}
 EOF
 
-printf "Info: Upgrading Homebrew packages."
+printf "Info: Upgrading Homebrew packages.\n"
 brew upgrade --cask --greedy
 brew cleanup
 
-printf "Info: Homebrew package installation and updates completed."
+printf "Info: Homebrew package installation and updates completed.\n"
