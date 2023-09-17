@@ -15,4 +15,4 @@ fi
 
 # Show Homebrew version
 BREW_VERSION="$(${BREW_PATH} --version)"
-printf "Info: Found ${BREW_VERSION} installed."
+printf "Info: Found %s installed." "${BREW_VERSION}"
