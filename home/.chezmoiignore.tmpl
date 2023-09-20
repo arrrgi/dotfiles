@@ -3,34 +3,26 @@
 {{/* Use context specific ignore templates so scripts and templates are only */}}
 {{/* applied depending on the target and access level the user has */}}
 
-{{/* if target is personal, MacOS device, ignore Linux scripts and templates */}}
-{{/* in .chezmoiscripts and .chezmoitemplates */}}
-{{- if and .target.darwin .function.personal }}
-{{ template "darwin/ignore" . }}
+{{/* if target has no secrets defined, ignore installing Age decryption key */}}
+{{- if not (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys ) }}
+.chezmoiscripts/bootstrap/00_bootstrap-decrypt-age-key.sh
 {{- end }}
 
 {{/* if target is Linux, ignore Darwin scripts and templates */}}
 {{/* in .chezmoiscripts and .chezmoitemplates */}}
-{{- if or .target.debian .target.ubuntu .target.wsl }}
+{{- if or .target.debian .target.devcontainer .target.ubuntu .target.wsl }}
 {{ template "linux/ignore" . }}
 {{- end }}
 
-{{/* if target has no secrets defined, ignore installing Age decryption key */}}
-{{- if not (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys ) }}
-.chezmoiscripts/global/00-setup-age-key.sh
+{{/* if target is work WSL device, include context based sensitive files */}}
+{{- if and .target.wsl .privacy.private .secrets.apikeys .secrets.sshkeys .state.ephemeral }}
+!.config/git
+!.config/wakatime
 {{- end }}
 
-{{/* if target is not work, ignore work SSH files */}}
-{{- if not .function.work }}
-{{- end }}
-
-{{/* if target is not work and not WSL or secret sshkeys is false, ignore work SSH files */}}
-{{- if and (not .function.work) (not .target.wsl) (not .secrets.sshkeys) }}
-.ssh/config.d/work
-.ssh/keys.d/work
-{{- end }}
-
-{{/* if target is work, WSL device, ignore personal SSH configs */}}
-{{- if and .function.work .target.wsl .secrets.sshkeys }}
-.ssh/config.d/personal
+{{/* if target is not a supported context, ignore everything not ignored globally */}}
+{{- if not (or .target.darwin .target.debian .target.devcontainer .target.ubuntu .target.wsl) }}
+.chezmoiscripts
+.chezmoitemplates
+.config
 {{- end }}
