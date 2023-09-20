@@ -1,2 +1,2 @@
-.chezmoiscripts/darwin
-.chezmoitemplates/darwin
+.chezmoiscripts/darwin/**
+.chezmoitemplates/darwin/**

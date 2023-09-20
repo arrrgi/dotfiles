@@ -1,24 +1,4 @@
-# Specific project directories to ignore
-.devcontainer
-.github
-.venv
-docs
-
-# Specific project files to ignore
-.editorconfig
-.gitignore
-.pre-commit-config.yaml
-.release-please-manifest.json
-install.sh
-LICENSE
-poetry.lock
-poetry.toml
-pyproject.toml
-README.md
-release-please-config.json
-
 # Sensitive or context specific files to ignore unless allow-listed
-.keys
 .config/git
 .config/rclone
 .config/wakatime
