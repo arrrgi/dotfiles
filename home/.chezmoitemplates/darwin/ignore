@@ -1,2 +1,2 @@
-.chezmoiscripts/linux
-.chezmoitemplates/linux
+.chezmoiscripts/linux/**
+.chezmoitemplates/linux/**

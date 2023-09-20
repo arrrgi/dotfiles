@@ -5,7 +5,31 @@
 
 {{/* if target has no secrets defined, ignore installing Age decryption key */}}
 {{- if not (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys ) }}
+**/*.age
 .chezmoiscripts/bootstrap/00_bootstrap-decrypt-age-key.sh
+{{- end }}
+
+{{/* if target is an ephemeral container, ignore all scripts and templates */}}
+{{/* in .chezmoiscripts and .chezmoitemplates and config except for Zsh config */}}
+{{/* and Wakatime API key */}}
+{{- if and .target.devcontainer .secrets.apikeys }}
+{{ template "darwin/ignore" . }}
+{{ template "linux/ignore" . }}
+.config
+!.config/zsh
+!.config/wakatime
+{{- end }}
+
+{{/* if target is personal, MacOS device, ignore Linux scripts and templates */}}
+{{/* in .chezmoiscripts and .chezmoitemplates and include context based sensitive files */}}
+{{- if and .target.darwin .privacy.private .secrets.apikeys .secrets.storagekeys }}
+{{ template "darwin/ignore" . }}
+!.config/git
+!.config/rclone
+!.config/wakatime
+!.ssh/config
+!.ssh/config.d/personal.conf
+!.ssh/allowed_signers
 {{- end }}
 
 {{/* if target is Linux, ignore Darwin scripts and templates */}}
@@ -18,11 +42,42 @@
 {{- if and .target.wsl .privacy.private .secrets.apikeys .secrets.sshkeys .state.ephemeral }}
 !.config/git
 !.config/wakatime
+!.ssh/config
+!.ssh/config.d/work.conf
+!.ssh/keys.d/id_ed25519.work*
+{{- end }}
+
+{{/* if target is a personal Ubuntu server, include SSH access and context based */}}
+{{/* sensitive files */}}
+{{- if and .target.ubuntu .privacy.private .secrets.apikeys .secrets.storagekeys .state.persistent }}
+!.config/wakatime
+!.config/rclone
+!.ssh/authorized_keys
+{{- end }}
+
+{{/* if target is a public Debian or Ubuntu server, only include SSH access */}}
+{{- if and (or .target.debian .target.ubuntu) .privacy.public .state.persistent }}
+!.ssh/authorized_keys
+{{- end }}
+
+{{/* if target is a server without root access, skip controlled access scripts */}}
+{{/* and templates */}}
+{{- if .access.restricted }}
+.chezmoiscripts/linux/controlled/**
+.chezmoitemplates/linux/controlled/**
+{{- end }}
+
+{{/* if target is a server with root access, skip restricted access scripts */}}
+{{/* and templates */}}
+{{- if .access.controlled }}
+.chezmoiscripts/linux/restricted/**
+.chezmoitemplates/linux/restricted/**
 {{- end }}
 
 {{/* if target is not a supported context, ignore everything not ignored globally */}}
 {{- if not (or .target.darwin .target.debian .target.devcontainer .target.ubuntu .target.wsl) }}
-.chezmoiscripts
-.chezmoitemplates
+.chezmoiscripts/**
+.chezmoitemplates/**
+.chezmoiexternal.yaml
 .config
 {{- end }}
