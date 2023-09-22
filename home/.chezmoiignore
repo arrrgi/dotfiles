@@ -1,7 +1,6 @@
-{{ template "ignore_global" . }}
-
 {{/* Use context specific ignore templates so scripts and templates are only */}}
 {{/* applied depending on the target and access level the user has */}}
+{{/* Note: SSH config and key exclusions use a directory specific .chezmoiignore */}}
 
 {{/* if target has no secrets defined, ignore installing Age decryption key */}}
 {{- if not (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys ) }}
@@ -21,15 +20,9 @@
 {{- end }}
 
 {{/* if target is personal, MacOS device, ignore Linux scripts and templates */}}
-{{/* in .chezmoiscripts and .chezmoitemplates and include context based sensitive files */}}
+{{/* in .chezmoiscripts and .chezmoitemplates and exclude context based sensitive files */}}
 {{- if and .target.darwin .privacy.private .secrets.apikeys .secrets.storagekeys }}
 {{ template "darwin/ignore" . }}
-!.config/git
-!.config/rclone
-!.config/wakatime
-!.ssh/config
-!.ssh/config.d/personal.conf
-!.ssh/allowed_signers
 {{- end }}
 
 {{/* if target is Linux, ignore Darwin scripts and templates */}}
@@ -38,26 +31,21 @@
 {{ template "linux/ignore" . }}
 {{- end }}
 
-{{/* if target is work WSL device, include context based sensitive files */}}
+{{/* if target is work WSL device, exclude context based sensitive files */}}
 {{- if and .target.wsl .privacy.private .secrets.apikeys .secrets.sshkeys .state.ephemeral }}
-!.config/git
-!.config/wakatime
-!.ssh/config
-!.ssh/config.d/work.conf
-!.ssh/keys.d/id_ed25519.work*
+.config/rclone
 {{- end }}
 
-{{/* if target is a personal Ubuntu server, include SSH access and context based */}}
-{{/* sensitive files */}}
+{{/* if target is a personal Ubuntu server, exclude context based sensitive files */}}
 {{- if and .target.ubuntu .privacy.private .secrets.apikeys .secrets.storagekeys .state.persistent }}
-!.config/wakatime
-!.config/rclone
-!.ssh/authorized_keys
+.config/git
 {{- end }}
 
-{{/* if target is a public Debian or Ubuntu server, only include SSH access */}}
+{{/* if target is a public Debian or Ubuntu server, exclude context based sensitive files */}}
 {{- if and (or .target.debian .target.ubuntu) .privacy.public .state.persistent }}
-!.ssh/authorized_keys
+.config/git
+.config/rclone
+.config/wakatime
 {{- end }}
 
 {{/* if target is a server without root access, skip controlled access scripts */}}

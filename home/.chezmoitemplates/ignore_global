@@ -1,5 +1,0 @@
-# Sensitive or context specific files to ignore unless allow-listed
-.config/git
-.config/rclone
-.config/wakatime
-.ssh
