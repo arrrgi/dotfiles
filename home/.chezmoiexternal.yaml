@@ -1,8 +1,0 @@
-{{- if and .target.wsl (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys) }}
-{{- $ageVersion := "1.1.1" }}
-".local/bin/age":
-  type: archive-file
-  url: https://github.com/FiloSottile/age/releases/download/v{{ $ageVersion }}/age-v{{ $ageVersion }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz
-  executable: true
-  path: age/age
-{{- end }}
