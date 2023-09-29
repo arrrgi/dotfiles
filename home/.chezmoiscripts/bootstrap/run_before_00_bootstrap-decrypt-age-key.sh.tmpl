@@ -14,8 +14,9 @@ set -eo pipefail
 if [ ! -f "{{ $decryptedKey }}" ]; then
     printf "Info: Decrypting {{ $encryptedKey }}\n"
     mkdir -p "{{ .chezmoi.homeDir }}/.config/age"
+    chmod 700 "{{ .chezmoi.homeDir }}/.config/age"
     chezmoi age decrypt --output "{{ $decryptedKey }}" --passphrase "{{ $encryptedKey }}"
-    chmod 600 "{{ $decryptedKey }}"
+    chmod 400 "{{ $decryptedKey }}"
     printf "Info: Decrypted key to private key file {{ $decryptedKey }}\n"
 else
     printf "Info: Private key file {{ $decryptedKey }} already exists. Skipping decryption.\n"
