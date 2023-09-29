@@ -9,3 +9,6 @@ id_rsa
 ### Project files
 .venv
 .cache
+
+## Work In Progress files
+scratch
