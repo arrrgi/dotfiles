@@ -1,5 +1,0 @@
-{{- $ghKeys := gitHubKeys .git.gh_username -}}
-{{- if gt (len $ghKeys) 0 -}}
-{{- $signingKey := index $ghKeys 0 -}}
-{{ .git.email }} namespaces="git" {{ $signingKey.Key }}
-{{ end -}}
