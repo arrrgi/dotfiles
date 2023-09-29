@@ -2,7 +2,7 @@
 
 # darwin/packages.def hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/darwin/packages.def") | sha256sum }}
 
-set -euo pipefail
+set -eo pipefail
 
 # This script is installs and updates Homebrew, and then uses Homebrew to install and update
 # packages. It relies on the following environment variable set in the Chezmoi config: BREW_PATH
