@@ -41,11 +41,18 @@
   "1password"
   "1password-cli"
   "brave-browser"
+  "cleanshot"
+  "firefox"
   "font-jetbrains-mono-nerd-font"
   "git-credential-manager"
   "obsidian"
   "raycast"
+  "telegram"
+  "todoist"
+  "transmit"
+  "utm"
   "visual-studio-code"
+  "vlc"
   "wezterm"
 -}}
 
