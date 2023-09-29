@@ -11,12 +11,12 @@
 {{/* if target is an ephemeral container, ignore all scripts and templates */}}
 {{/* in .chezmoiscripts and .chezmoitemplates and config except for Zsh config */}}
 {{/* and Wakatime API key */}}
-{{- if and .target.devcontainer .secrets.apikeys }}
+{{- if and .target.devcontainer .state.ephemeral }}
 {{ template "darwin/ignore" . }}
 {{ template "linux/ignore" . }}
 .config
 !.config/zsh
-!.config/wakatime
+.ssh
 {{- end }}
 
 {{/* if target is personal, MacOS device, ignore Linux scripts and templates */}}
