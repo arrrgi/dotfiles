@@ -20,8 +20,6 @@
     {{- $_ := set $access "controlled" true -}}
     {{- $_ := set $privacy "private" true -}}
     {{- $_ := set $state "ephemeral" true -}}
-    {{/* Enable container context secrets */}}
-    {{- $_ := set $secrets "apikeys" true -}}
     {{- writeToStdout "🌟 Info: Done with container config.\n" -}}
   {{/* If the results are false, notify the user the target environment is not supported and exit with an error */}}
   {{- else -}}
@@ -94,7 +92,7 @@
       {{/* Set context specific dict values */}}
       {{- $_ := set $target "ubuntu" true -}}
       {{- $_ := set $function "work" true -}}
-      {{- $_ := set $access "controlled" true -}}
+      {{- $_ := set $access "restricted" true -}}
       {{- $_ := set $privacy "public" true -}}
       {{- $_ := set $state "persistent" true -}}
       {{- writeToStdout "🌟 Info: Done with Ubuntu work server config.\n" -}}
