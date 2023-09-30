@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -eufo pipefail
 
 # This script installs Homebrew if it is not yet installed on the target system. It relies
 # on the following environment variable set in the Chezmoi config: BREW_PATH
