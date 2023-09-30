@@ -1,0 +1,6 @@
+{{ if and .function.personal .target.darwin -}}
+  {{ .git.email }} namespaces="git" {{ hcpVaultSecret "sshSigningKeyPersonal" }}
+{{- end -}}
+{{- if and .function.work .target.wsl -}}
+  {{ .git.email }} namespaces="git" {{ hcpVaultSecret "sshSigningKeyWork" }}
+{{- end -}}

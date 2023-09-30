@@ -1,0 +1,30 @@
+# Specific host options should be set first
+{{- if .function.personal }}
+Include config.d/personal.conf
+{{- else if .function.work }}
+Include config.d/work.conf
+{{- end }}
+
+# Generic defaults for all hosts follows
+Host *
+  ConnectTimeout 10
+  ControlMaster auto
+  ControlPath ~/.ssh/%r@%h:%p
+  ControlPersist 720
+  EscapeChar `
+  {{- if and .target.darwin .function.personal }}
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  {{- end }}
+  PreferredAuthentications publickey
+  SendEnv LANG LC_*
+  ServerAliveCountMax 10
+  ServerAliveInterval 30
+  VisualHostKey yes
+  # Host keys the client accepts - order here is honored by OpenSSH
+  HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa,ecdsa-sha2-nistp521-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp521,ecdsa-sha2-nistp384,ecdsa-sha2-nistp256
+  # Key exchange algorithms the client accepts - order here is honored by OpenSSH
+  KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256
+  # MAC algorithms the client accepts - order here is honored by OpenSSH
+  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com
+  # Ciphers the client accepts - order here is honored by OpenSSH
+  Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
