@@ -1,0 +1,22 @@
+{{/* Define cross platform externals first */}}
+
+{{/* Linux specific externals */}}
+{{/* Declare version variables */}}
+{{- $ageVersion := "1.1.1" -}}
+{{- $vltVersion := "0.2.2" -}}
+
+{{- if and .target.wsl (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys) }}
+".local/bin/age":
+  type: archive-file
+  url: https://github.com/FiloSottile/age/releases/download/v{{ $ageVersion }}/age-v{{ $ageVersion }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz
+  executable: true
+  path: age/age
+
+".local/bin/vlt":
+  type: archive-file
+  url: https://releases.hashicorp.com/vlt/{{ $vltVersion }}/vlt_{{ $vltVersion }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip
+  executable: true
+{{- end }}
+
+{{/* Darwin specific externals */}}
+{{/* Declare version variables */}}
