@@ -2,7 +2,7 @@
 
 # darwin/packages.def hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/darwin/packages.def") | sha256sum }}
 
-set -eo pipefail
+set -eufo pipefail
 
 # This script is installs and updates Homebrew, and then uses Homebrew to install and update
 # packages. It relies on the following environment variable set in the Chezmoi config: BREW_PATH
@@ -14,20 +14,25 @@ set -eo pipefail
 # Prompt pre-emptively for sudo password
 sudo -v
 
-# Source Homebrew environment variables
-eval "$(${BREW_PATH} shellenv)"
+if [ -x ${BREW_PATH} ]; then
+  # Source Homebrew environment variables
+  eval "$(${BREW_PATH} shellenv)"
 
-# Update Homebrew and install packages
-printf "Info: Updating Homebrew.\n"
-brew update
+  # Update Homebrew and install packages
+  printf "Info: Updating Homebrew.\n"
+  brew update
+  printf "Info: Installing Homebrew packages.\n"
+  brew bundle --no-lock --file=/dev/stdin <<EOF
+  {{ includeTemplate "darwin/packages.def" . -}}
+  EOF
+  printf "Info: Upgrading Homebrew packages.\n"
 
-printf "Info: Installing Homebrew packages.\n"
-brew bundle --no-lock --file=/dev/stdin <<EOF
-{{ includeTemplate "darwin/packages.def" . -}}
-EOF
-
-printf "Info: Upgrading Homebrew packages.\n"
-brew upgrade --cask --greedy
-brew cleanup
-
-printf "Info: Homebrew package installation and updates completed.\n"
+  # Upgrade packages
+  printf "Info: Upgrading Homebrew packages.\n"
+  brew upgrade --cask --greedy
+  brew cleanup
+  printf "Info: Homebrew package installation and updates completed.\n"
+else
+  printf "Error: Homebrew is not installed. Exiting.\n"
+  exit 1
+fi
