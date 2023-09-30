@@ -1,0 +1,25 @@
+{{/* Context specific SSH config and key exclusions */}}
+{{/* Ignore personal SSH config when context is WSL-based work device */}}
+{{- if and .target.wsl .function.work }}
+config.d/personal.conf
+allowed_signers
+authorized_keys
+{{- end }}
+{{/* Ignore work SSH config when context is personal device */}}
+{{- if and .target.darwin .function.personal }}
+config.d/work.conf
+keys.d
+authorized_keys
+{{- end }}
+{{/* Ignore all SSH config except authorized keys on personal or */}}
+{{/* hybrid function servers */}}
+{{- if and (or .target.ubuntu .target.debian) (or .function.personal .function.hybrid) }}
+config
+config.d
+keys.d
+allowed_signers
+{{- end }}
+{{/* Ignore all SSH config when context is work based server */}}
+{{- if and .target.ubuntu .function.work }}
+*
+{{- end }}
