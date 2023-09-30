@@ -2,7 +2,24 @@
 {{/* applied depending on the target and access level the user has */}}
 {{/* Note: SSH config and key exclusions use a directory specific .chezmoiignore */}}
 
+{{/* Global ignores */}}
+.*info
+.cache
+.cargo
+.DD*
+.DS_Store
+.lesshst
+.local
+.npm
+.oracle*
+.redhat
+.tmp
+.Trash
+.volta
+.vscode*
+
 {{/* if target has no secrets defined, ignore installing Age decryption key */}}
+{{/* and encrypted files */}}
 {{- if not (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys ) }}
 **/*.age
 .chezmoiscripts/bootstrap/00_bootstrap-decrypt-age-key.sh
