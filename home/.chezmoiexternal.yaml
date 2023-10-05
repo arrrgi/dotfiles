@@ -16,6 +16,7 @@
   type: archive-file
   url: https://releases.hashicorp.com/vlt/{{ $vltVersion }}/vlt_{{ $vltVersion }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip
   executable: true
+  path: vlt
 {{- end }}
 
 {{/* Darwin specific externals */}}
