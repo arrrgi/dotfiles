@@ -2,8 +2,8 @@
 
 {{/* Linux specific externals */}}
 {{/* Declare version variables */}}
-{{- $ageVersion := "1.1.1" -}}
-{{- $vltVersion := "0.2.2" -}}
+{{ $ageVersion := "1.1.1" -}}
+{{ $vltVersion := "0.2.2" -}}
 
 {{- if and .target.wsl (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys) }}
 ".local/bin/age":
