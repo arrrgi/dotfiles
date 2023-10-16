@@ -133,7 +133,7 @@
 {{/* Write out the config as YAML with variable substitution */}}
 diff:
   pager: delta
-scriptEnv:
+env:
 {{- if eq .chezmoi.os "darwin" }}
   {{- if eq .chezmoi.arch "arm64" }}
   BREW_PATH: "/opt/homebrew/bin/brew"
