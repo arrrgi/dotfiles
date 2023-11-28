@@ -53,7 +53,7 @@ fetch_binary() {
 fetch_jq_binary() {
   local jq_system_arch
   local jq_download_url
-  jq_system_arch=$(uname -s | tr '[:upper:]' '[:lower:]' | sed 's/darwin/macos/g')-$(uname -m | tr '[:upper:]' '[:lower:]' | sed 's/x86_64/amd64/g')
+  jq_system_arch=$(uname -s | tr '[:upper:]' '[:lower:]' | sed 's/darwin/macos/g')-$(uname -m | tr '[:upper:]' '[:lower:]' | sed 's/x86_64/amd64/g') # we need to replace the output of uname -s and uname -m to match the jq binary naming convention
   jq_download_url=$(curl -sL https://api.github.com/repos/jqlang/jq/releases/latest | grep "browser_download_url.*${jq_system_arch}" | cut -d '"' -f 4) || exit 1
 
   # Check if jq is already installed (e.g. via Homebrew) and skip if found, otherwise install it
@@ -66,7 +66,7 @@ fetch_vlt_binary() {
   local vlt_system_arch
   local vlt_download_url
   vlt_system_os=$(uname -s | tr '[:upper:]' '[:lower:]')
-  vlt_system_arch=$(uname -m | tr '[:upper:]' '[:lower:]' | sed 's/x86_64/amd64/g')
+  vlt_system_arch=$(uname -m | tr '[:upper:]' '[:lower:]' | sed 's/x86_64/amd64/g') # we need to replace the output of uname -m to match the vlt binary naming convention
   vlt_download_url=$(curl -s https://releases.hashicorp.com/vlt/index.json | jq -r --arg os "$vlt_system_os" --arg arch "$vlt_system_arch" '.versions | to_entries | map(select(.key | test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | map(.value.builds[] | select(.os == $os and .arch == $arch)) | sort_by(.version) | last | .url') || exit 1
 
   check_binary_installed "python3" || {
