@@ -156,6 +156,10 @@ hcpVaultSecrets:
   organizationId: {{ $hcp.orgID | quote }}
   projectId: {{ $hcp.projectID | quote }}
   applicationName: chezmoi
+hooks:
+  read-source-state:
+    pre:
+      command: ".local/share/chezmoi/home/hooks/.install-hcp-vlt.sh"
 {{- end }}
 data:
   target:
