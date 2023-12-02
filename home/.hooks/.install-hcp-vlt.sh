@@ -25,10 +25,10 @@ setup_bin_directory() {
 check_binary_installed() {
   local binary_name=$1
   if command -v "$binary_name" >/dev/null 2>&1; then
-    printf "Info: %s binary found in PATH...\n" "$binary_name"
+    printf "Warning: %s binary found in PATH...\n" "$binary_name"
     return 0
   else
-    printf "Info: %s binary not found in PATH...\n" "$binary_name"
+    printf "Warning: %s binary not found in PATH...\n" "$binary_name"
     return 1
   fi
 }
