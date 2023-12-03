@@ -4,14 +4,15 @@
 
 set -eufo pipefail
 
-# This script is installs and updates Homebrew, and then uses Homebrew to install and update
+# This script installs and updates Homebrew, and then uses Homebrew to install and update
 # packages. It relies on the following environment variable set in the Chezmoi config: BREW_PATH
 
-# The packages to install defined in the darwin/packages.def Chezmoi template. Changes to
+# The packages to install are defined in the darwin/packages.def Chezmoi template. Changes to
 # the packages.def template will be detected by Chezmoi between executions to apply
 # any changes. NOTE: Packages added manually to the target are removed by the `cleanup` option.
 
 # Prompt pre-emptively for sudo password
+printf "Info: A password may be required to install Homebrew packages.\n"
 sudo -v
 
 if [ -x ${BREW_PATH} ]; then
