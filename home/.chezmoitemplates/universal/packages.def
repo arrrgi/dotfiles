@@ -1,0 +1,21 @@
+{{- $packages := list
+  "age"
+  "bat"
+  "broot"
+  "fd"
+  "git"
+  "git-delta"
+  "grc"
+  "jq"
+  "lsd"
+  "neovim"
+  "peco"
+  "pipx"
+  "rclone"
+  "ripgrep"
+  "yq"
+  "zoxide"
+  "zsh"
+  "hashicorp/tap/vlt"
+-}}
+{{- $packages | sortAlpha | join " " -}}
