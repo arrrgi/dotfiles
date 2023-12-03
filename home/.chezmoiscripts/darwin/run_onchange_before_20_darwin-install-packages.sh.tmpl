@@ -4,8 +4,8 @@
 
 set -euo pipefail
 
-# This script installs and updates Homebrew, and then uses Homebrew to install and update
-# packages. It relies on the following environment variable set in the Chezmoi config: BREW_PATH
+# This script uses Homebrew to install and update packages. It relies on the following environment variable
+# set in the Chezmoi config: BREW_PATH
 
 # The packages to install are defined in the darwin/packages.def Chezmoi template. Changes to
 # the packages.def template will be detected by Chezmoi between executions to apply
@@ -26,13 +26,13 @@ if [ -x ${BREW_PATH} ]; then
   brew bundle --no-lock --file=/dev/stdin <<EOF
   {{ includeTemplate "darwin/packages.def" . -}}
   EOF
-  printf "Info: Upgrading Homebrew packages.\n"
+  printf "Info: Cleaning up Homebrew packages.\n"
+  brew bundle cleanup --force --file=/dev/stdin <<EOF
+  {{ includeTemplate "darwin/packages.def" . -}}
+  EOF
 
-  # Upgrade packages
-  printf "Info: Upgrading Homebrew packages.\n"
-  brew upgrade --cask --greedy
   brew cleanup
-  printf "Info: Homebrew package installation and updates completed.\n"
+  printf "Info: Homebrew package installations completed.\n"
 else
   printf "Error: Homebrew is not installed. Exiting.\n"
   exit 1

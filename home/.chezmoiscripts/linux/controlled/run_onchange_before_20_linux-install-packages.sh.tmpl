@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-# This script uses Homebrew to install and update packages. It relies on the following environment variable
+# This script uses Homebrew to install relevant packages. It relies on the following environment variable
 # set in the Chezmoi config: BREW_PATH
 
 # The packages to install are defined in the linux/controlled/packages.def Chezmoi template. Changes to
@@ -26,13 +26,9 @@ if [ -x ${BREW_PATH} ]; then
   brew bundle cleanup --force --file=/dev/stdin <<EOF
   {{ includeTemplate "linux/controlled/packages.def" . -}}
   EOF
-  printf "Info: Upgrading Homebrew packages.\n"
 
-  # Upgrade packages
-  printf "Info: Upgrading Homebrew packages.\n"
-  brew upgrade --cask --greedy
   brew cleanup
-  printf "Info: Homebrew package installation and updates completed.\n"
+  printf "Info: Homebrew package installations completed.\n"
 else
   printf "Error: Homebrew is not installed. Exiting.\n"
   exit 1
