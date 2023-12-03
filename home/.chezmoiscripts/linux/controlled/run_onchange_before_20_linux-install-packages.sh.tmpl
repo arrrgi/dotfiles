@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# linux/controlled/packages.def hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/linux/controlled/packages.def") | sha256sum }}
+
+set -euo pipefail
+
+# This script uses Homebrew to install and update packages. It relies on the following environment variable
+# set in the Chezmoi config: BREW_PATH
+
+# The packages to install are defined in the linux/controlled/packages.def Chezmoi template. Changes to
+# the packages.def template will be detected by Chezmoi between executions to apply
+# any changes. NOTE: Packages added manually to the target are removed by the `cleanup` option.
+
+if [ -x ${BREW_PATH} ]; then
+  # Source Homebrew environment variables
+  eval "$(${BREW_PATH} shellenv)"
+
+  # Update Homebrew and install packages
+  printf "Info: Updating Homebrew.\n"
+  brew update
+  printf "Info: Installing Homebrew packages.\n"
+  brew bundle --no-lock --file=/dev/stdin <<EOF
+  {{ includeTemplate "linux/controlled/packages.def" . -}}
+  EOF
+  printf "Info: Cleaning up Homebrew packages.\n"
+  brew bundle cleanup --force --file=/dev/stdin <<EOF
+  {{ includeTemplate "linux/controlled/packages.def" . -}}
+  EOF
+  printf "Info: Upgrading Homebrew packages.\n"
+
+  # Upgrade packages
+  printf "Info: Upgrading Homebrew packages.\n"
+  brew upgrade --cask --greedy
+  brew cleanup
+  printf "Info: Homebrew package installation and updates completed.\n"
+else
+  printf "Error: Homebrew is not installed. Exiting.\n"
+  exit 1
+fi
