@@ -140,6 +140,8 @@ env:
   {{- else }}
   BREW_PATH: "/usr/local/bin/brew"
   {{- end }}
+{{- else if and (eq .chezmoi.os "linux") (.privacy.private) }}
+  BREW_PATH: "/home/linuxbrew/.linuxbrew/bin/brew"
 {{- end }}
 {{- if or $secrets.apikeys $secrets.sshkeys $secrets.storagekeys }}
   {{- $_ := set $hcp "clientID" (promptStringOnce $hcp "clientID" "What is your Vault Secrets Service Principal ID") }}
