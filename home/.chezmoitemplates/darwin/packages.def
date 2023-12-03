@@ -1,43 +1,27 @@
-{{ $taps := list
+{{- $packages := splitList " " (includeTemplate "universal/packages.def" .) }}
+{{- $taps := list
   "hashicorp/tap"
   "homebrew/bundle"
   "homebrew/cask-fonts"
   "sigstore/tap"
 -}}
 
-{{ $brews := list
-  "age"
-  "bat"
-  "bpytop"
-  "broot"
+{{/* insert MacOS specific packages here */}}
+{{- $brews := concat $packages (list
   "coreutils"
-  "fd"
-  "git"
-  "git-delta"
   "gnu-sed"
   "gnu-tar"
-  "grc"
   "grep"
   "hadolint"
   "httpie"
-  "jq"
-  "lsd"
-  "neovim"
-  "peco"
-  "pipx"
-  "rclone"
-  "ripgrep"
   "shellcheck"
   "tmux"
   "volta"
-  "yq"
-  "zoxide"
-  "zsh"
-  "hashicorp/tap/vlt"
   "sigstore/tap/gitsign"
+)
 -}}
 
-{{ $casks := list
+{{- $casks := list
   "1password"
   "1password-cli"
   "brave-browser"
@@ -46,6 +30,7 @@
   "font-jetbrains-mono-nerd-font"
   "git-credential-manager"
   "obsidian"
+  "orbstack"
   "raycast"
   "telegram"
   "todoist"

@@ -1,0 +1,18 @@
+{{- $packages := splitList " " (includeTemplate "universal/packages.def" .) }}
+{{- $taps := list
+  "hashicorp/tap"
+  "homebrew/bundle"
+-}}
+
+{{/* insert Linux specific packages here */}}
+{{- $brews := concat $packages (list
+  "bpytop"
+)
+-}}
+
+{{ range ($taps | sortAlpha | uniq) -}}
+tap "{{ . }}"
+{{ end -}}
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
