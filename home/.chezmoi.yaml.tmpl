@@ -133,6 +133,10 @@
 {{/* Write out the config as YAML with variable substitution */}}
 diff:
   pager: delta
+  command: delta
+  args: "--side-by-side"
+  exclude:
+    - scripts
 env:
 {{- if eq .chezmoi.os "darwin" }}
   {{- if eq .chezmoi.arch "arm64" }}
