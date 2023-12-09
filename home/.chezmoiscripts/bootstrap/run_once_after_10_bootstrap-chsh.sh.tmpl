@@ -1,4 +1,4 @@
-{{ if and (ne .env.BREW_PATH "") (.access.controlled) -}}
+{{ if and (env "BREW_PATH") (.access.controlled) -}}
 #!/usr/bin/env bash
 #
 # SPDX-FileCopyrightText: (c) 2023 Rowan Gillson <devops@the.bald.engineer>
