@@ -1,0 +1,69 @@
+# Changelog
+
+## [0.2.0](https://github.com/arrrgi/dotfiles/compare/v0.1.0...v0.2.0) (2023-12-09)
+
+
+### Features
+
+* 🚧 add initial config template for testing ([59709bc](https://github.com/arrrgi/dotfiles/commit/59709bc1ed8d81de888bb5a2daa666ee001e8c19))
+* add basic git config without conditionals ([deab97f](https://github.com/arrrgi/dotfiles/commit/deab97fd0653a80b30f42c779283aa5602fd19b6))
+* add core externals definition ([d18cedb](https://github.com/arrrgi/dotfiles/commit/d18cedbcd29321550b705cb47cbb6aa0b1094ff6))
+* add darwin bootstrap script for testing ([a63b663](https://github.com/arrrgi/dotfiles/commit/a63b66353a54b07ce91de485329cccdce714b177))
+* add decryption key to support secrets in targets ([7b82c10](https://github.com/arrrgi/dotfiles/commit/7b82c10502b8b70eeb27efe790e9f1c24488439d))
+* add diff options to Chezmoi config ([18c3903](https://github.com/arrrgi/dotfiles/commit/18c390314962aadcebc752f5ce4c23cef7c4f674))
+* add first external utility package ([ed5af44](https://github.com/arrrgi/dotfiles/commit/ed5af44aeb1fc5b8480d7fac87099e49021541a1))
+* add global and some basic context relevant ignore configurations ([8f602fc](https://github.com/arrrgi/dotfiles/commit/8f602fce8a0972121c5d70e21a27634bba7790e4))
+* add handler for changing shell as post config task ([ae02b41](https://github.com/arrrgi/dotfiles/commit/ae02b41a6f09dc53c16d341c7855fc68bd0258ce))
+* add Homebrew based package installs to MacOS ([c2557c9](https://github.com/arrrgi/dotfiles/commit/c2557c96dd1f893d72d62587ee6a5aae2121313b))
+* add install script ([1801545](https://github.com/arrrgi/dotfiles/commit/1801545a7e4202710812b72f76d31197cbb0c5ef))
+* add logic and prompts for storing Vault Secrets data and scriptEnv ([6f91d10](https://github.com/arrrgi/dotfiles/commit/6f91d1004bc412ce088dd5637540393f947be997))
+* add Neofetch as a universal package ([6ceeb95](https://github.com/arrrgi/dotfiles/commit/6ceeb9502975deeeb9083fc0842cba92d7541ffe))
+* add script to install Homebrew packages on Linux ([291f0d6](https://github.com/arrrgi/dotfiles/commit/291f0d65fe71432a8895fb50ae4f89a9922185d4))
+* add SSH conditional configs ([0c5739e](https://github.com/arrrgi/dotfiles/commit/0c5739e259abca4ba19e6cf7146846b446121265))
+* add support for Homebrew on Linux ([dc91843](https://github.com/arrrgi/dotfiles/commit/dc91843abc929624422c1bc10b9a6096dafc43ef))
+* add Tmux and Neovim plugin externals ([1461940](https://github.com/arrrgi/dotfiles/commit/1461940efb325bccc069ed3c4c76a89de7cb488a))
+* add Vault Secrets CLI to Darwin packages ([f17168f](https://github.com/arrrgi/dotfiles/commit/f17168fda9a8fe530ed331e0e4cf1a27b26496e6))
+* create basic Devcontainer ([#12](https://github.com/arrrgi/dotfiles/issues/12)) ([19956f0](https://github.com/arrrgi/dotfiles/commit/19956f08960d2e6b0dd8de1b7c3e6d21f1f003fa))
+* define source of dotfiles and restrict to a specific chezmoi version ([47d8312](https://github.com/arrrgi/dotfiles/commit/47d8312da18c3d6e55a0b219bb7721a90311afc7))
+* support passphrase based sensitive file decryption with Age ([e2d8c7f](https://github.com/arrrgi/dotfiles/commit/e2d8c7f92048937452d7abb098786eb6f0a75763))
+
+
+### Bug Fixes
+
+* 🐛 resolve data to dict variables correctly ([aea734a](https://github.com/arrrgi/dotfiles/commit/aea734aaad4c9bce4265048c30e7d1a25bf2b232))
+* 🐛 resolved whitespace stripping mistake in template functions ([940cd78](https://github.com/arrrgi/dotfiles/commit/940cd78b16bb42b75c75da54f9b460ce56c4de3e))
+* add mandatory path spec to vlt external ([68dac40](https://github.com/arrrgi/dotfiles/commit/68dac400fcc636fea8ca052d8295cdd2271c6419))
+* add missing newlines to printf statements ([d9aa177](https://github.com/arrrgi/dotfiles/commit/d9aa17761055359a28fa191423d793398307f60f))
+* correctly eval brew environment vars ([09f7c96](https://github.com/arrrgi/dotfiles/commit/09f7c96d5f8078345a95cb5de6a46536fc2e7108))
+* ensure externals url's are quoted ([b47bdc5](https://github.com/arrrgi/dotfiles/commit/b47bdc5f8ca9d4062b9c004213f1059a90baf7de))
+* ignore unset variable flag as chezmoi creates subshells ([b2b0ebd](https://github.com/arrrgi/dotfiles/commit/b2b0ebd175e2c0c2d2e8ed8260213f2efd51ac3b))
+* ignore unset variable flag on decrypt script ([4b3d6fd](https://github.com/arrrgi/dotfiles/commit/4b3d6fdc54f7e77ef1348f699099b33af7a4a012))
+* move hooks to hidden directory to ignore from target state ([e1615e8](https://github.com/arrrgi/dotfiles/commit/e1615e8dc346f99204f35341c0fb09eb41416999))
+* pass correct command to decrypt Age file ([1e04300](https://github.com/arrrgi/dotfiles/commit/1e043007b19e45c1c3656e2c8af34dacf5ab5605))
+* remove brew bundle cleanup as Brewfile is piped via heredoc ([1d5e757](https://github.com/arrrgi/dotfiles/commit/1d5e75721faca66bb0576a976bc64407297e8b28))
+* remove extension from pgrep process lookup ([32be9af](https://github.com/arrrgi/dotfiles/commit/32be9af37ac2bc0f5721649b2b8cb9eecf46b037))
+* remove invalid whitespace chomping ([d8c8b31](https://github.com/arrrgi/dotfiles/commit/d8c8b31c4153e5bf07553fd53e0cd00060e9a683))
+* replace Age key to test decryption failure ([a46a10c](https://github.com/arrrgi/dotfiles/commit/a46a10ccb6000af473b01592d7889f3188386d5c))
+* resolve linux target conditional correctly ([2edf6d5](https://github.com/arrrgi/dotfiles/commit/2edf6d5dc00369bc84eb2a8a8cd62f1ed8c51ab4))
+* revert brew check to POSIX compliant method ([bb33d08](https://github.com/arrrgi/dotfiles/commit/bb33d089ff1c27faa01ceede4ccc87e35365af41))
+* revert to bash and output Brew version ([548c091](https://github.com/arrrgi/dotfiles/commit/548c091d8bce644df4e032db912ef59d0ec8b10b))
+* switch Darwin bootstrap to bash to support eval step ([6797921](https://github.com/arrrgi/dotfiles/commit/6797921941497e3655a7172ee7ef353d6193b243))
+* trim whitespace from script to resolve fork error ([7189885](https://github.com/arrrgi/dotfiles/commit/71898859f58f2043786738e7717f7d1c24401cd6))
+* unset API keys for Devcontainers and revert install script switches ([93bd783](https://github.com/arrrgi/dotfiles/commit/93bd783f1455304c8a6649f565bf8f86cd75800f))
+* update condition for chsh script execution ([f6d71fe](https://github.com/arrrgi/dotfiles/commit/f6d71fe30ff98cd8d5655c8bf275e1ed1c3b26c9))
+* update logic to detect container environment ([#13](https://github.com/arrrgi/dotfiles/issues/13)) ([a10c6aa](https://github.com/arrrgi/dotfiles/commit/a10c6aa8aa4f2cbd93ec29c09a038c4d9d513d02))
+* update XCode CLT process query ([7208efb](https://github.com/arrrgi/dotfiles/commit/7208efb7ad7756b3d419a0a0f809242533f74973))
+* use armored key file and new identity ([bb3c47d](https://github.com/arrrgi/dotfiles/commit/bb3c47de3556cfcbce77a6a2d9fa6a380c3c0d3c))
+* use hostname prefix logic for personal servers ([1aeec9e](https://github.com/arrrgi/dotfiles/commit/1aeec9e658d2fb2a0320c67533ff2fdf29014917))
+* use updated MkDocs job config ([#3](https://github.com/arrrgi/dotfiles/issues/3)) ([62e9fd8](https://github.com/arrrgi/dotfiles/commit/62e9fd81de487cd9e9a3381a0958047462ec7d20))
+
+
+### Documentation
+
+* add MkDocs to repo to support additional documentation ([d42f811](https://github.com/arrrgi/dotfiles/commit/d42f81177bfd4a87b40dbc91d5ba0140c35c6a0d))
+* amend basic documentation ([9106786](https://github.com/arrrgi/dotfiles/commit/91067864c8cc2f3f2d179548f87dd821daa56df3))
+* basic documentation to be iterated on ([#7](https://github.com/arrrgi/dotfiles/issues/7)) ([b2d50c1](https://github.com/arrrgi/dotfiles/commit/b2d50c192d6bc61a7e2315dd1718d987ee2274b7))
+* outline basic installation steps and flow logic ([cbb725e](https://github.com/arrrgi/dotfiles/commit/cbb725ee70b6b4f4eeed9a836f415920db16b161))
+* update install command in usage ([#16](https://github.com/arrrgi/dotfiles/issues/16)) ([0a594be](https://github.com/arrrgi/dotfiles/commit/0a594beaf45ec0ca0be4b165bccee80b4010f4f5))
+* update installation command accounting for vanilla MacOS ([#15](https://github.com/arrrgi/dotfiles/issues/15)) ([cc10582](https://github.com/arrrgi/dotfiles/commit/cc10582f57063730cd53efb1146badb068ba345a))
+* update installation command and docs reference URL ([7d78534](https://github.com/arrrgi/dotfiles/commit/7d78534c431b38528e4e8d1c0f7970a8870d51f4))
