@@ -1,0 +1,56 @@
+{{ if and (ne .env.BREW_PATH "") (.access.controlled) -}}
+#!/usr/bin/env bash
+#
+# SPDX-FileCopyrightText: (c) 2023 Rowan Gillson <devops@the.bald.engineer>
+# SPDX-License-Identifier: MIT
+#
+
+set -euo pipefail
+
+add_to_shells() {
+  local shell_path="$1"
+  if ! grep -qF "$shell_path" /etc/shells; then
+    printf '%s\n' "$shell_path" | sudo tee -a /etc/shells >/dev/null
+  else
+    printf '%s\n' "Info: $shell_path is already in /etc/shells"
+    return 0
+  fi
+}
+
+change_default_shell() {
+  local shell_path="$1"
+  if [ "$SHELL" != "$shell_path" ]; then
+    chsh -s "$shell_path" "$USER"
+  else
+    printf '%s\n' "Info: $shell_path is already the default shell"
+    return 0
+  fi
+}
+
+detect_zsh_path() {
+  local brew_prefix
+  local zsh_path
+
+  if [ -x "${BREW_PATH:-}" ]; then
+    brew_prefix="$("${BREW_PATH}" --prefix)"
+    export PATH="${brew_prefix}/bin:${PATH}"
+
+    if [ -x "${brew_prefix}/bin/zsh" ]; then
+      zsh_path="${brew_prefix}/bin/zsh"
+    elif command -v zsh >/dev/null; then
+      zsh_path="$(command -v zsh)"
+    else
+      printf '%s\n' "Warning: Zsh is not installed via Homebrew or on the system. Please install Zsh and run this script again." >&2
+      exit 0
+    fi
+
+    add_to_shells "$zsh_path"
+    change_default_shell "$zsh_path"
+  else
+    printf '%s\n' "Error: Homebrew is not available at ${BREW_PATH}. Please install Homebrew and run this script again." >&2
+    exit 1
+  fi
+}
+
+detect_zsh_path "$@"
+{{- end }}
