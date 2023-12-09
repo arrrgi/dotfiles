@@ -1,2 +1,7 @@
+{{/*
+SPDX-FileCopyrightText: (c) 2023 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
+
 .chezmoiscripts/darwin/**
 .chezmoitemplates/darwin/**
