@@ -1,3 +1,8 @@
+{{/*
+SPDX-FileCopyrightText: (c) 2023 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
+
 {{/* Use context specific ignore templates so scripts and templates are only */}}
 {{/* applied depending on the target and access level the user has */}}
 {{/* Note: SSH config and key exclusions use a directory specific .chezmoiignore */}}

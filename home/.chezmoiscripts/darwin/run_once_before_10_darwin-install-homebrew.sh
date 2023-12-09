@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# SPDX-FileCopyrightText: (c) 2023 Rowan Gillson <devops@the.bald.engineer>
+# SPDX-License-Identifier: MIT
+#
 
 set -euo pipefail
 
