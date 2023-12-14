@@ -2,7 +2,6 @@
 {{/* Ignore personal SSH config when context is WSL-based work device */}}
 {{- if and .target.wsl .function.work }}
 config.d/personal.conf
-allowed_signers
 authorized_keys
 {{- end }}
 {{/* Ignore work SSH config when context is personal device */}}
