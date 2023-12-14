@@ -1,6 +1,9 @@
 # Specific host options should be set first
 {{- if .function.personal }}
 Include config.d/personal.conf
+{{-   if lookPath "orb" }}
+Include ~/.orbstack/ssh/config
+{{-   end }}
 {{- else if .function.work }}
 Include config.d/work.conf
 {{- end }}
