@@ -1,3 +1,4 @@
 [include]
   path = ~/.config/git/standard
   path = ~/.config/git/user
+  path = ~/.config/git/aliases

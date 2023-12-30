@@ -16,6 +16,17 @@
 
 [core]
   autocrlf = input
+  excludesfile = ~/.config/git/ignore
+# TODO: pager = delta + [delta] options
+#[delta]
+#  line-numbers = true
 
 [safe]
   directory = *
+
+[log]
+  date = iso
+
+[rerere]
+  enabled = true
+
