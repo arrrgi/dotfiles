@@ -5,4 +5,5 @@ SPDX-License-Identifier: MIT
 
 .chezmoiscripts/darwin/**
 .chezmoitemplates/darwin/**
+.config/1Password/**
 .config/wezterm/**
