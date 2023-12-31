@@ -6,7 +6,7 @@
 #
 
 {{- if lookPath "zellij" }}
-# Enable Zellij auto-attach if we are in a remote terminal
+# Enable Zellij auto-attach if we are in a remote terminal.
 if [ -n "${SSH_TTY}" ] && [ "${0##*/}" = "-zsh" ]; then
   export ZELLIJ_AUTO_ATTACH=true
   eval "$(zellij setup --generate-auto-start zsh)"
@@ -31,7 +31,7 @@ zstyle ':z4h:bindkey' keyboard  'pc'
 zstyle ':z4h:bindkey' keyboard  'mac'
 {{- end }}
 
-# Don't automatically start tmux - we use Zellij for terminal multiplexing
+# Don't automatically start tmux - we use Zellij for terminal multiplexing.
 zstyle ':z4h:' start-tmux       no
 
 # Mark up shell's output with semantic information.
@@ -62,7 +62,7 @@ zstyle ':z4h:ssh:*'                     enable 'no'
 # enabled hosts.
 zstyle ':z4h:ssh:*' send-extra-files '~/.config/zsh/.exports.sh' '~/.config/zsh/.aliases.sh' '~/.config/zsh-abbr/user-abbreviations'
 
-# Enable SSH config hostname completion
+# Enable SSH config hostname completion.
 zstyle ':completion:*:ssh:argument-1:'       tag-order  hosts users
 zstyle ':completion:*:scp:argument-rest:'    tag-order  hosts files users
 zstyle ':completion:*:(ssh|scp|rdp):*:hosts' hosts
@@ -116,6 +116,12 @@ z4h source "${ZDOTDIR:-$HOME/.config/zsh}/.functions.sh"
 {{- if lookPath "grc" -}}
 z4h source "${HOMEBREW_PREFIX}/etc/grc.zsh" <$TTY
 {{- end }}
+
+# Add additional directories to $fpath.
+fpath=(
+    $ZDOTDIR/completions
+    $fpath
+)
 
 # Use additional Git repositories pulled in with `z4h install`.
 #
