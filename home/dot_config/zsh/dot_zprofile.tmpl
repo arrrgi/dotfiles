@@ -1,0 +1,16 @@
+#
+# SPDX-FileCopyrightText: (c) 2023 Rowan Gillson <devops@the.bald.engineer>
+# SPDX-License-Identifier: MIT
+#
+
+{{/* Workaround to systemd missing from WSL to start services */}}
+{{- if .target.wsl -}}
+if service docker status 2>&1 | grep -q "is not running"; then
+  wsl.exe -d "${WSL_DISTRO_NAME}" -u root -e /usr/sbin/service docker start >/dev/null 2>&1
+fi
+{{- end }}
+
+{{- if lookPath "orb" -}}
+# Added by OrbStack: command-line tools and integration
+source "${HOME}/.orbstack/shell/init.zsh" 2>/dev/null || :
+{{- end }}

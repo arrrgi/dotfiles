@@ -1,0 +1,70 @@
+#
+# SPDX-FileCopyrightText: (c) 2023 Rowan Gillson <devops@the.bald.engineer>
+# SPDX-License-Identifier: MIT
+#
+
+# Useful shortcuts
+alias _='sudo '
+alias sudo='sudo '
+alias reload='exec ${SHELL} -l'
+
+# Navigation
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
+alias egrep='grep -E'
+alias fgrep='grep -F'
+
+# Command substitutions
+# LSD is a modern replacement for ls
+if command -v lsd &> /dev/null; then
+  alias ls='lsd'
+  alias la='ls -A'
+  alias ll='ls -l'
+  alias lla='la -l'
+  alias ld='ls --depth=1 --tree'
+  alias lld='ld -l'
+  alias lldd='ls --depth=2 --tree -l'
+fi
+
+# Bat is a modern replacement for cat
+if command -v bat &>/dev/null; then
+  alias cat='bat -pp'
+  alias less='bat --paging=always'
+  # override MANPAGER
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
+
+# Helix
+if command -v hx &>/dev/null; then
+  alias vim='hx'
+  alias vi='hx'
+elif command -v nvim &>/dev/null; then
+  alias vim='nvim'
+  alias vi='nvim'
+fi
+
+# Wget
+alias wget='wget --hsts-file="${XDG_CACHE_HOME}/wget-hsts"'
+
+# Zellij
+alias zj='zellij'
+
+# Conveniences
+alias zshrc='${=EDITOR} ${ZDOTDIR:-$XDG_CONFIG_HOME}/.zshrc'
+alias -g H='| head'
+alias -g T='| tail'
+alias -g G='| grep'
+alias -g L="| less"
+alias du='du -c'
+alias dud='du -d 1 -h'
+alias duf='du -sh *'
+alias h='history'
+alias sortnr='sort -n -r'
+alias unexport='unset'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
