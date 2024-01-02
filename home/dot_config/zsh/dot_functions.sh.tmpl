@@ -3,8 +3,8 @@
 # SPDX-License-Identifier: MIT
 #
 
-u() {
-  chezmoi upgrade
-  chezmoi update --init
+# Shell function for Broot to cd into a directory - workaround for Zsh integration
+function br {
+    emulate -L zsh
+    (){ broot --outcmd $1 ${@:2} && source $1 } =() $@
 }
-
