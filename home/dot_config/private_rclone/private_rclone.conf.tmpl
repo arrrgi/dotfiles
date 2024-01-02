@@ -1,0 +1,18 @@
+[B2]
+type = b2
+account = {{ hcpVaultSecret "rcloneApiKeyPersonal" -}}
+key = {{ hcpVaultSecret "rcloneApiSecretPersonal" -}}
+hard_delete = true
+
+[Encrypted]
+type = crypt
+remote = B2:mediavault-bucket
+filename_encryption = standard
+password = {{ hcpVaultSecret "rcloneEncryptKeyPersonal" -}}
+password2 = {{ hcpVaultSecret "rcloneEncryptSaltPersonal" }}
+
+[AVault]
+type = crypt
+remote = B2:avault-bucket
+password = {{ hcpVaultSecret "rcloneEncryptKeyPersonal" -}}
+password2 = {{ hcpVaultSecret "rcloneEncryptSaltPersonal" -}}
