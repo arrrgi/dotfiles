@@ -8,20 +8,29 @@ SPDX-License-Identifier: MIT
 {{/* Note: SSH config and key exclusions use a directory specific .chezmoiignore */}}
 
 {{/* Global ignores */}}
+**/*/*.zwc
 .*info
+.bash_history
 .cache
 .cargo
 .DD*
 .DS_Store
+.docker
 .lesshst
-.local
 .npm
+.profile
 .oracle*
+.orbstack
 .redhat
 .tmp
 .Trash
 .volta
 .vscode*
+.zsh_history
+.config/age
+.config/wakatime/wakatime*
+.config/zsh/.zsh_history
+.ssh/s/**
 
 {{/* if target has no secrets defined, ignore installing Age decryption key */}}
 {{/* and encrypted files */}}
@@ -68,6 +77,8 @@ SPDX-License-Identifier: MIT
 .config/git
 .config/rclone
 .config/wakatime
+.config/zsh
+.zshenv
 {{- end }}
 
 {{/* if target is a server without root access, skip controlled access scripts */}}
@@ -90,4 +101,5 @@ SPDX-License-Identifier: MIT
 .chezmoitemplates/**
 .chezmoiexternal.yaml
 .config
+.ssh
 {{- end }}
