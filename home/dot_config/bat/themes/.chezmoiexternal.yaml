@@ -1,0 +1,11 @@
+{{/*
+SPDX-FileCopyrightText: (c) 2023 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
+
+{{- $refreshPeriod := "168h" }}
+
+"rose-pine.tmTheme":
+  type: file
+  url: "https://raw.githubusercontent.com/rose-pine/sublime-text/main/rose-pine.tmTheme"
+  refreshPeriod: {{ $refreshPeriod }}
