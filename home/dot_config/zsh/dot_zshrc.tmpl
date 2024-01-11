@@ -133,6 +133,7 @@ z4h load olets/zsh-abbr
 z4h load djui/alias-tips
 z4h load ohmyzsh/ohmyzsh/plugins/encode64
 z4h load ohmyzsh/ohmyzsh/plugins/sudo
+z4h load ohmyzsh/ohmyzsh/plugins/gitignore
 {{/* Source systemd Zsh plugin only for Ubuntu servers */}}
 {{- if .target.ubuntu -}}
 z4h load ohmyzsh/ohmyzsh/plugins/systemd
@@ -179,7 +180,6 @@ HISTFILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh_history"
 setopt APPEND_HISTORY       # Append history to the history file.
 setopt BANG_HIST            # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY     # Write the history file in the ":start:elapsed;command" format.
-setopt INC_APPEND_HISTORY   # Write to the history file immediately, not when the shell exits.
 setopt HIST_FIND_NO_DUPS    # Do not display a line previously found.
 setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate.
 setopt HIST_IGNORE_DUPS     # Don't record an entry that was just recorded again.
@@ -187,13 +187,20 @@ setopt HIST_IGNORE_SPACE    # Don't record an entry starting with a space.
 setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks before recording entry.
 setopt HIST_SAVE_NO_DUPS    # Don't write duplicate entries in the history file.
 setopt HIST_VERIFY          # Don't execute immediately upon history expansion.
+setopt INC_APPEND_HISTORY   # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY        # Share history between all sessions.
 
 # Cache unpackaged completions and functions
 (( ${+commands[chezmoi]} )) && _evalcache chezmoi completion zsh
 (( ${+commands[op]} )) && _evalcache op completion zsh && compdef _op op
 (( ${+commands[thefuck]} )) && _evalcache thefuck --alias
+(( ${+commands[wezterm]} )) && _evalcache wezterm shell-completion --shell zsh
 (( ${+commands[zoxide]} )) && _evalcache zoxide init zsh
+
+# Test for Bat themes cache file in .cache/bat/themes.bin, if not present, run bat command to cache user themes
+if [ ! -f "${XDG_CACHE_HOME}/bat/themes.bin" ]; then
+  (( ${+commands[bat]} )) && bat cache --build
+fi
 
 # Remove slow command not found handler
 [[ ! -v functions[command_not_found_handler] ]] || unfunction command_not_found_handler
