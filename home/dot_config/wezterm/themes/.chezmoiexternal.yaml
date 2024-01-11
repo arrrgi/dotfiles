@@ -1,0 +1,12 @@
+{{/*
+SPDX-FileCopyrightText: (c) 2023 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
+
+{{- $refreshPeriod := "168h" }}
+
+"rose-pine":
+  type: archive
+  url: "https://github.com/neapsix/wezterm/archive/refs/heads/main.zip"
+  stripComponents: 2
+  refreshPeriod: {{ $refreshPeriod }}
