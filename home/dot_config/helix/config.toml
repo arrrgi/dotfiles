@@ -1,0 +1,5 @@
+theme = "rose_pine"
+
+[editor]
+insert-final-newline = true
+mouse = false
