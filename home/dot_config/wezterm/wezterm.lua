@@ -11,14 +11,27 @@ end
 
 -- Config colors
 config.colors = colors
+--config.bold_brightens_ansi_colors = true
 
 -- Config font options
 config.font = wezterm.font 'JetBrainsMono Nerd Font Mono'
 config.font_size = 12
 
 -- Config window defaults
-config.initial_rows = 77
-config.initial_cols = 430
+--config.initial_rows = 77
+--config.initial_cols = 430
+if wezterm.target_triple:find("darwin") then
+  wezterm.on("gui-startup", function(cmd)
+    local screen = wezterm.gui.screens().active
+    local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+    local gui = window:gui_window()
+    local width = 0.9 * screen.width
+    local height = 0.9 * screen.height
+    gui:set_inner_size(width, height)
+    gui:set_position((screen.width - width) / 2, (screen.height - height) / 2)
+  end)
+end
+
 config.window_padding = {
   left = 15,
   right = 15,
