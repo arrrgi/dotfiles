@@ -9,6 +9,9 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+-- Config output history
+config.scrollback_lines = 10000
+
 -- Config colors
 config.colors = colors
 --config.bold_brightens_ansi_colors = true
@@ -18,8 +21,6 @@ config.font = wezterm.font 'JetBrainsMono Nerd Font Mono'
 config.font_size = 12
 
 -- Config window defaults
---config.initial_rows = 77
---config.initial_cols = 430
 if wezterm.target_triple:find("darwin") then
   wezterm.on("gui-startup", function(cmd)
     local screen = wezterm.gui.screens().active
@@ -31,19 +32,31 @@ if wezterm.target_triple:find("darwin") then
     gui:set_position((screen.width - width) / 2, (screen.height - height) / 2)
   end)
 end
-
 config.window_padding = {
   left = 15,
   right = 15,
   top = 15,
   bottom = 5,
-
 }
-config.window_decorations = 'RESIZE'
+config.macos_window_background_blur = 30
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.window_frame = window_frame
 config.window_background_opacity = 0.95
-config.macos_window_background_blur = 30
 config.window_close_confirmation = 'AlwaysPrompt'
+config.adjust_window_size_when_changing_font_size = false
+
+-- Config keybindings
+config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.keys = {
+  { key = "phys:Space",   mods = "LEADER",    action = act.ActivateCommandPalette },
+  -- Tab actions (switching)
+  { key = "[",            mods = "LEADER",    action = act.ActivateTabRelative(-1) },
+  { key = "]",            mods = "LEADER",    action = act.ActivateTabRelative(1) },
+  { key = "t",            mods = "LEADER",    action = act.ShowTabNavigator },
+  -- Tab actions (ordering)
+  { key = "{",            mods = "LEADER|SHIFT",    action = act.MoveTabRelative(-1) },
+  { key = "}",            mods = "LEADER|SHIFT",    action = act.MoveTabRelative(1) },
+}
 
 -- Disable annoyances
 config.check_for_updates = false
