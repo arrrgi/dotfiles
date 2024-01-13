@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.3.0](https://github.com/arrrgi/dotfiles/compare/v0.2.0...v0.3.0) (2024-01-13)
+
+
+### Features
+
+* 🚧 add basic WezTerm config as placeholder for WIP ([44a467b](https://github.com/arrrgi/dotfiles/commit/44a467b932c7d4f12460273c52d8e5e39c30ef07))
+* add basic Helix config ([a35d30b](https://github.com/arrrgi/dotfiles/commit/a35d30b2018ed045a162c0158a6ce4ad88591728))
+* add broot config files ([7d0cada](https://github.com/arrrgi/dotfiles/commit/7d0cada9e5c2bf5de29db18e90ad7a8f35f7d070))
+* add MacOS shortcut for VSCode ([6d7a5d0](https://github.com/arrrgi/dotfiles/commit/6d7a5d072e2b82b9b5ee2a39225225849fcfbb89))
+* add missing MacOS tools ([de86860](https://github.com/arrrgi/dotfiles/commit/de86860c0bb6cc5606d8aa1c1e9f15a1aa12c7bf))
+* add Orbstack support to personal SSH config inclusions ([3c8e39c](https://github.com/arrrgi/dotfiles/commit/3c8e39cce0cabcec8cb399243b17c94b49e0c034))
+* add poetry and cheat utilities to packages ([8e15a7d](https://github.com/arrrgi/dotfiles/commit/8e15a7d85ad8b5539e1b563897281d13398c3c60))
+* add support for external completions ([5bb22c9](https://github.com/arrrgi/dotfiles/commit/5bb22c90d0489a5138d1167d20e944d63a58c2cd))
+* add Wakatime, Rclone and 1Password configs ([5d70da6](https://github.com/arrrgi/dotfiles/commit/5d70da6fb26078766723b9114ace5b240e7f16d3))
+* add Zsh config and personalisations ([c06783d](https://github.com/arrrgi/dotfiles/commit/c06783da22fc41223c4b5d061ea4537f4f342fd3))
+* create initial core tools configs ([50e409a](https://github.com/arrrgi/dotfiles/commit/50e409aa6580e6b348083646ce44f13c726f0a32))
+
+
+### Bug Fixes
+
+* trim newline from Vault Secrets template expansion ([0e667bb](https://github.com/arrrgi/dotfiles/commit/0e667bb053552b4897282b2d195670c3e7114c07))
+
 ## [0.2.0](https://github.com/arrrgi/dotfiles/compare/v0.1.0...v0.2.0) (2023-12-09)
 
 
