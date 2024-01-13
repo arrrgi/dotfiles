@@ -179,6 +179,7 @@ HISTORY_IGNORE="(:|cd(| *)|l[adls](| *)|lsd(| *)|clear|pwd|exit|man *|*--help|*-
 HISTFILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh_history"
 setopt APPEND_HISTORY       # Append history to the history file.
 setopt BANG_HIST            # Treat the '!' character specially during expansion.
+setopt COMBINING_CHARS      # Recognize certain non-English character combinations as special.
 setopt EXTENDED_HISTORY     # Write the history file in the ":start:elapsed;command" format.
 setopt HIST_FIND_NO_DUPS    # Do not display a line previously found.
 setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate.
