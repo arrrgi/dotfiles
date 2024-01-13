@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/arrrgi/dotfiles/compare/v0.3.0...v0.3.1) (2024-01-13)
+
+
+### Bug Fixes
+
+* 🐛 update diff excludes in Chezmoi config to skip dirs ([#22](https://github.com/arrrgi/dotfiles/issues/22)) ([d087322](https://github.com/arrrgi/dotfiles/commit/d087322898b9aa5af17d097416f996b33a9da530)), closes [#21](https://github.com/arrrgi/dotfiles/issues/21)
+
 ## [0.3.0](https://github.com/arrrgi/dotfiles/compare/v0.2.0...v0.3.0) (2024-01-13)
 
 
