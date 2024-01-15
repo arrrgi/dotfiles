@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/arrrgi/dotfiles/compare/v0.3.1...v0.3.2) (2024-01-15)
+
+
+### Bug Fixes
+
+* update tool configs ([#26](https://github.com/arrrgi/dotfiles/issues/26)) ([ca5d415](https://github.com/arrrgi/dotfiles/commit/ca5d415ef18a2922507917f21b13f10a64effcaa)), closes [#24](https://github.com/arrrgi/dotfiles/issues/24)
+
 ## [0.3.1](https://github.com/arrrgi/dotfiles/compare/v0.3.0...v0.3.1) (2024-01-13)
 
 
