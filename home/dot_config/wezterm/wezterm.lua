@@ -46,7 +46,7 @@ config.window_close_confirmation = 'AlwaysPrompt'
 config.adjust_window_size_when_changing_font_size = false
 
 -- Config keybindings
-config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
   { key = "phys:Space",   mods = "LEADER",    action = act.ActivateCommandPalette },
   -- Tab actions (switching)
