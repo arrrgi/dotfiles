@@ -84,27 +84,32 @@ z4h install djui/alias-tips || return
 z4h init || return
 
 # Extend PATH.
+typeset -U PATH path
 {{/* Define paths conditionally */}}
 {{- if and (.target.darwin) (env "BREW_PATH") -}}
 path=(
+  # The Homebrew versions of Gnu tools.
   "${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin"
   "${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnubin"
   "${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin"
   "${HOMEBREW_PREFIX}/opt/grep/libexec/gnubin"
+  # The default directories minus ~/.local/bin and $HOMEBREW_PREFIX/*.
+  ${path:#(${HOME}/.local/bin|${HOMEBREW_PREFIX}/*)}
+  # Extra directories at the end.
   "${HOMEBREW_PREFIX}/bin"
   "${HOME}/.local/bin"
-  $path
 )
-{{- else if and (.target.ubuntu) (env "BREW_PATH") -}}
+{{- else if and (or .target.ubuntu .target.wsl) (env "BREW_PATH") -}}
 path=(
+  # The default directories minus ~/.local/bin and $HOMEBREW_PREFIX/*.
+  ${path:#(${HOME}/.local/bin|${HOMEBREW_PREFIX}/*)}
+  # Extra directories at the end.
   "${HOMEBREW_PREFIX}/bin"
   "${HOME}/.local/bin"
-  $path
 )
 {{- else -}}
-path=(
+path+=(
   "${HOME}/.local/bin"
-  $path
 )
 {{- end }}
 
