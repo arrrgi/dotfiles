@@ -8,7 +8,9 @@ SPDX-License-Identifier: MIT
   "bat"
   "broot"
   "cheat"
+  "dust"
   "fd"
+  "fclones"
   "git"
   "git-delta"
   "grc"
@@ -22,7 +24,6 @@ SPDX-License-Identifier: MIT
   "ripgrep"
   "yq"
   "zellij"
-  "zoxide"
   "zsh"
   "hashicorp/tap/vlt"
 -}}
