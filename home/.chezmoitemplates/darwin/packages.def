@@ -25,13 +25,16 @@ SPDX-License-Identifier: MIT
   "vivid"
   "volta"
   "sigstore/tap/gitsign"
+  "zed"
 )
 -}}
 
 {{- $casks := list
   "1password"
   "1password-cli"
+  "arc"
   "brave-browser"
+  "chatgpt"
   "cleanshot"
   "firefox"
   "font-jetbrains-mono-nerd-font"
@@ -42,7 +45,6 @@ SPDX-License-Identifier: MIT
   "raycast"
   "telegram"
   "todoist"
-  "transmit"
   "utm"
   "visual-studio-code"
   "vlc"
