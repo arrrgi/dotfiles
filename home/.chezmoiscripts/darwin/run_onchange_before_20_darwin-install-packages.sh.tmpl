@@ -26,10 +26,12 @@ if [ -x ${BREW_PATH} ]; then
   # Update Homebrew and install packages
   printf "Info: Updating Homebrew.\n"
   brew update
+
   printf "Info: Installing Homebrew packages.\n"
   brew bundle --no-lock --file=/dev/stdin <<EOF
   {{ includeTemplate "darwin/packages.def" . -}}
   EOF
+
   printf "Info: Cleaning up Homebrew packages.\n"
   brew bundle cleanup --force --file=/dev/stdin <<EOF
   {{ includeTemplate "darwin/packages.def" . -}}
