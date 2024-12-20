@@ -42,6 +42,10 @@ zstyle ':z4h:' propagate-cwd          'yes'
 # command autosuggestions or the whole thing ('accept')?
 zstyle ':z4h:autosuggestions' forward-char 'accept'
 
+# Use fzf to select directories from the directory history.
+zstyle ':z4h:fzf-dir-history' fzf-bindings tab:repeat
+zstyle ':z4h:cd-down'         fzf-bindings tab:repeat
+
 # Recursively traverse directories when TAB-completing files.
 zstyle ':z4h:fzf-complete' recurse-dirs 'no'
 
