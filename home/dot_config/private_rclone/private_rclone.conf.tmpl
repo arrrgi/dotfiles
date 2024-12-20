@@ -1,18 +1,20 @@
-[B2]
-type = b2
-account = {{ hcpVaultSecret "rcloneApiKeyPersonal" -}}
-key = {{ hcpVaultSecret "rcloneApiSecretPersonal" -}}
-hard_delete = true
+[GDrive]
+type = drive
+client_id = {{ hcpVaultSecret "rcloneDriveId" -}}
+client_secret = {{ hcpVaultSecret "rcloneDriveSecret" -}}
+scope = drive.file
+token = {{ hcpVaultSecret "rcloneDriveToken" -}}
+root_folder_id = {{ hcpVaultSecret "rcloneDriveRootDir" -}}
+use_trash = false
+chunk_size = 32M
+skip_gdocs = true
+stop_on_upload_limit = true
+stop_on_download_limit = true
+skip_shortcuts = true
+skip_dangling_shortcuts = true
 
-[Encrypted]
+[GDCrypt]
 type = crypt
-remote = B2:mediavault-bucket
-filename_encryption = standard
-password = {{ hcpVaultSecret "rcloneEncryptKeyPersonal" -}}
-password2 = {{ hcpVaultSecret "rcloneEncryptSaltPersonal" }}
-
-[AVault]
-type = crypt
-remote = B2:avault-bucket
-password = {{ hcpVaultSecret "rcloneEncryptKeyPersonal" -}}
-password2 = {{ hcpVaultSecret "rcloneEncryptSaltPersonal" -}}
+remote = GDrive:
+password = {{ hcpVaultSecret "rcloneDriveEncryptKey" -}}
+password2 = {{ hcpVaultSecret "rcloneDriveEncryptSalt" -}}
