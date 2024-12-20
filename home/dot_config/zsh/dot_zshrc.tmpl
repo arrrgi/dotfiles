@@ -140,7 +140,6 @@ fpath+=("${HOMEBREW_PREFIX}/share/zsh-abbr")
 # z4h source ohmyzsh/ohmyzsh/lib/diagnostics.zsh  # source an individual file
 # z4h load   ohmyzsh/ohmyzsh/plugins/emoji-clock  # load a plugin
 z4h load mroth/evalcache
-z4h load olets/zsh-abbr
 z4h load djui/alias-tips
 z4h load ohmyzsh/ohmyzsh/plugins/encode64
 z4h load ohmyzsh/ohmyzsh/plugins/sudo
@@ -207,7 +206,6 @@ setopt SHARE_HISTORY        # Share history between all sessions.
 (( ${+commands[op]} )) && _evalcache op completion zsh && compdef _op op
 (( ${+commands[thefuck]} )) && _evalcache thefuck --alias
 (( ${+commands[wezterm]} )) && _evalcache wezterm shell-completion --shell zsh
-(( ${+commands[zoxide]} )) && _evalcache zoxide init zsh
 
 # Test for Bat themes cache file in .cache/bat/themes.bin, if not present, run bat command to cache user themes
 if [ ! -f "${XDG_CACHE_HOME}/bat/themes.bin" ]; then

@@ -3,6 +3,21 @@
 # SPDX-License-Identifier: MIT
 #
 
+{{- if and (stat "/home/linuxbrew/.linuxbrew/bin") (stat "/home/linuxbrew/.linuxbrew/sbin") -}}
+# Shell function to run sudo with Homebrew's path if Homebrew is installed
+function sudo() {
+    local BREW_BIN="/home/linuxbrew/.linuxbrew/bin"
+    local BREW_SBIN="/home/linuxbrew/.linuxbrew/sbin"
+
+    if [ -d "$BREW_BIN" ] && [ -d "$BREW_SBIN" ]; then
+        PATH="$BREW_BIN:$BREW_SBIN:$PATH" command sudo "$@"
+    else
+        command sudo "$@"
+    fi
+}
+{{- end }}
+
+
 # Shell function for Broot to cd into a directory - workaround for Zsh integration
 function br {
     emulate -L zsh
