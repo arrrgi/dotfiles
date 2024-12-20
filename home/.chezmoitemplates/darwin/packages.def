@@ -8,12 +8,12 @@ SPDX-License-Identifier: MIT
   "hashicorp/tap"
   "homebrew/bundle"
   "homebrew/cask-fonts"
-  "sigstore/tap"
 -}}
 
 {{/* insert MacOS specific packages here */}}
 {{- $brews := concat $packages (list
   "coreutils"
+  "gitsign"
   "gnu-sed"
   "gnu-tar"
   "grep"
@@ -22,10 +22,10 @@ SPDX-License-Identifier: MIT
   "poetry"
   "shellcheck"
   "thefuck"
+  "uv"
   "vivid"
   "volta"
-  "sigstore/tap/gitsign"
-  "zed"
+  "yt-dlp"
 )
 -}}
 
@@ -39,16 +39,16 @@ SPDX-License-Identifier: MIT
   "firefox"
   "font-jetbrains-mono-nerd-font"
   "git-credential-manager"
-  "moom"
+  "jordanbaird-ice"
   "obsidian"
   "orbstack"
   "raycast"
   "telegram"
   "todoist"
-  "utm"
   "visual-studio-code"
   "vlc"
   "wezterm"
+  "zed"
 -}}
 
 {{ range ($taps | sortAlpha | uniq) -}}
