@@ -5,7 +5,7 @@
 
 # Useful shortcuts
 alias _='sudo '
-alias sudo='sudo '
+# alias sudo='sudo '
 alias reload='exec ${SHELL} -l'
 
 # Navigation
@@ -52,13 +52,16 @@ alias wget='wget --hsts-file="${XDG_CACHE_HOME}/wget-hsts"'
 # Zellij
 alias zj='zellij'
 
+# Dust
+alias dust='dust -r'
+
 # Conveniences
 alias zshrc='${=EDITOR} ${ZDOTDIR:-$XDG_CONFIG_HOME}/.zshrc'
 alias -g H='| head'
 alias -g T='| tail'
 alias -g G='| grep'
 alias -g L="| less"
-alias du='du -c'
+alias du='du -cx'
 alias dud='du -d 1 -h'
 alias duf='du -sh *'
 alias h='history'
@@ -67,3 +70,6 @@ alias unexport='unset'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
+# Show list of Zsh functions and completions available
+alias showfunk=print -l ${(ok)functions}
