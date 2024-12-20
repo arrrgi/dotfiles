@@ -216,5 +216,17 @@ if [ ! -f "${XDG_CACHE_HOME}/bat/themes.bin" ]; then
   (( ${+commands[bat]} )) && bat cache --build
 fi
 
+{{- if .target.wsl -}}
+# Check for SSH_AUTH_SOCK env variable and load ssh-agent and SSH private key for Git commit signing
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  RUNNING_AGENT_COUNT=$(pgrep -cfx 'ssh-agent -s')
+  if [ "RUNNING_AGENT_COUNT" -eq 0 ]; then
+    ssh-agent -s > "${HOME}/.ssh/agent.env"
+  fi
+  eval $(cat "${HOME}/.ssh/agent.env") > /dev/null
+  ssh-add "${HOME}/.ssh/keys.d/id_ed25519.sign.work" > /dev/null 2>&1
+fi
+{{- end }}
+
 # Remove slow command not found handler
 [[ ! -v functions[command_not_found_handler] ]] || unfunction command_not_found_handler
