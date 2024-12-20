@@ -74,7 +74,6 @@ zstyle ':completion:*:(ssh|scp|rdp):*:hosts' hosts
 # example. If you don't plan to use Oh My Zsh, delete this line.
 z4h install ohmyzsh/ohmyzsh || return
 z4h install mroth/evalcache || return
-z4h install olets/zsh-abbr || return
 z4h install djui/alias-tips || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
@@ -113,6 +112,12 @@ path+=(
 )
 {{- end }}
 
+# Add additional directories to $fpath.
+fpath=(
+    $ZDOTDIR/completions
+    $fpath
+)
+
 # Source additional local files if they exist.
 z4h source "${ZDOTDIR:-$HOME/.config/zsh}/.exports.sh"
 z4h source "${ZDOTDIR:-$HOME/.config/zsh}/.aliases.sh"
@@ -121,12 +126,13 @@ z4h source "${ZDOTDIR:-$HOME/.config/zsh}/.functions.sh"
 {{- if lookPath "grc" -}}
 z4h source "${HOMEBREW_PREFIX}/etc/grc.zsh" <$TTY
 {{- end }}
-
-# Add additional directories to $fpath.
-fpath=(
-    $ZDOTDIR/completions
-    $fpath
-)
+{{/* Source Zsh-abbr only on targets where it is installed */}}
+{{- if env "BREW_PATH" -}}
+if [[ -L "${HOMEBREW_PREFIX}/share/zsh-abbr/zsh-abbr.zsh" ]]; then
+  z4h source "${HOMEBREW_PREFIX}/share/zsh-abbr/zsh-abbr.zsh"
+fi
+fpath+=("${HOMEBREW_PREFIX}/share/zsh-abbr")
+{{- end }}
 
 # Use additional Git repositories pulled in with `z4h install`.
 #
