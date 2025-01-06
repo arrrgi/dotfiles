@@ -25,7 +25,7 @@ SPDX-License-Identifier: MIT
   "yq"
   "zellij"
   "zsh"
-  "hashicorp/tap/vlt"
+  "hashicorp/tap/hcp"
   "olets/tap/zsh-abbr"
 -}}
 {{- $packages | sortAlpha | join " " -}}
