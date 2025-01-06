@@ -1,8 +1,12 @@
-{{ if and .function.personal .target.darwin -}}
+{{/*
+SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
+{{- if and .function.personal .target.darwin -}}
 [user]
   name = {{ .git.name }}
   email = {{ .git.email }}
-  signingkey = {{ hcpVaultSecret "sshSigningKeyPersonal" }}
+  signingkey = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "sshSigningKeyPersonal") | trim }}
 
 [gpg]
   format = ssh
@@ -29,7 +33,7 @@
 [user]
   name = {{ .git.name }}
   email = {{ .git.email }}
-  signingkey = {{ hcpVaultSecret "sshSigningKeyWork" }}
+  signingkey = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "sshSigningKeyWork") | trim }}
 
 [gpg]
   format = ssh

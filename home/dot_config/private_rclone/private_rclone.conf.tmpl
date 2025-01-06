@@ -1,10 +1,14 @@
+{{/*
+SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
 [GDrive]
 type = drive
-client_id = {{ hcpVaultSecret "rcloneDriveId" -}}
-client_secret = {{ hcpVaultSecret "rcloneDriveSecret" -}}
+client_id = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveId") | trim }}
+client_secret = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveSecret") | trim }}
 scope = drive.file
-token = {{ hcpVaultSecret "rcloneDriveToken" -}}
-root_folder_id = {{ hcpVaultSecret "rcloneDriveRootDir" -}}
+token = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveToken") | trim }}
+root_folder_id = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveRootDir") | trim }}
 use_trash = false
 chunk_size = 32M
 skip_gdocs = true
@@ -16,5 +20,5 @@ skip_dangling_shortcuts = true
 [GDCrypt]
 type = crypt
 remote = GDrive:
-password = {{ hcpVaultSecret "rcloneDriveEncryptKey" -}}
-password2 = {{ hcpVaultSecret "rcloneDriveEncryptSalt" -}}
+password = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveEncryptKey") | trim }}
+password2 = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveEncryptSalt") | trim }}

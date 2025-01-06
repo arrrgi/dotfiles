@@ -12,7 +12,7 @@ SPDX-License-Identifier: MIT
 {{- $state := dict "persistent" false "ephemeral" false -}}
 {{- $secrets := dict "apikeys" false "sshkeys" false "storagekeys" false -}}
 {{- $git := dict -}}
-{{- $hcp := dict -}}
+{{- $vlt := dict -}}
 
 {{/* Test if the user is in a container by checking that a TTY is not present */}}
 {{- if not stdinIsATTY -}}
@@ -154,26 +154,25 @@ env:
   BREW_PATH: "/home/linuxbrew/.linuxbrew/bin/brew"
 {{- end }}
 {{- if or $secrets.apikeys $secrets.sshkeys $secrets.storagekeys }}
-  {{- $_ := set $hcp "clientID" (promptStringOnce $hcp "clientID" "What is your Vault Secrets Service Principal ID") }}
-  {{- $_ := set $hcp "clientSecret" (promptStringOnce $hcp "clientSecret" "What is your Vault Secrets Service Principal Secret") }}
-  HCP_CLIENT_ID: {{ $hcp.clientID | quote }}
-  HCP_CLIENT_SECRET: {{ $hcp.clientSecret | quote }}
+  {{- $_ := set $vlt "clientID" (promptStringOnce $vlt "clientID" "What is your Vault Secrets Service Principal ID") }}
+  {{- $_ := set $vlt "clientSecret" (promptStringOnce $vlt "clientSecret" "What is your Vault Secrets Service Principal Secret") }}
+  HCP_CLIENT_ID: {{ $vlt.clientID | quote }}
+  HCP_CLIENT_SECRET: {{ $vlt.clientSecret | quote }}
 encryption: age
 age:
   identity: "{{ $.chezmoi.homeDir }}/.config/age/key.txt"
   recipient: "age183zmhhlz4wg0a8qmweyzmm5cf0y0g4tyulxg8ldjzjmkgze2sqlsnvwuqs"
-hcpVaultSecrets:
-  {{- $_ := set $hcp "orgID" (promptStringOnce $hcp "orgID" "What is your Vault Secrets Organisation ID") }}
-  {{- $_ := set $hcp "projectID" (promptStringOnce $hcp "projectID" "What is your Vault Secrets Project ID") }}
-  organizationId: {{ $hcp.orgID | quote }}
-  projectId: {{ $hcp.projectID | quote }}
-  applicationName: chezmoi
 hooks:
   read-source-state:
     pre:
-      command: ".local/share/chezmoi/home/.hooks/.install-hcp-vlt.sh"
+      command: ".local/share/chezmoi/home/.hooks/.install-hcp-cli.sh"
 {{- end }}
 data:
+{{- if or $secrets.apikeys $secrets.sshkeys $secrets.storagekeys }}
+  hcp:
+    {{- $_ := set $vlt "appName" (promptStringOnce $vlt "appName" "What is your HCP Vault Secrets application name") }}
+    appName: {{ $vlt.appName | quote }}
+{{- end }}
   target:
     {{- range $key, $value := $target }}
     {{ $key }}: {{ $value }}
