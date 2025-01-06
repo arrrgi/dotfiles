@@ -53,25 +53,25 @@ fetch_jq_binary() {
   check_binary_installed "jq" || fetch_binary "jq" "$jq_download_url"
 }
 
-# Fetch vlt binary
-fetch_vlt_binary() {
-  local vlt_system_os
-  local vlt_system_arch
-  local vlt_download_url
-  vlt_system_os=$(uname -s | tr '[:upper:]' '[:lower:]')
-  vlt_system_arch=$(uname -m | tr '[:upper:]' '[:lower:]' | sed 's/x86_64/amd64/g') # we need to replace the output of uname -m to match the vlt binary naming convention
-  vlt_download_url=$(curl -s https://releases.hashicorp.com/vlt/index.json | jq -r --arg os "$vlt_system_os" --arg arch "$vlt_system_arch" '.versions | to_entries | map(select(.key | test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | map(.value.builds[] | select(.os == $os and .arch == $arch)) | sort_by(.version) | last | .url') || exit 1
+# Fetch hcp binary
+fetch_hcp_binary() {
+  local hcp_system_os
+  local hcp_system_arch
+  local hcp_download_url
+  hcp_system_os=$(uname -s | tr '[:upper:]' '[:lower:]')
+  hcp_system_arch=$(uname -m | tr '[:upper:]' '[:lower:]' | sed 's/x86_64/amd64/g') # we need to replace the output of uname -m to match the hcp binary naming convention
+  hcp_download_url=$(curl -s https://releases.hashicorp.com/hcp/index.json | jq -r --arg os "$hcp_system_os" --arg arch "$hcp_system_arch" '.versions | to_entries | max_by(.key) | .value.builds[] | select(.arch == $arch and .os == $os) | .url') || exit 1
 
   check_binary_installed "python3" || {
     exit 1
   }
 
-  # Check if vlt is already installed and skip if found, otherwise install it
-  if check_binary_installed "vlt"; then
+  # Check if hcp is already installed and skip if found, otherwise install it
+  if check_binary_installed "hcp"; then
     return 0
   else
-    fetch_binary "vlt.zip" "$vlt_download_url"
-    python3 -c "import zipfile, os; zipfile.ZipFile('${bin_directory}/vlt.zip').extractall('${bin_directory}'); os.chmod('${bin_directory}/vlt', 0o755); os.remove('${bin_directory}/vlt.zip')" || {
+    fetch_binary "hcp.zip" "$hcp_download_url"
+    python3 -c "import zipfile, os; zipfile.ZipFile('${bin_directory}/hcp.zip').extractall('${bin_directory}'); os.chmod('${bin_directory}/hcp', 0o755); os.remove('${bin_directory}/hcp.zip')" || {
       exit 1
     }
   fi
@@ -80,7 +80,7 @@ fetch_vlt_binary() {
 main() {
   setup_bin_directory
   fetch_jq_binary
-  fetch_vlt_binary
+  fetch_hcp_binary
 }
 
 main "$@"
