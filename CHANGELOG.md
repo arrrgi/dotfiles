@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.1](https://github.com/arrrgi/dotfiles/compare/v1.0.0...v1.0.1) (2025-01-06)
+
+
+### Bug Fixes
+
+* add conditional logic to detect and update socket on SSH remotes ([#40](https://github.com/arrrgi/dotfiles/issues/40)) ([4b89ed4](https://github.com/arrrgi/dotfiles/commit/4b89ed4d23ca3473491ee5f0de57a4efd2690cb6))
+* correct scope and conditions of SSH config ([#41](https://github.com/arrrgi/dotfiles/issues/41)) ([5a1f7c2](https://github.com/arrrgi/dotfiles/commit/5a1f7c2176ba78bb30294815ad5566435457c7fd))
+* include olets tap in package defs ([#42](https://github.com/arrrgi/dotfiles/issues/42)) ([b771e6b](https://github.com/arrrgi/dotfiles/commit/b771e6b3cd366ee5a2db2e9e688c45a854057e25))
+* update chezmoi alias to remove conflict with commitizen ([#46](https://github.com/arrrgi/dotfiles/issues/46)) ([47afc5a](https://github.com/arrrgi/dotfiles/commit/47afc5a292b27adf077bdadca34143f647b995b3))
+* update internal version manifests to correct version ([#43](https://github.com/arrrgi/dotfiles/issues/43)) ([130dd8d](https://github.com/arrrgi/dotfiles/commit/130dd8de7320cd0f7403d9c9e5c0c76b3fbf7b48))
+
 ## [1.0.0](https://github.com/arrrgi/dotfiles/compare/v0.3.2...v1.0.0) (2025-01-06)
 
 
