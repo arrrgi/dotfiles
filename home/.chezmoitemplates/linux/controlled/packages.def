@@ -7,6 +7,7 @@ SPDX-License-Identifier: MIT
 {{- $taps := list
   "hashicorp/tap"
   "homebrew/bundle"
+  "olets/tap"
 -}}
 
 {{/* insert Linux specific packages here */}}
