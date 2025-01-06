@@ -18,6 +18,40 @@
 
 ### Bug Fixes
 
+* add conditional logic to detect and update socket on SSH remotes ([#40](https://github.com/arrrgi/dotfiles/issues/40)) ([4b89ed4](https://github.com/arrrgi/dotfiles/commit/4b89ed4d23ca3473491ee5f0de57a4efd2690cb6))
+* adjust Wezterm padding to allow for window buttons ([#32](https://github.com/arrrgi/dotfiles/issues/32)) ([20c81fa](https://github.com/arrrgi/dotfiles/commit/20c81fa3736addefe1e440e8c3e410cb6e9fcb61))
+* correct scope and conditions of SSH config ([#41](https://github.com/arrrgi/dotfiles/issues/41)) ([5a1f7c2](https://github.com/arrrgi/dotfiles/commit/5a1f7c2176ba78bb30294815ad5566435457c7fd))
+* include olets tap in package defs ([#42](https://github.com/arrrgi/dotfiles/issues/42)) ([b771e6b](https://github.com/arrrgi/dotfiles/commit/b771e6b3cd366ee5a2db2e9e688c45a854057e25))
+* migrate from zsh4humans installation of zsh-abbr to Brew based ([af6bca2](https://github.com/arrrgi/dotfiles/commit/af6bca2bd5815eca0b2caffb90f014ee354df652))
+* support loading SSH private key to agent on work devices ([29ae063](https://github.com/arrrgi/dotfiles/commit/29ae06384f76c2f76f50452785de6c9194f3a0da))
+* update internal version manifests to correct version ([#43](https://github.com/arrrgi/dotfiles/issues/43)) ([130dd8d](https://github.com/arrrgi/dotfiles/commit/130dd8de7320cd0f7403d9c9e5c0c76b3fbf7b48))
+* update target conditional and remove zoxide vars ([75667fe](https://github.com/arrrgi/dotfiles/commit/75667fe4245a5a4cbe92c9d42e8a40220af4bd60))
+* use correct SSH public key templated items for work device target ([dad1d6d](https://github.com/arrrgi/dotfiles/commit/dad1d6d298bc7f33834b29b0a2d9746404fb5280))
+* use valid URI to Bat theme ([3c3c505](https://github.com/arrrgi/dotfiles/commit/3c3c505cd5b41d970eac669e6dcd5fc9ddcdfd09))
+
+
+### Documentation
+
+* **license:** update copyright year(s) ([#37](https://github.com/arrrgi/dotfiles/issues/37)) ([2e53a6d](https://github.com/arrrgi/dotfiles/commit/2e53a6de8e3af9deaaf0ec34a75f446b18fc804e))
+
+## [1.0.0](https://github.com/arrrgi/dotfiles/compare/v0.3.2...v1.0.0) (2025-01-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate all secret references to use new templated function
+
+### Features
+
+* add HCP CLI secret retrieval function template ([b339abf](https://github.com/arrrgi/dotfiles/commit/b339abf0205ebaab0c95c1c6dbab0db4587de458))
+* allow fzf search of directory history replacing zoxide ([ee0c756](https://github.com/arrrgi/dotfiles/commit/ee0c7560dbb22915802d8cf2bf907b89c58214af))
+* ensure HCP CLI package is installed ([57682d8](https://github.com/arrrgi/dotfiles/commit/57682d80bccf911037ec4506878aac1856a9264f))
+* migrate all secret references to use new templated function ([8fc720d](https://github.com/arrrgi/dotfiles/commit/8fc720d8d6df097922bdb2b498b551b4f5a4e56c))
+* redefine commonly used Homebrew packages ([#35](https://github.com/arrrgi/dotfiles/issues/35)) ([47c9f4e](https://github.com/arrrgi/dotfiles/commit/47c9f4ee933a9957f820fe5828f4183706330cea))
+
+
+### Bug Fixes
+
 * adjust Wezterm padding to allow for window buttons ([#32](https://github.com/arrrgi/dotfiles/issues/32)) ([20c81fa](https://github.com/arrrgi/dotfiles/commit/20c81fa3736addefe1e440e8c3e410cb6e9fcb61))
 * migrate from zsh4humans installation of zsh-abbr to Brew based ([af6bca2](https://github.com/arrrgi/dotfiles/commit/af6bca2bd5815eca0b2caffb90f014ee354df652))
 * support loading SSH private key to agent on work devices ([29ae063](https://github.com/arrrgi/dotfiles/commit/29ae06384f76c2f76f50452785de6c9194f3a0da))
