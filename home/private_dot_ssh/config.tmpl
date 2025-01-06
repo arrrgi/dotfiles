@@ -1,5 +1,9 @@
+#
+# SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+# SPDX-License-Identifier: MIT
+#
 # Specific host options should be set first
-{{- if .function.personal }}
+{{- if and .target.darwin .function.personal }}
 Include config.d/personal.conf
 {{-   if lookPath "orb" }}
 Include ~/.orbstack/ssh/config

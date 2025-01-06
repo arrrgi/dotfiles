@@ -1,2 +1,9 @@
+{{/*
+SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
+{{- if and .function.personal .target.ubuntu }}
+{{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "sshAuthKeyPersonal") | trim }} Personal SSH Auth Key
+{{- else if and .function.work .target.wsl }}
 {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "sshAuthKeyWork") | trim }} Work SSH Auth Key
-{{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "sshSigningKeyWork") | trim }} Work SSH Signing Key
+{{- end }}

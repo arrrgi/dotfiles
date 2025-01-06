@@ -1,4 +1,8 @@
-{{ if and .function.personal .target.darwin -}}
+{{/*
+SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
+{{- if and .function.personal .target.darwin -}}
   {{ .git.email }} namespaces="git" {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "sshSigningKeyPersonal") | trim }}
 {{- end -}}
 {{- if and .function.work .target.wsl -}}
