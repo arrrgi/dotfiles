@@ -8,6 +8,7 @@ SPDX-License-Identifier: MIT
   "hashicorp/tap"
   "homebrew/bundle"
   "homebrew/cask-fonts"
+  "olets/tap"
 -}}
 
 {{/* insert MacOS specific packages here */}}
@@ -20,6 +21,7 @@ SPDX-License-Identifier: MIT
   "hadolint"
   "httpie"
   "poetry"
+  "qbittorrent-cli"
   "shellcheck"
   "thefuck"
   "uv"
@@ -36,6 +38,7 @@ SPDX-License-Identifier: MIT
   "brave-browser"
   "chatgpt"
   "cleanshot"
+  "discord"
   "firefox"
   "font-jetbrains-mono-nerd-font"
   "git-credential-manager"
