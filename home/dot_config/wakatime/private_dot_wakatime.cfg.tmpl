@@ -1,3 +1,6 @@
-
+{{/*
+SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
 [settings]
-api_key = {{ hcpVaultSecret "wakatimeApiKeyGlobal" }}
+api_key = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "wakatimeApiKeyGlobal") | trim }}
