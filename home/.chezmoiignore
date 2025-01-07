@@ -36,7 +36,7 @@ SPDX-License-Identifier: MIT
 {{/* and encrypted files */}}
 {{- if not (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys ) }}
 **/*.age
-.chezmoiscripts/bootstrap/00_bootstrap-decrypt-age-key.sh
+.chezmoiscripts/pre/00_bootstrap-decrypt-age-key.sh
 {{- end }}
 
 {{/* if target is an ephemeral container, ignore all scripts and templates */}}
@@ -74,6 +74,7 @@ SPDX-License-Identifier: MIT
 
 {{/* if target is a public Debian or Ubuntu server, exclude context based sensitive files */}}
 {{- if and (or .target.debian .target.ubuntu) .privacy.public .state.persistent }}
+.chezmoiscripts/post/99_exec-zsh.sh
 .config/git
 .config/rclone
 .config/wakatime
