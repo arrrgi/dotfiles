@@ -1,0 +1,7 @@
+{{/*
+SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
+{{- if lookPath "docker" -}}
+{{- output "docker" "completion" "zsh" }}
+{{- end }}
