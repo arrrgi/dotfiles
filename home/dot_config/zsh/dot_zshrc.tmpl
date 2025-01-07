@@ -107,23 +107,20 @@ path=(
   "${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnubin"
   "${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin"
   "${HOMEBREW_PREFIX}/opt/grep/libexec/gnubin"
-  # The default directories minus ~/.local/bin and $HOMEBREW_PREFIX/*.
-  ${path:#(${HOME}/.local/bin|${HOMEBREW_PREFIX}/*)}
-  # Extra directories at the end.
   "${HOMEBREW_PREFIX}/bin"
   "${HOME}/.local/bin"
+  ${path}
 )
 {{- else if and (or .target.ubuntu .target.wsl) (env "BREW_PATH") -}}
 path=(
-  # The default directories minus ~/.local/bin and $HOMEBREW_PREFIX/*.
-  ${path:#(${HOME}/.local/bin|${HOMEBREW_PREFIX}/*)}
-  # Extra directories at the end.
   "${HOMEBREW_PREFIX}/bin"
   "${HOME}/.local/bin"
+  ${path}
 )
 {{- else -}}
 path+=(
   "${HOME}/.local/bin"
+  ${path}
 )
 {{- end }}
 
