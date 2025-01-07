@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/arrrgi/dotfiles/compare/v1.0.1...v1.1.0) (2025-01-07)
+
+
+### Features
+
+* add docker shell completion for supported targets ([#49](https://github.com/arrrgi/dotfiles/issues/49)) ([86b07d3](https://github.com/arrrgi/dotfiles/commit/86b07d3e545119c394123859c7600cf0c6fdcf28))
+* implement Zsh reload as post script ([#48](https://github.com/arrrgi/dotfiles/issues/48)) ([25ea4f3](https://github.com/arrrgi/dotfiles/commit/25ea4f329feb3c09a6ca5196c01472f0e9692634))
+
 ## [1.0.1](https://github.com/arrrgi/dotfiles/compare/v1.0.0...v1.0.1) (2025-01-06)
 
 
