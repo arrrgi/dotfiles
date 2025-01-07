@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/arrrgi/dotfiles/compare/v1.1.1...v1.2.0) (2025-01-07)
+
+
+### Features
+
+* replace neofetch with macchina and cleanup deprecated packages ([#54](https://github.com/arrrgi/dotfiles/issues/54)) ([2d6f72f](https://github.com/arrrgi/dotfiles/commit/2d6f72ffb2fb75816c5304d2f58805b457ffa411))
+* update Zellij config to newer version ([#55](https://github.com/arrrgi/dotfiles/issues/55)) ([890efdb](https://github.com/arrrgi/dotfiles/commit/890efdbbd36b3db0d0325b3ca15a0d40b4999d7f))
+
+
+### Bug Fixes
+
+* fix binary path order and zsh notice script ([#53](https://github.com/arrrgi/dotfiles/issues/53)) ([2ee02ec](https://github.com/arrrgi/dotfiles/commit/2ee02ecec701fcb50c68fba0af41263c45b151ad))
+
 ## [1.1.1](https://github.com/arrrgi/dotfiles/compare/v1.1.0...v1.1.1) (2025-01-07)
 
 
