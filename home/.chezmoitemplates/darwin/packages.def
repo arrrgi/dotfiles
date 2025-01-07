@@ -7,7 +7,6 @@ SPDX-License-Identifier: MIT
 {{- $taps := list
   "hashicorp/tap"
   "homebrew/bundle"
-  "homebrew/cask-fonts"
   "olets/tap"
 -}}
 
