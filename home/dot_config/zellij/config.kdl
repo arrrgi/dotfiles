@@ -210,10 +210,12 @@ plugins {
 // Default: $SHELL
 //
 // default_shell "fish"
+default_shell "zsh"
 
 // Choose the path to override cwd that zellij will use for opening new panes
 //
 // default_cwd ""
+default_cwd "${HOME}"
 
 // Toggle between having pane frames around the panes
 // Options:
