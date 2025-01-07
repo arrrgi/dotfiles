@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/arrrgi/dotfiles/compare/v1.1.0...v1.1.1) (2025-01-07)
+
+
+### Bug Fixes
+
+* update zj config to use home directory as CWD ([#51](https://github.com/arrrgi/dotfiles/issues/51)) ([8280673](https://github.com/arrrgi/dotfiles/commit/828067384e1e9ba9eee4577d5b4e21f1c11d7234))
+
 ## [1.1.0](https://github.com/arrrgi/dotfiles/compare/v1.0.1...v1.1.0) (2025-01-07)
 
 
