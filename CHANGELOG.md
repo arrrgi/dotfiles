@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/arrrgi/dotfiles/compare/v1.2.0...v1.2.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* resolve zshrc minor bugs ([#57](https://github.com/arrrgi/dotfiles/issues/57)) ([4b1caa3](https://github.com/arrrgi/dotfiles/commit/4b1caa3193b78f906172863587539ae29c8de428))
+
 ## [1.2.0](https://github.com/arrrgi/dotfiles/compare/v1.1.1...v1.2.0) (2025-01-07)
 
 
