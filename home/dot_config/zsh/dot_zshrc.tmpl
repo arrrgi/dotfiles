@@ -142,8 +142,8 @@ z4h source "${HOMEBREW_PREFIX}/etc/grc.zsh" <$TTY
 {{- if env "BREW_PATH" -}}
 if [[ -L "${HOMEBREW_PREFIX}/share/zsh-abbr/zsh-abbr.zsh" ]]; then
   z4h source "${HOMEBREW_PREFIX}/share/zsh-abbr/zsh-abbr.zsh"
+  fpath+=("${HOMEBREW_PREFIX}/share/zsh-abbr")
 fi
-fpath+=("${HOMEBREW_PREFIX}/share/zsh-abbr")
 {{- end }}
 
 # Use additional Git repositories pulled in with `z4h install`.
@@ -224,7 +224,7 @@ if [ ! -f "${XDG_CACHE_HOME}/bat/themes.bin" ]; then
   (( ${+commands[bat]} )) && bat cache --build
 fi
 
-{{- if .target.wsl -}}
+{{ if .target.wsl -}}
 # Check for SSH_AUTH_SOCK env variable and load ssh-agent and SSH private key for Git commit signing
 if [ -z "$SSH_AUTH_SOCK" ]; then
   RUNNING_AGENT_COUNT=$(pgrep -cfx 'ssh-agent -s')
