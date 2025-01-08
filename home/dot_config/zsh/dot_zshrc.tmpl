@@ -142,8 +142,8 @@ z4h source "${HOMEBREW_PREFIX}/etc/grc.zsh" <$TTY
 {{- if env "BREW_PATH" -}}
 if [[ -L "${HOMEBREW_PREFIX}/share/zsh-abbr/zsh-abbr.zsh" ]]; then
   z4h source "${HOMEBREW_PREFIX}/share/zsh-abbr/zsh-abbr.zsh"
+  fpath+=("${HOMEBREW_PREFIX}/share/zsh-abbr")
 fi
-fpath+=("${HOMEBREW_PREFIX}/share/zsh-abbr")
 {{- end }}
 
 # Use additional Git repositories pulled in with `z4h install`.
