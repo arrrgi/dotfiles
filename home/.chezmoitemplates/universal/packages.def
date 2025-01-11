@@ -11,6 +11,7 @@ SPDX-License-Identifier: MIT
   "dust"
   "fd"
   "fclones"
+  "gh"
   "git"
   "git-delta"
   "grc"
