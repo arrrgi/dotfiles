@@ -33,8 +33,8 @@ fi
 if command -v bat &>/dev/null; then
   alias cat='bat -pp'
   alias less='bat --paging=always'
-  # override MANPAGER
-  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  # override MANPAGER to colorize with bat
+  export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 fi
 
 # Helix
@@ -72,4 +72,4 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # Show list of Zsh functions and completions available
-alias showfunk=print -l ${(ok)functions}
+alias showfunk='print -l ${(ok)functions}'
