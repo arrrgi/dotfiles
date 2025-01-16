@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/arrrgi/dotfiles/compare/v1.3.0...v1.3.1) (2025-01-16)
+
+
+### Bug Fixes
+
+* rewrite theme import and use new external ([#67](https://github.com/arrrgi/dotfiles/issues/67)) ([79c7848](https://github.com/arrrgi/dotfiles/commit/79c78488739f100c02d6204848363392677216c9))
+
 ## [1.3.0](https://github.com/arrrgi/dotfiles/compare/v1.2.1...v1.3.0) (2025-01-16)
 
 
