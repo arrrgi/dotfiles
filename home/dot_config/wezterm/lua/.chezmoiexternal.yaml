@@ -5,8 +5,9 @@ SPDX-License-Identifier: MIT
 
 {{- $refreshPeriod := "168h" }}
 
-"rose-pine":
-  type: archive
+"rose-pine.lua":
+  type: archive-file
   url: "https://github.com/neapsix/wezterm/archive/refs/heads/main.zip"
-  stripComponents: 2
+  path: plugin/init.lua
+  stripComponents: 1
   refreshPeriod: {{ $refreshPeriod }}
