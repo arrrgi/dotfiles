@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.0](https://github.com/arrrgi/dotfiles/compare/v1.2.1...v1.3.0) (2025-01-16)
+
+
+### Features
+
+* add Github CLI and shorten Chezmoi alias ([#59](https://github.com/arrrgi/dotfiles/issues/59)) ([d2e4510](https://github.com/arrrgi/dotfiles/commit/d2e4510e37cf2577d2a12dcbcf1f06c24c1c8bcb))
+
+
+### Bug Fixes
+
+* update MANPAGER export to support newer groff versions ([#64](https://github.com/arrrgi/dotfiles/issues/64)) ([dcc813e](https://github.com/arrrgi/dotfiles/commit/dcc813e18ce4a902668b336ee4d31fd3417959c1))
+* update path handling for sudo with Homebrew on WSL ([#65](https://github.com/arrrgi/dotfiles/issues/65)) ([531c151](https://github.com/arrrgi/dotfiles/commit/531c1515729ce50b4b87c45f7978204398722113))
+* **wsl:** properly brace shell variables to correct type as integer ([#62](https://github.com/arrrgi/dotfiles/issues/62)) ([910db58](https://github.com/arrrgi/dotfiles/commit/910db580c1b549884194bc90c6158ffe5aae5c26))
+
 ## [1.2.1](https://github.com/arrrgi/dotfiles/compare/v1.2.0...v1.2.1) (2025-01-08)
 
 
