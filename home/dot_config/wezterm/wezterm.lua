@@ -1,8 +1,7 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 
-local colors = require 'themes.rose-pine.rose-pine'.colors()
-local window_frame = require 'themes.rose-pine.rose-pine'.window_frame()
+local theme = require('lua/rose-pine').main
 
 local config = {}
 if wezterm.config_builder then
@@ -13,7 +12,7 @@ end
 config.scrollback_lines = 10000
 
 -- Config colors
-config.colors = colors
+config.colors = theme.colors()
 --config.bold_brightens_ansi_colors = true
 
 -- Config font options
@@ -40,7 +39,7 @@ config.window_padding = {
 }
 config.macos_window_background_blur = 30
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-config.window_frame = window_frame
+config.window_frame = theme.window_frame()
 config.window_background_opacity = 0.95
 config.window_close_confirmation = 'AlwaysPrompt'
 config.adjust_window_size_when_changing_font_size = false
