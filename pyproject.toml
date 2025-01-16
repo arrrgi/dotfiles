@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dotfiles"
-version = "1.2.1"
+version = "1.3.0"
 description = "Opinionated dotfiles managed by Chezmoi"
 authors = ["Rowan Gillson <devops@the.bald.engineer>"]
 license = "MIT"
@@ -16,7 +16,7 @@ mkdocs-material = "^9.1.21"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "1.2.1"
+version = "1.3.0"
 tag_format = "$version"
 annotated_tag = "true"
 version_files = [
