@@ -9,11 +9,21 @@ function sudo() {
     local BREW_BIN="/home/linuxbrew/.linuxbrew/bin"
     local BREW_SBIN="/home/linuxbrew/.linuxbrew/sbin"
 
-    if [ -d "$BREW_BIN" ] && [ -d "$BREW_SBIN" ]; then
-        PATH="$BREW_BIN:$BREW_SBIN:$PATH" command sudo "$@"
-    else
-        command sudo "$@"
+    # Check if either Homebrew bin or sbin exists
+    if [[ -d "$BREW_BIN" || -d "$BREW_SBIN" ]]; then
+        # Construct the Homebrew PATH
+        local BREW_PATH=""
+        [[ -d "$BREW_BIN" ]] && BREW_PATH="$BREW_BIN"
+        [[ -d "$BREW_SBIN" ]] && BREW_PATH="${BREW_PATH:+$BREW_PATH:}$BREW_SBIN"
+
+        # Prepend the Homebrew PATH if it's not already in the current PATH
+        if [[ ":$PATH:" != *":$BREW_PATH:"* ]]; then
+            PATH="$BREW_PATH:$PATH"
+        fi
     fi
+
+    # Execute sudo with the updated PATH
+    command sudo env "PATH=$PATH" "$@"
 }
 {{- end }}
 
