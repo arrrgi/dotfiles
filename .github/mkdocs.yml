@@ -3,7 +3,7 @@ site_name: Only the Dotfiles
 site_url: https://dotfiles.bald.engineer
 repo_url: https://github.com/arrrgi/dotfiles
 repo_name: arrrgi/dotfiles
-copyright: Copyright &copy; 2023 Rowan Gillson
+copyright: Copyright &copy; 2025 Rowan Gillson
 
 theme:
   name: material

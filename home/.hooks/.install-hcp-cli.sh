@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# SPDX-FileCopyrightText: © 2023 Rowan Gillson <devops@the.bald.engineer>
+# SPDX-FileCopyrightText: © 2025 Rowan Gillson <devops@the.bald.engineer>
 # SPDX-License-Identifier: MIT
 #
 
