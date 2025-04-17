@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+# SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
 # SPDX-License-Identifier: MIT
 #
 # .zshrc hash: {{ include (joinPath .chezmoi.sourceDir "dot_config/zsh/dot_zshrc.tmpl") | sha256sum }}

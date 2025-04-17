@@ -1,7 +1,7 @@
-#
-# SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
-# SPDX-License-Identifier: MIT
-#
+{{/*
+SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
 [GDrive]
 type = drive
 client_id = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveId") | trim }}
