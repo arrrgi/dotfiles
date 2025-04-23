@@ -7,17 +7,14 @@ SPDX-License-Identifier: MIT
 
 {{/* Define cross platform externals first */}}
 
-{{/* Linux specific externals */}}
-{{/* Declare version variables */}}
-{{ $ageVersion := "1.1.1" -}}
+{{/* WSL specific externals */}}
 
 {{- if and .target.wsl (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys) }}
 ".local/bin/age":
   type: archive-file
-  url: "https://github.com/FiloSottile/age/releases/download/v{{ $ageVersion }}/age-v{{ $ageVersion }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
+  url: "https://github.com/FiloSottile/age/releases/download/v{{ .versions.age }}/age-v{{ .versions.age }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
   executable: true
   path: age/age
 {{- end }}
 
 {{/* Darwin specific externals */}}
-{{/* Declare version variables */}}
