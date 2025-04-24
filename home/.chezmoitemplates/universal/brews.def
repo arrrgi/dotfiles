@@ -5,6 +5,7 @@ SPDX-License-Identifier: MIT
 
 {{- $packages := list
 	"age"
+	"aria2"
 	"bat"
 	"cheat"
 	"dust"
