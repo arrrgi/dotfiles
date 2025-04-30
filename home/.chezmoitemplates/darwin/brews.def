@@ -13,6 +13,7 @@ SPDX-License-Identifier: MIT
 {{/* insert MacOS specific packages here */}}
 {{- $brews := concat $packages (list
   "coreutils"
+	"doctl"
   "gitsign"
   "gnu-sed"
   "gnu-tar"
@@ -33,6 +34,7 @@ SPDX-License-Identifier: MIT
 {{- $casks := list
   "1password"
   "1password-cli"
+	"antinote"
   "arc"
   "brave-browser"
   "cleanshot"
