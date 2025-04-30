@@ -4,15 +4,15 @@
 # SPDX-License-Identifier: MIT
 #
 
-# linux/controlled/packages.def hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/linux/controlled/packages.def") | sha256sum }}
+# linux/controlled/brews.def hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/linux/controlled/brews.def") | sha256sum }}
 
 set -euo pipefail
 
 # This script uses Homebrew to install relevant packages. It relies on the following environment variable
 # set in the Chezmoi config: BREW_PATH
 
-# The packages to install are defined in the linux/controlled/packages.def Chezmoi template. Changes to
-# the packages.def template will be detected by Chezmoi between executions to apply
+# The packages to install are defined in the linux/controlled/brews.def Chezmoi template. Changes to
+# the brews.def template will be detected by Chezmoi between executions to apply
 # any changes. NOTE: Packages added manually to the target are removed by the `cleanup` option.
 
 if [ -x ${BREW_PATH} ]; then
@@ -23,12 +23,12 @@ if [ -x ${BREW_PATH} ]; then
   printf "Info: Updating Homebrew.\n"
   brew update
   printf "Info: Installing Homebrew packages.\n"
-  brew bundle --no-lock --file=/dev/stdin <<EOF
-  {{ includeTemplate "linux/controlled/packages.def" . -}}
+  brew bundle --file=/dev/stdin <<EOF
+  {{ includeTemplate "linux/controlled/brews.def" . -}}
   EOF
   printf "Info: Cleaning up Homebrew packages.\n"
   brew bundle cleanup --force --file=/dev/stdin <<EOF
-  {{ includeTemplate "linux/controlled/packages.def" . -}}
+  {{ includeTemplate "linux/controlled/brews.def" . -}}
   EOF
 
   brew cleanup

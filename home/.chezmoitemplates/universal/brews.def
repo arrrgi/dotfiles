@@ -1,0 +1,35 @@
+{{/*
+SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
+
+{{- $packages := list
+	"age"
+	"aria2"
+	"bat"
+	"cheat"
+	"dust"
+	"fastfetch"
+	"fd"
+	"fclones"
+	"gh"
+	"git"
+	"git-delta"
+	"grc"
+	"helix"
+	"jless"
+	"jq"
+	"lsd"
+	"peco"
+	"pipx"
+	"portal"
+	"rclone"
+	"ripgrep"
+	"superfile"
+	"yq"
+	"zellij"
+	"zsh"
+	"hashicorp/tap/hcp"
+	"olets/tap/zsh-abbr"
+-}}
+{{- $packages | sortAlpha | join " " -}}

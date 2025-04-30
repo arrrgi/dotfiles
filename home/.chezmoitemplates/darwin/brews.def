@@ -1,9 +1,9 @@
 {{/*
-SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
+SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
 SPDX-License-Identifier: MIT
 */}}
 
-{{- $packages := splitList " " (includeTemplate "universal/packages.def" .) }}
+{{- $packages := splitList " " (includeTemplate "universal/brews.def" .) }}
 {{- $taps := list
   "hashicorp/tap"
   "homebrew/bundle"
@@ -13,6 +13,7 @@ SPDX-License-Identifier: MIT
 {{/* insert MacOS specific packages here */}}
 {{- $brews := concat $packages (list
   "coreutils"
+	"doctl"
   "gitsign"
   "gnu-sed"
   "gnu-tar"
@@ -33,9 +34,9 @@ SPDX-License-Identifier: MIT
 {{- $casks := list
   "1password"
   "1password-cli"
+	"antinote"
   "arc"
   "brave-browser"
-  "chatgpt"
   "cleanshot"
   "discord"
   "firefox"

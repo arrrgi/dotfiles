@@ -1,0 +1,2 @@
+versions:
+  age: "1.2.1" # renovate: depName=FiloSottile/age

@@ -4,21 +4,22 @@
 # SPDX-License-Identifier: MIT
 #
 
-# darwin/packages.def hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/darwin/packages.def") | sha256sum }}
+# darwin/packages.def hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/darwin/brews.def") | sha256sum }}
 
 set -euo pipefail
 
 # This script uses Homebrew to install relevant packages. It relies on the following environment variable
 # set in the Chezmoi config: BREW_PATH
 
-# The packages to install are defined in the darwin/packages.def Chezmoi template. Changes to
-# the packages.def template will be detected by Chezmoi between executions to apply
+# The packages to install are defined in the darwin/brews.def Chezmoi template. Changes to
+# the brews.def template will be detected by Chezmoi between executions to apply
 # any changes. NOTE: Packages added manually to the target are removed by the `cleanup` option.
 
 # Prompt pre-emptively for sudo password
 printf "Info: A password may be required to install Homebrew packages.\n"
 sudo -v
 
+# Perform Homebrew tasks
 if [ -x ${BREW_PATH} ]; then
   # Source Homebrew environment variables
   eval "$(${BREW_PATH} shellenv)"
@@ -28,13 +29,13 @@ if [ -x ${BREW_PATH} ]; then
   brew update
 
   printf "Info: Installing Homebrew packages.\n"
-  brew bundle --no-lock --file=/dev/stdin <<EOF
-  {{ includeTemplate "darwin/packages.def" . -}}
+  brew bundle --file=/dev/stdin <<EOF
+  {{ includeTemplate "darwin/brews.def" . -}}
   EOF
 
   printf "Info: Cleaning up Homebrew packages.\n"
   brew bundle cleanup --force --file=/dev/stdin <<EOF
-  {{ includeTemplate "darwin/packages.def" . -}}
+  {{ includeTemplate "darwin/brews.def" . -}}
   EOF
 
   brew cleanup
