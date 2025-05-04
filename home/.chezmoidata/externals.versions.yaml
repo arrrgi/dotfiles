@@ -1,2 +1,6 @@
-versions:
-  age: "1.2.1" # renovate: depName=FiloSottile/age
+tools:
+  binaries:
+    age: "1.2.1" # renovate: depName=FiloSottile/age datasource=github-releases versioning=semver
+  pypi:
+    torf-cli: "5.2.1" # renovate: depName=torf-cli datasource=pypi versioning=pep440
+    speedtest-cli: "2.1.3" # renovate: depName=speedtest-cli datasource=pypi versioning=pep440

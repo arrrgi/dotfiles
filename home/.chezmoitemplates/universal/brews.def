@@ -1,5 +1,5 @@
 {{/*
-SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
 SPDX-License-Identifier: MIT
 */}}
 
@@ -26,6 +26,7 @@ SPDX-License-Identifier: MIT
 	"rclone"
 	"ripgrep"
 	"superfile"
+  "uv"
 	"yq"
 	"zellij"
 	"zsh"

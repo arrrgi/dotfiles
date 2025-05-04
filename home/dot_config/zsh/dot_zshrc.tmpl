@@ -218,6 +218,7 @@ setopt SHARE_HISTORY        # Share history between all sessions.
 (( ${+commands[op]} )) && _evalcache op completion zsh && compdef _op op
 (( ${+commands[thefuck]} )) && _evalcache thefuck --alias
 (( ${+commands[wezterm]} )) && _evalcache wezterm shell-completion --shell zsh
+(( ${+commands[mise]} )) && _evalcache mise activate zsh
 
 # Test for Bat themes cache file in .cache/bat/themes.bin, if not present, run bat command to cache user themes
 if [ ! -f "${XDG_CACHE_HOME}/bat/themes.bin" ]; then
