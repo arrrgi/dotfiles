@@ -27,9 +27,16 @@ function sudo() {
 }
 {{- end }}
 
+{{- if lookPath "spf" -}}
+# Shell function to allow Superfile to exit to cwd
+function spf() {
+	export SPF_LAST_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/superfile/lastdir"
 
-# Shell function for Broot to cd into a directory - workaround for Zsh integration
-function br {
-    emulate -L zsh
-    (){ broot --outcmd $1 ${@:2} && source $1 } =() $@
+	command spf "$@"
+
+	[ ! -f "${SPF_LAST_DIR}" ] || {
+		. "${SPF_LAST_DIR}"
+		rm -f -- "${SPF_LAST_DIR}" > /dev/null
+	}
 }
+{{- end }}

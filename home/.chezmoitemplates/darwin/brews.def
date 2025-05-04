@@ -1,5 +1,5 @@
 {{/*
-SPDX-FileCopyrightText: (c) 2024 Rowan Gillson <devops@the.bald.engineer>
+SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
 SPDX-License-Identifier: MIT
 */}}
 
@@ -14,20 +14,17 @@ SPDX-License-Identifier: MIT
 {{- $brews := concat $packages (list
   "coreutils"
 	"doctl"
-  "gitsign"
   "gnu-sed"
   "gnu-tar"
   "grep"
   "hadolint"
   "httpie"
-  "poetry"
+	"mise"
   "qbittorrent-cli"
   "shellcheck"
   "thefuck"
-  "uv"
   "vivid"
-  "volta"
-  "yt-dlp"
+	"yt-dlp"
 )
 -}}
 

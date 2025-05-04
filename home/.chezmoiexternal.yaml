@@ -12,7 +12,7 @@ SPDX-License-Identifier: MIT
 {{- if and .target.wsl (or .secrets.apikeys .secrets.sshkeys .secrets.storagekeys) }}
 ".local/bin/age":
   type: archive-file
-  url: "https://github.com/FiloSottile/age/releases/download/v{{ .versions.age }}/age-v{{ .versions.age }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
+  url: "https://github.com/FiloSottile/age/releases/download/v{{ .tools.binaries.age }}/age-v{{ .tools.binaries.age }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
   executable: true
   path: age/age
 {{- end }}
