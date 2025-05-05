@@ -37,6 +37,11 @@ if command -v bat &>/dev/null; then
   export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 fi
 
+# fd is a modern replacement for find
+if command -v fd &>/dev/null; then
+	alias fd='fd --hidden'
+fi
+
 # Helix
 if command -v hx &>/dev/null; then
   alias vim='hx'
@@ -50,7 +55,7 @@ fi
 alias wget='wget --hsts-file="${XDG_CACHE_HOME}/wget-hsts"'
 
 # Zellij
-alias zj='zellij'
+# alias zat='session=$(zj ls -ns | fzf --exit-0 || echo "") && [ -n "$session" ] && zj a "$session" || true'
 
 # Dust
 alias dust='dust -r'
@@ -67,7 +72,7 @@ alias duf='du -sh *'
 alias h='history'
 alias sortnr='sort -n -r'
 alias unexport='unset'
-alias rm='rm -i'
+alias rm='rm -I'
 alias cp='cp -i'
 alias mv='mv -i'
 

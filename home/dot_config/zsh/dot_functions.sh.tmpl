@@ -27,7 +27,7 @@ function sudo() {
 }
 {{- end }}
 
-{{- if lookPath "spf" -}}
+{{- if lookPath "spf" }}
 # Shell function to allow Superfile to exit to cwd
 function spf() {
 	export SPF_LAST_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/superfile/lastdir"

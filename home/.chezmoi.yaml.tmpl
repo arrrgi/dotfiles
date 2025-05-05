@@ -139,11 +139,11 @@ SPDX-License-Identifier: MIT
 diff:
   pager: delta
   command: delta
-  args: "--side-by-side"
   exclude:
     - scripts
     - dirs
 env:
+  DELTA_FEATURES: "+side-by-side +syntax-theme=rose-pine +dark +tabs=2 +line-numbers +hyperlinks"
 {{- if eq .chezmoi.os "darwin" }}
   {{- if eq .chezmoi.arch "arm64" }}
   BREW_PATH: "/opt/homebrew/bin/brew"
