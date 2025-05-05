@@ -11,7 +11,7 @@ if [ -n "${SSH_TTY}" ] && [ "${0##*/}" = "-zsh" ]; then
   export ZELLIJ_AUTO_ATTACH=true
   # Handle SSH_AUTH_SOCK forwarding for Zellij sessions.
   if [ -z "${ZELLIJ}" ] && [ "${TERM}" != 'dumb' ] && ( echo "$-" | grep "i" >/dev/null ) && command -v zellij >/dev/null; then
-    if [ -S "${SSH_AUTH_SOCK}" ] && [ -w "/run/user/$(id -u)/" ] && ! [ -S "/run/user/$(id -u)/ssh_auth.sock" ]; then
+    if [ -S "${SSH_AUTH_SOCK}" ] && [ -w "/run/user/$(id -u)/" ] && [ -S "/run/user/$(id -u)/ssh_auth.sock" ]; then
       rm -f /run/user/$(id -u)/ssh_auth.sock
       ln -s "${SSH_AUTH_SOCK}" "/run/user/$(id -u)/ssh_auth.sock"
     fi
