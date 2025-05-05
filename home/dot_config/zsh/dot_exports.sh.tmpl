@@ -8,6 +8,7 @@ xdg_vars=(
   "XDG_CONFIG_HOME=${HOME}/.config"
   "XDG_DATA_HOME=${HOME}/.local/share"
   "XDG_CACHE_HOME=${HOME}/.cache"
+	"XDG_STATE_HOME=${HOME}/.local/state"
 )
 for var in "${xdg_vars[@]}"; do
   var_name="${var%%=*}"  # Extract variable name
@@ -28,11 +29,17 @@ export XDG_RUNTIME_DIR=
 {{- end }}
 
 # Define settings and directories for various programs
+# Bat
+export BAT_THEME=rose-pine
+
 # Cargo
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 
 # Docker
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+
+# Delta
+export DELTA_FEATURES='+side-by-side +syntax-theme=rose-pine +dark +tabs=2 +line-numbers +hyperlinks'
 
 # Editor
 {{- if .target.wsl }}
@@ -42,6 +49,9 @@ export VISUAL="code --wait"
 export EDITOR="hx"
 export VISUAL="hx"
 {{- end }}
+
+# fzf
+# export FZF_DEFAULT_OPTS="--border=horizontal --color=hl:201,hl+:201 --ansi --exact --no-mouse --multi --cycle --tiebreak=length,begin,index --delimiter='\000' --layout=default "
 
 # GnuPG
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
@@ -77,10 +87,6 @@ export SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/
 # Terminfo
 export TERMINFO="${XDG_DATA_HOME}/terminfo"
 export TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
-
-# Volta
-export VOLTA_HOME="${XDG_DATA_HOME}/.volta"
-export PATH="${VOLTA_HOME}/bin:$PATH"
 
 # Wakatime
 export WAKATIME_HOME="${XDG_CONFIG_HOME}/wakatime"

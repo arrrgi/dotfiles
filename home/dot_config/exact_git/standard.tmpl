@@ -1,0 +1,47 @@
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = true
+  autostash = true
+
+[fetch]
+  prune = true
+
+[rebase]
+  autostash = true
+
+[color]
+  ui = true
+
+[core]
+  autocrlf = input
+  excludesfile = ~/.config/git/ignore
+{{- if lookPath "delta" }}
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  line-numbers = true
+  hyperlinks = true
+  syntax-theme = rose-pine
+  dark = true
+  side-by-side = true
+  tabs = 2
+  hyperlinks = true
+{{- end }}
+
+[diff "age"]
+  textconv = chezmoi decrypt
+
+[safe]
+  directory = *
+
+[log]
+  date = iso
+
+[rerere]
+  enabled = true
+

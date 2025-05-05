@@ -22,3 +22,20 @@ type = crypt
 remote = GDrive:
 password = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveEncryptKey") | trim }}
 password2 = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveEncryptSalt") | trim }}
+
+[utility]
+type = sftp
+host = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneUtilityHost") | trim }}
+user = r0b0tn11k
+shell_type = unix
+md5sum_command = md5sum
+sha1sum_command = sha1sum
+
+[server]
+type = sftp
+host = 10.0.10.5
+port = 2244
+user = sysadm
+shell_type = unix
+md5sum_command = md5sum
+sha1sum_command = sha1sum
