@@ -11,13 +11,19 @@ if [ -n "${SSH_TTY}" ] && [ "${0##*/}" = "-zsh" ]; then
   export ZELLIJ_AUTO_ATTACH=true
   # Handle SSH_AUTH_SOCK forwarding for Zellij sessions.
   if [ -z "${ZELLIJ}" ] && [ "${TERM}" != 'dumb' ] && ( echo "$-" | grep "i" >/dev/null ) && command -v zellij >/dev/null; then
-    if [ -S "${SSH_AUTH_SOCK}" ] && [ -w "/run/user/$(id -u)/" ] && [ -S "/run/user/$(id -u)/ssh_auth.sock" ]; then
+    # Always update the symlink if a valid SSH_AUTH_SOCK exists and the runtime dir is writable
+    if [ -S "${SSH_AUTH_SOCK}" ] && [ -w "/run/user/$(id -u)/" ]; then
       rm -f /run/user/$(id -u)/ssh_auth.sock
       ln -s "${SSH_AUTH_SOCK}" "/run/user/$(id -u)/ssh_auth.sock"
     fi
+    # Set SSH_AUTH_SOCK to stable socket if it exists
+		if [ -S "/run/user/$(id -u)/ssh_auth.sock" ]; then
+			export SSH_AUTH_SOCK="/run/user/$(id -u)/ssh_auth.sock"
+		fi
     eval "$(zellij setup --generate-auto-start zsh)"
   fi
 
+  # Fallback if Zellij is already running
   if [ -S "/run/user/$(id -u)/ssh_auth.sock" ]; then
     export SSH_AUTH_SOCK="/run/user/$(id -u)/ssh_auth.sock"
   fi
@@ -219,6 +225,7 @@ setopt SHARE_HISTORY        # Share history between all sessions.
 (( ${+commands[thefuck]} )) && _evalcache thefuck --alias
 (( ${+commands[wezterm]} )) && _evalcache wezterm shell-completion --shell zsh
 (( ${+commands[mise]} )) && _evalcache mise activate zsh
+(( ${+commands[gh]} )) && _evalcache gh copilot alias -- zsh
 
 # Test for Bat themes cache file in .cache/bat/themes.bin, if not present, run bat command to cache user themes
 if [ ! -f "${XDG_CACHE_HOME}/bat/themes.bin" ]; then
