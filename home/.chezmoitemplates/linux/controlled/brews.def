@@ -16,9 +16,10 @@ SPDX-License-Identifier: MIT
 -}}
 
 {{- if .target.wsl }}
-{{- $linuxBrews = append $linuxBrews
+{{-   $linuxBrews = concat $linuxBrews (list
   "gh"
-  "mise"
+	"mise"
+)
 -}}
 {{- end }}
 
