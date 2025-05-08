@@ -17,6 +17,7 @@ SPDX-License-Identifier: MIT
 
 {{- if .target.wsl }}
 {{- $linuxBrews = append $linuxBrews
+  "gh"
   "mise"
 -}}
 {{- end }}
