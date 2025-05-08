@@ -13,7 +13,8 @@ SPDX-License-Identifier: MIT
 {{/* insert MacOS specific packages here */}}
 {{- $brews := concat $packages (list
   "coreutils"
-	"doctl"
+  "doctl"
+  "gh"
   "gnu-sed"
   "gnu-tar"
   "grep"
@@ -24,14 +25,14 @@ SPDX-License-Identifier: MIT
   "shellcheck"
   "thefuck"
   "vivid"
-	"yt-dlp"
+  "yt-dlp"
 )
 -}}
 
 {{- $casks := list
   "1password"
   "1password-cli"
-	"antinote"
+  "antinote"
   "arc"
   "brave-browser"
   "cleanshot"
