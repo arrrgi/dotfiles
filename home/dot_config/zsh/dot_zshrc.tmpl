@@ -5,7 +5,7 @@
 # Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 #
 
-{{- if lookPath "zellij" }}
+{{- if and (lookPath "zellij") .function.personal }}
 # Enable Zellij auto-attach if we are in a remote terminal.
 if [ -n "${SSH_TTY}" ] && [ "${0##*/}" = "-zsh" ]; then
   export ZELLIJ_AUTO_ATTACH=true
