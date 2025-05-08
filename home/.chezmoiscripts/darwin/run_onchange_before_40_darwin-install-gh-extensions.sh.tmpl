@@ -1,0 +1,15 @@
+{{- if lookPath "gh" -}}
+#!/usr/bin/env bash
+#
+# SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
+# SPDX-License-Identifier: MIT
+#
+# externals.versions.yaml hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoidata/externals.versions.yaml") | sha256sum }}
+
+set -euo pipefail
+
+{{- range $pkg := .tools.gh }}
+printf "Info: Installing %s\n" "{{ printf "%s" $pkg }}"
+gh extension install {{ $pkg }} --force
+{{- end }}
+{{- end }}
