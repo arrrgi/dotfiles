@@ -11,11 +11,17 @@ SPDX-License-Identifier: MIT
 -}}
 
 {{/* insert Linux specific packages here */}}
-{{- $brews := concat $packages (list
+{{- $linuxBrews := list
   "bpytop"
-  "mise"
-)
 -}}
+
+{{- if .target.wsl }}
+{{- $linuxBrews = append $linuxBrews
+  "mise"
+-}}
+{{- end }}
+
+{{- $brews := concat $packages $linuxBrews -}}
 
 {{ range ($taps | sortAlpha | uniq) -}}
 tap "{{ . }}"
