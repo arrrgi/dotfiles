@@ -1,50 +1,60 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-  "name": "Ubuntu",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/base:jammy",
-  "features": {
-    "ghcr.io/devcontainers/features/git:1": {
-      "version": "latest"
-    },
-    "ghcr.io/devcontainers-contrib/features/poetry:2": {
-      "version": "latest"
-    }
-  },
+	"name": "Ubuntu",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:noble",
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": true,
+			"configureZshAsDefaultShell": true,
+			"upgradePackages": true,
+			"username": "vscode",
+			"userUid": "automatic",
+			"userGid": "automatic"
+		},
+		"ghcr.io/devcontainers/features/git:1": {
+			"version": "os-provided"
+		},
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "3.12"
+		},
+		"ghcr.io/va-h/devcontainers-features/uv:1": {
+			"version": "latest"
+		}
+	},
 
-  // Features to add to the dev container. More info: https://containers.dev/features.
-  // "features": {},
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
 
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
 
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "uname -a",
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
 
-  // Configure tool-specific properties.
-  "customizations": {
-    // Add devcontainer-specific settings.json values here, such as:
-    "vscode": {
-      "extensions": [
-        "DavidAnson.vscode-markdownlint",
-        "editorconfig.editorconfig",
-        "esbenp.prettier-vscode",
-        "ms-python.python",
-        "redhat.vscode-yaml",
-        "oderwat.indent-rainbow",
-        "vivaxy.vscode-conventional-commits"
-      ],
-      "settings": {
-        "conventionalCommits.autoCommit": false,
-        "conventionalCommits.emojiFormat": "emoji",
-        "conventionalCommits.gitmoji": true,
-        "git.enableCommitSigning": true,
-        "dev.containers.copyGitConfig": true
-      }
-    }
-  }
+	// Configure tool-specific properties.
+	"customizations": {
+		// Add devcontainer-specific settings.json values here, such as:
+		"vscode": {
+			"extensions": [
+				"editorconfig.editorconfig",
+				"esbenp.prettier-vscode",
+				"jinliming2.vscode-go-template",
+				"ms-python.python",
+				"oderwat.indent-rainbow",
+				"redhat.vscode-yaml",
+				"timonwong.shellcheck",
+				"vivaxy.vscode-conventional-commits"
+			],
+			"settings": {
+				"conventionalCommits.autoCommit": false,
+				"conventionalCommits.emojiFormat": "emoji",
+				"conventionalCommits.gitmoji": true
+			}
+		}
+	}
 
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
 }
