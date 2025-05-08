@@ -1,5 +1,11 @@
+{{/*
+SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
+SPDX-License-Identifier: MIT
+*/}}
 [settings]
 idiomatic_version_file_enable_tools = []
 
+{{- if .target.wsl }}
 [settings.node]
 gpg_verify = false
+{{- end }}
