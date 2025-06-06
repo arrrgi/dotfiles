@@ -12,7 +12,7 @@ dependencies = []
 
 [dependency-groups]
 dev = [
-    "commitizen>=4.6.0",
+    "commitizen>=4.6.3",
     "mkdocs-material>=9.6.12",
     "pre-commit>=4.2.0",
 ]
