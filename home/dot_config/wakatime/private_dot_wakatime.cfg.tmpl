@@ -3,4 +3,4 @@ SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
 SPDX-License-Identifier: MIT
 */}}
 [settings]
-api_key = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "wakatimeApiKeyGlobal") | trim }}
+api_key = {{ (awsSecretsManager "dotfiles/chezmoi/secrets").wakatimeApiKeyGlobal | trim }}

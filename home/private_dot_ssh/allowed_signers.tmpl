@@ -3,8 +3,8 @@ SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
 SPDX-License-Identifier: MIT
 */}}
 {{- if and .function.personal .target.darwin -}}
-  {{ .git.email }} namespaces="git" {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "sshSigningKeyPersonal") | trim }}
+  {{ .git.email }} namespaces="git" {{ .git.email }} namespaces="git" {{ (awsSecretsManager "dotfiles/chezmoi/secrets").sshSigningKeyPersonal | trim }}
 {{- end -}}
 {{- if and .function.work .target.wsl -}}
-  {{ .git.email }} namespaces="git" {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "sshSigningKeyPersonal") | trim }}
+  {{ .git.email }} namespaces="git" {{ (awsSecretsManager "dotfiles/chezmoi/secrets").sshSigningKeyWork | trim }}
 {{- end -}}
