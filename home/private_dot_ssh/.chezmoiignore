@@ -8,7 +8,6 @@ authorized_keys
 {{- if and .target.darwin .function.personal }}
 config.d/work.conf
 keys.d
-authorized_keys
 {{- end }}
 {{/* Ignore all SSH config except authorized keys on personal or */}}
 {{/* hybrid function servers */}}
