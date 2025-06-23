@@ -26,3 +26,10 @@ abbr 'zellij a'='zellij attach'
 abbr 'zellij l'='zellij list-sessions'
 abbr 'zellij d'='zellij delete-session'
 abbr 'zellij k'='zellij kill-session'
+
+{{- if .target.darwin -}}
+# Snatch commands
+abbr uptop='scp "${HOME}/Downloads/Torrents/Music/Upload/*.torrent" utility:/home/r0b0tn11k/watch/qbittorrent/music/'
+abbr downlow='rsync -aPvz utility:/home/r0b0tn11k/downloads/qbittorrent/complete/Music/ ${HOME}/Downloads/Torrents/Music/Xfer/'
+abbr pushit='rsync -aPvz "${HOME}/Downloads/Torrents/Music/Xfer/" server:/mnt/usb/datablob/workspace/'
+{{- end }}
