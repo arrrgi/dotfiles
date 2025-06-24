@@ -19,7 +19,7 @@ if [ ! -f "{{ $decryptedKey }}" ]; then
     printf "Info: Decrypting {{ $encryptedKey }}\n"
     mkdir -p "{{ .chezmoi.homeDir }}/.config/age"
     chmod 700 "{{ .chezmoi.homeDir }}/.config/age"
-    chezmoi age decrypt --output "{{ $decryptedKey }}" --passphrase "{{ $encryptedKey }}"
+    "{{ .chezmoi.executable }}" age decrypt --output "{{ $decryptedKey }}" --passphrase "{{ $encryptedKey }}"
     chmod 400 "{{ $decryptedKey }}"
     printf "Info: Decrypted key to private key file {{ $decryptedKey }}\n"
 else
