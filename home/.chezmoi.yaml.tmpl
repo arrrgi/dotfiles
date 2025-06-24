@@ -12,7 +12,7 @@ SPDX-License-Identifier: MIT
 {{- $state := dict "persistent" false "ephemeral" false -}}
 {{- $secrets := dict "apikeys" false "sshkeys" false "storagekeys" false -}}
 {{- $git := dict -}}
-{{- $vlt := dict -}}
+{{- $aws := dict -}}
 
 {{/* Test if the user is in a container by checking that a TTY is not present */}}
 {{- if not stdinIsATTY -}}
@@ -154,25 +154,19 @@ env:
   BREW_PATH: "/home/linuxbrew/.linuxbrew/bin/brew"
 {{- end }}
 {{- if or $secrets.apikeys $secrets.sshkeys $secrets.storagekeys }}
-  {{- $_ := set $vlt "clientID" (promptStringOnce $vlt "clientID" "What is your Vault Secrets Service Principal ID") }}
-  {{- $_ := set $vlt "clientSecret" (promptStringOnce $vlt "clientSecret" "What is your Vault Secrets Service Principal Secret") }}
-  HCP_CLIENT_ID: {{ $vlt.clientID | quote }}
-  HCP_CLIENT_SECRET: {{ $vlt.clientSecret | quote }}
+  {{- $_ := set $aws "accessKeyID" (promptStringOnce $aws "accessKeyID" "What is your AWS Access Key ID") }}
+  {{- $_ := set $aws "secretAccessKey" (promptStringOnce $aws "secretAccessKey" "What is your AWS Secret Access Key") }}
+  {{- $_ := set $aws "region" (promptStringOnce $aws "region" "What is your AWS Region" | default "ap-southeast-2") }}
+  AWS_ACCESS_KEY_ID: {{ $aws.accessKeyID | quote }}
+  AWS_SECRET_ACCESS_KEY: {{ $aws.secretAccessKey | quote }}
+awsSecretsManager:
+  region: {{ $aws.region | quote }}
 encryption: age
 age:
   identity: "{{ $.chezmoi.homeDir }}/.config/age/key.txt"
   recipient: "age183zmhhlz4wg0a8qmweyzmm5cf0y0g4tyulxg8ldjzjmkgze2sqlsnvwuqs"
-hooks:
-  read-source-state:
-    pre:
-      command: ".local/share/chezmoi/home/.hooks/.install-hcp-cli.sh"
 {{- end }}
 data:
-{{- if or $secrets.apikeys $secrets.sshkeys $secrets.storagekeys }}
-  hcp:
-    {{- $_ := set $vlt "appName" (promptStringOnce $vlt "appName" "What is your HCP Vault Secrets application name") }}
-    appName: {{ $vlt.appName | quote }}
-{{- end }}
   target:
     {{- range $key, $value := $target }}
     {{ $key }}: {{ $value }}

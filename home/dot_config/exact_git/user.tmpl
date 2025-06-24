@@ -6,7 +6,7 @@ SPDX-License-Identifier: MIT
 [user]
   name = {{ .git.name }}
   email = {{ .git.email }}
-  signingkey = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "sshSigningKeyPersonal") | trim }}
+	signingkey = {{ (awsSecretsManager "dotfiles/chezmoi/secrets").sshSigningKeyPersonal | trim }}
 
 [gpg]
   format = ssh
@@ -33,7 +33,7 @@ SPDX-License-Identifier: MIT
 [user]
   name = {{ .git.name }}
   email = {{ .git.email }}
-  signingkey = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "sshSigningKeyWork") | trim }}
+  signingkey = {{ (awsSecretsManager "dotfiles/chezmoi/secrets").sshSigningKeyWork | trim }}
 
 [gpg]
   format = ssh

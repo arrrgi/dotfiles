@@ -228,7 +228,6 @@ setopt SHARE_HISTORY        # Share history between all sessions.
 (( ${+commands[wezterm]} )) && _evalcache wezterm shell-completion --shell zsh
 (( ${+commands[mise]} )) && _evalcache mise activate zsh
 
-# Handle gh and copilot extension completions
 {{- $ghExists := lookPath "gh" -}}
 {{- $copilotExtensionInstalled := false -}}
 {{- if $ghExists -}}
@@ -243,6 +242,7 @@ setopt SHARE_HISTORY        # Share history between all sessions.
 {{- end }}
 
 {{- if $copilotExtensionInstalled }}
+# Handle gh and copilot extension completions
 (( ${+commands[gh]} )) && _evalcache gh copilot alias -- zsh
 {{- end }}
 

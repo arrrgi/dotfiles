@@ -4,11 +4,11 @@ SPDX-License-Identifier: MIT
 */}}
 [GDrive]
 type = drive
-client_id = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveId") | trim }}
-client_secret = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveSecret") | trim }}
+client_id = {{ (awsSecretsManager "dotfiles/chezmoi/secrets").rcloneDriveId | trim }}
+client_secret = {{ (awsSecretsManager "dotfiles/chezmoi/secrets").rcloneDriveSecret | trim }}
 scope = drive.file
-token = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveToken") | trim }}
-root_folder_id = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveRootDir") | trim }}
+token = {{ (awsSecretsManager "dotfiles/chezmoi/secrets").rcloneDriveToken | trim }}
+root_folder_id = {{ (awsSecretsManager "dotfiles/chezmoi/secrets").rcloneDriveRootDir | trim }}
 use_trash = false
 chunk_size = 32M
 skip_gdocs = true
@@ -20,12 +20,12 @@ skip_dangling_shortcuts = true
 [GDCrypt]
 type = crypt
 remote = GDrive:
-password = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveEncryptKey") | trim }}
-password2 = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneDriveEncryptSalt") | trim }}
+password = {{ (awsSecretsManager "dotfiles/chezmoi/secrets").rcloneDriveEncryptKey | trim }}
+password2 = {{ (awsSecretsManager "dotfiles/chezmoi/secrets").rcloneDriveEncryptSalt | trim }}
 
 [utility]
 type = sftp
-host = {{ includeTemplate "universal/hcpHandler.tmpl" (list .hcp.appName "rcloneUtilityHost") | trim }}
+host = {{ (awsSecretsManager "dotfiles/chezmoi/secrets").rcloneUtilityHost | trim }}
 user = r0b0tn11k
 shell_type = unix
 md5sum_command = md5sum
