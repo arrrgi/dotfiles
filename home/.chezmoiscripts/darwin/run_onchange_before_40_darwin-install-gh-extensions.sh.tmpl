@@ -7,7 +7,7 @@
 # externals.versions.yaml hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoidata/externals.versions.yaml") | sha256sum }}
 
 set -euo pipefail
-
+GH_TOKEN="{{ (awsSecretsManager "dotfiles/chezmoi/secrets").githubToken | trim}}"
 {{- range $pkg := .tools.gh }}
 printf "Info: Installing %s\n" "{{ printf "%s" $pkg }}"
 gh extension install {{ $pkg }} --force

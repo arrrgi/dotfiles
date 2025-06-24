@@ -53,6 +53,9 @@ export VISUAL="hx"
 # fzf
 # export FZF_DEFAULT_OPTS="--border=horizontal --color=hl:201,hl+:201 --ansi --exact --no-mouse --multi --cycle --tiebreak=length,begin,index --delimiter='\000' --layout=default "
 
+# GH
+export GH_TOKEN="{{ (awsSecretsManager "dotfiles/chezmoi/secrets").githubToken | trim}}"
+
 # GnuPG
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 export GPG_TTY=$TTY
