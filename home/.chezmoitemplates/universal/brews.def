@@ -26,6 +26,7 @@ SPDX-License-Identifier: MIT
 	"ripgrep"
 	"superfile"
   "uv"
+	"vhs"
 	"yq"
 	"zellij"
 	"zsh"
