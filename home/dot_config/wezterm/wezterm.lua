@@ -22,13 +22,28 @@ config.font_size = 12
 -- Config window defaults
 if wezterm.target_triple:find("darwin") then
   wezterm.on("gui-startup", function(cmd)
-    local screen = wezterm.gui.screens().active
+    local screen = wezterm.gui.screens().main
     local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
     local gui = window:gui_window()
-    local width = 0.9 * screen.width
-    local height = 0.9 * screen.height
-    gui:set_inner_size(width, height)
-    gui:set_position((screen.width - width) / 2, (screen.height - height) / 2)
+
+    if screen.name == "DELL U3421WE" then
+      -- Half-screen with padding for the Dell monitor
+      local padding = 10 -- pixels
+      local menu_bar_height = 25 -- pixels
+      local width = (screen.width / 2) - (padding * 1.5)
+      local height = screen.height - menu_bar_height - (padding * 2)
+      local x = (screen.width / 2) + (padding / 2)
+      local y = menu_bar_height + padding
+      gui:set_inner_size(width, height)
+      gui:set_position(x, y)
+    elseif screen.name == "Built-in Retina Display" then
+      -- Full screen for the built-in display
+      gui:set_inner_size(screen.width, screen.height)
+      gui:set_position(screen.x, screen.y)
+    end
+
+    -- Prevent the default window from opening as we have defined our own.
+    return false
   end)
 end
 config.window_padding = {
@@ -40,7 +55,7 @@ config.window_padding = {
 config.macos_window_background_blur = 30
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.window_frame = theme.window_frame()
-config.window_background_opacity = 0.95
+config.window_background_opacity = 0.9
 config.window_close_confirmation = 'AlwaysPrompt'
 config.adjust_window_size_when_changing_font_size = false
 
