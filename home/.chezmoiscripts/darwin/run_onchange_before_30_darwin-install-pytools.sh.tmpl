@@ -8,7 +8,13 @@
 
 set -euo pipefail
 
-{{- range $pkg, $version := .tools.pypi }}
+{{- $pypiTools := .tools.pypi.universal | default dict | deepCopy -}}
+{{- if hasKey .tools.pypi .chezmoi.os -}}
+{{-   $osSpecificTools := get .tools.pypi .chezmoi.os -}}
+{{-   $_ := merge $pypiTools $osSpecificTools -}}
+{{- end -}}
+
+{{- range $pkg, $version := $pypiTools }}
 printf "Info: Installing %s\n" "{{ printf "%s@%s" $pkg $version }}"
 uv tool install {{ printf "%s@%s" $pkg $version | quote }} --force
 {{- end }}
