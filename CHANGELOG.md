@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.4.0](https://github.com/arrrgi/dotfiles/compare/v1.3.1...v1.4.0) (2025-06-28)
+
+
+### Features
+
+* add renovate configuration file ([#73](https://github.com/arrrgi/dotfiles/issues/73)) ([509737f](https://github.com/arrrgi/dotfiles/commit/509737fedddca8c03b0c0eaf6e9f59bcff5b18d4))
+* add script to install PyPI tools using uv for Linux controlled targets ([#98](https://github.com/arrrgi/dotfiles/issues/98)) ([e098bb9](https://github.com/arrrgi/dotfiles/commit/e098bb9ace765947288f771758a7776854cb5e88))
+* add support for GitHub CLI and extensions in Zsh configuration and scripts ([#84](https://github.com/arrrgi/dotfiles/issues/84)) ([f34badd](https://github.com/arrrgi/dotfiles/commit/f34badd1cdeb86cfeb3754f2e2c96aacc98efd5e))
+* update packages and project tools ([#72](https://github.com/arrrgi/dotfiles/issues/72)) ([f2f3cad](https://github.com/arrrgi/dotfiles/commit/f2f3cad6a0a474b3db66587800ab6b5e28f7b18e))
+
+
+### Bug Fixes
+
+* add 'gh' to Linux specific packages for WSL support ([#86](https://github.com/arrrgi/dotfiles/issues/86)) ([969c375](https://github.com/arrrgi/dotfiles/commit/969c375888c187b65e2bcd25e9add8181b7e2ecd))
+* correct handling of Linux specific packages in brews.def for WSL support ([#83](https://github.com/arrrgi/dotfiles/issues/83)) ([a3f80a2](https://github.com/arrrgi/dotfiles/commit/a3f80a2b27383e49140bd47d4050ffb515451c78))
+* correct SSH_AUTH_SOCK handling in Zellij auto-attach logic ([#79](https://github.com/arrrgi/dotfiles/issues/79)) ([899ddb5](https://github.com/arrrgi/dotfiles/commit/899ddb573bef020161db78c36a7f5f90356a81b8))
+* correct syntax for appending Linux specific packages in brews.def ([#87](https://github.com/arrrgi/dotfiles/issues/87)) ([bce55a4](https://github.com/arrrgi/dotfiles/commit/bce55a4825de036bb97bd4d89bf6afcd761824f5))
+* correct syntax in renovate configuration file ([#74](https://github.com/arrrgi/dotfiles/issues/74)) ([6ab0727](https://github.com/arrrgi/dotfiles/commit/6ab0727eefdca1a0db0cdbed6ff758b8dedd7703))
+* correctly attach SSH_AUTH_SOCK in Zellij ([#80](https://github.com/arrrgi/dotfiles/issues/80)) ([5524b82](https://github.com/arrrgi/dotfiles/commit/5524b8226842cfc545ca0f1980eb3083510b4f67))
+* properly define extension names and rename script ([#85](https://github.com/arrrgi/dotfiles/issues/85)) ([a34e4d1](https://github.com/arrrgi/dotfiles/commit/a34e4d1dcc9425cab6b418199b39a1f3f42a4db7))
+* remove unused tap from brews.def for MacOS and Linux ([#90](https://github.com/arrrgi/dotfiles/issues/90)) ([84f1dce](https://github.com/arrrgi/dotfiles/commit/84f1dce190a40bc41501c0b6745515114dbb6da4))
+* resolve incorrect whitespace rendering breaking functions ([#78](https://github.com/arrrgi/dotfiles/issues/78)) ([df263d1](https://github.com/arrrgi/dotfiles/commit/df263d1a36e5b0647fefdd3ad8af641366d1fc5f))
+* update GH_TOKEN export in scripts for consistency ([#93](https://github.com/arrrgi/dotfiles/issues/93)) ([179f7be](https://github.com/arrrgi/dotfiles/commit/179f7be5ec9a21efdc358fbace06b0fbfa9f16c2))
+* update scripts names and paths for lexical execution ([#91](https://github.com/arrrgi/dotfiles/issues/91)) ([d9d98b8](https://github.com/arrrgi/dotfiles/commit/d9d98b840f134c4d6ac38abc403045412e41c63a))
+* update tailscale package name to tailscale-app in brews.def ([#96](https://github.com/arrrgi/dotfiles/issues/96)) ([7f983fc](https://github.com/arrrgi/dotfiles/commit/7f983fc37efcd1a21396f413550c67814627cefc))
+
+
+### Documentation
+
+* expand usage instructions with prerequisites and installation steps ([#92](https://github.com/arrrgi/dotfiles/issues/92)) ([b48e85e](https://github.com/arrrgi/dotfiles/commit/b48e85e12cbded2600231c8e70e18eef90ce7007))
+
 ## [1.3.1](https://github.com/arrrgi/dotfiles/compare/v1.3.0...v1.3.1) (2025-01-16)
 
 
