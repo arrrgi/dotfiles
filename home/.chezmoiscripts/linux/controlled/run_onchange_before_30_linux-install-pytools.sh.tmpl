@@ -1,0 +1,21 @@
+{{- if lookPath "uv" -}}
+#!/usr/bin/env bash
+#
+# SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
+# SPDX-License-Identifier: MIT
+#
+# externals.versions.yaml hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoidata/externals.versions.yaml") | sha256sum }}
+
+set -euo pipefail
+
+{{- $pypiTools := .tools.pypi.universal | default dict | deepCopy -}}
+{{- if hasKey .tools.pypi .chezmoi.os -}}
+{{-   $osSpecificTools := get .tools.pypi .chezmoi.os -}}
+{{-   $_ := merge $pypiTools $osSpecificTools -}}
+{{- end -}}
+
+{{- range $pkg, $version := $pypiTools }}
+printf "Info: Installing %s\n" "{{ printf "%s@%s" $pkg $version }}"
+uv tool install {{ printf "%s@%s" $pkg $version | quote }} --force
+{{- end }}
+{{- end }}
