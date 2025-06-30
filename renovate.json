@@ -3,5 +3,6 @@
 	"extends": [
 		"github>arrrgi/renovate-config:default",
 		"github>arrrgi/renovate-config:regexManager"
-	]
+	],
+	"prCreation": "approval"
 }
