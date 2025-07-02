@@ -12,6 +12,7 @@ SPDX-License-Identifier: MIT
 	"fastfetch"
 	"fd"
 	"fclones"
+	"gemini-cli"
 	"git"
 	"git-delta"
 	"grc"
