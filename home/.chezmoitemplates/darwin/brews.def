@@ -38,6 +38,7 @@ SPDX-License-Identifier: MIT
   "font-jetbrains-mono-nerd-font"
   "git-credential-manager"
 	"google-drive"
+	"iina"
   "jordanbaird-ice"
   "obsidian"
   "orbstack"
@@ -46,8 +47,8 @@ SPDX-License-Identifier: MIT
   "telegram"
   "todoist-app"
   "visual-studio-code"
-  "vlc"
   "wezterm"
+	"windows-app"
   "zed"
 -}}
 
