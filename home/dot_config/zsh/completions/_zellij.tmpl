@@ -2,6 +2,16 @@
 #compdef zellij
 
 autoload -U is-at-least
+_zellij_sessions() {
+    local line sessions desc; sessions=("${(@f)$(zellij list-sessions --no-formatting 2>/dev/null)}")
+    local -a session_names_with_desc
+    for line in "${sessions[@]}"; do
+        session_name=${line%% *}
+        desc=${line#* }
+        session_names_with_desc+=("$session_name:$desc")
+    done
+    _describe -t sessions 'active session' session_names_with_desc
+}
 
 _zellij() {
     typeset -A opt_args
@@ -137,7 +147,7 @@ _arguments "${_arguments_options[@]}" \
 '*--force-run-commands[If resurrecting a dead session, immediately run all its commands on startup]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
-':: Session to attach to:_zellij__sessions' \
+'::session-name:_zellij_sessions' \
 ":: :_zellij__attach_commands" \
 "*::: :->attach" \
 && ret=0
@@ -212,7 +222,7 @@ esac
 _arguments "${_arguments_options[@]}" \
 '-h[Print help information]' \
 '--help[Print help information]' \
-':: Session to kill:_zellij__sessions' \
+'::target-session:_zellij_sessions' \
 && ret=0
 ;;
 (delete-session)
@@ -221,7 +231,7 @@ _arguments "${_arguments_options[@]}" \
 '*--force[Kill the session if it'\''s running before deleting it]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
-':: Session to delete:_zellij__sessions' \
+'::target-session:_zellij_sessions' \
 && ret=0
 ;;
 (kill-all-sessions)
@@ -1287,15 +1297,7 @@ _zellij__action__write-chars_commands() {
     _describe -t commands 'zellij action write-chars commands' commands "$@"
 }
 
-(( $+functions[_zellij__sessions] )) ||
-_zellij__sessions() {
-    local sessions; sessions=()
-    sessions=(${(f)"$(zellij list-sessions --no-formatting 2>/dev/null)"})
-    sessions=(${sessions/ /:})
-    _describe -t sessions 'zellij sessions' sessions -o nosort "$@"
-}
-
-_zellij "$@"
+compdef _zellij zellij
 function zr () { zellij run --name "$*" -- zsh -ic "$*";}
 function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
 function zri () { zellij run --name "$*" --in-place -- zsh -ic "$*";}
