@@ -151,7 +151,7 @@ dev = [
 [package.metadata.requires-dev]
 dev = [
     { name = "commitizen", specifier = ">=4.8.3" },
-    { name = "mkdocs-material", specifier = ">=9.6.17" },
+    { name = "mkdocs-material", specifier = ">=9.6.18" },
     { name = "pre-commit", specifier = ">=4.3.0" },
 ]
 
