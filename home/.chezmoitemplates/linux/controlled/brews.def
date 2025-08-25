@@ -5,17 +5,17 @@ SPDX-License-Identifier: MIT
 
 {{- $packages := splitList " " (includeTemplate "universal/brews.def" .) }}
 {{- $taps := list
-  "olets/tap"
+	"olets/tap"
 -}}
 
 {{/* insert Linux specific packages here */}}
 {{- $linuxBrews := list
-  "bpytop"
+	"bpytop"
 -}}
 
 {{- if .target.wsl }}
 {{-   $linuxBrews = concat $linuxBrews (list
-  "gh"
+	"gh"
 	"mise"
 )
 -}}

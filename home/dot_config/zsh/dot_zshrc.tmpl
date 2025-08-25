@@ -206,7 +206,7 @@ setopt no_auto_menu  # require an extra TAB press to open the completion menu
 HISTSIZE=50000
 SAVEHIST=50000
 HISTORY_IGNORE="(:|cd(| *)|l[adls](| *)|lsd(| *)|clear|pwd|exit|man *|*--help|*--version|[bf]g(| *)|jobs|z(| *)|history|less *|*shutdown*|*reboot*)"
-HISTFILE="${ZDOTDIR:-$HOME/.config/zsh}/.zsh_history"
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/.zsh_history"
 setopt APPEND_HISTORY       # Append history to the history file.
 setopt BANG_HIST            # Treat the '!' character specially during expansion.
 setopt COMBINING_CHARS      # Recognize certain non-English character combinations as special.
