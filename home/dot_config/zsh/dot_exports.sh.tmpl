@@ -42,12 +42,15 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export DELTA_FEATURES='+side-by-side +syntax-theme=rose-pine +dark +tabs=2 +line-numbers +hyperlinks'
 
 # Editor
-{{- if .target.wsl }}
+{{- if lookPath "code" }}
 export EDITOR="code --wait"
 export VISUAL="code --wait"
-{{- else }}
+{{- else if lookPath "hx" }}
 export EDITOR="hx"
 export VISUAL="hx"
+{{ else }}
+export EDITOR="vi"
+export VISUAL="vi"
 {{- end }}
 
 # fzf

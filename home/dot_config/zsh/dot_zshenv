@@ -12,6 +12,10 @@ if [ -n "${ZSH_VERSION-}" ]; then
   #
   #   export GOPATH=$HOME/go
   #
+  # Ensure Zsh history directory exists (shell expansion safe)
+  ZSH_HISTORY_DIR="${HOME}/.local/state/zsh"
+  [ -d "${ZSH_HISTORY_DIR}" ] || mkdir -p -- "${ZSH_HISTORY_DIR}"
+  #
   # Do not change anything else in this file.
 
   : ${ZDOTDIR:=~}
