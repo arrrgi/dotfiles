@@ -115,15 +115,15 @@ path=(
   "${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnubin"
   "${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin"
   "${HOMEBREW_PREFIX}/opt/grep/libexec/gnubin"
-  "${HOMEBREW_PREFIX}/bin"
   "${HOME}/.local/bin"
+  "${HOMEBREW_PREFIX}/bin"
   ${path}
 )
 {{- else if and (or .target.ubuntu .target.wsl) (env "BREW_PATH") -}}
 path=(
-  "${HOMEBREW_PREFIX}/bin"
   "${HOME}/.local/bin"
-  ${path}
+  "${HOMEBREW_PREFIX}/bin"
+	${path}
 )
 {{- else -}}
 path+=(
@@ -160,7 +160,7 @@ fi
 # z4h source ohmyzsh/ohmyzsh/lib/diagnostics.zsh  # source an individual file
 # z4h load   ohmyzsh/ohmyzsh/plugins/emoji-clock  # load a plugin
 z4h load mroth/evalcache
-z4h load djui/alias-tips
+# z4h load djui/alias-tips
 z4h load ohmyzsh/ohmyzsh/plugins/encode64
 z4h load ohmyzsh/ohmyzsh/plugins/sudo
 z4h load ohmyzsh/ohmyzsh/plugins/gitignore
