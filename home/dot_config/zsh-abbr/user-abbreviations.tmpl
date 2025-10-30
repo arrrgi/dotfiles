@@ -30,6 +30,14 @@ abbr 'zellij k'='zellij kill-session'
 {{ if .target.darwin -}}
 # Snatch commands
 abbr uptop='scp "${HOME}"/Downloads/Torrents/Music/Upload/*.torrent utility:/home/r0b0tn11k/watch/qbittorrent/music/'
-abbr downlow='rsync -aPvz utility:/home/r0b0tn11k/downloads/qbittorrent/complete/Music/ ${HOME}/Downloads/Torrents/Music/Staged/'
-abbr pushit='rsync -aPvz "${HOME}/Downloads/Torrents/Music/Staged/" server:/mnt/usb/datablob/workspace/'
+abbr downlow='rsync -aPv utility:/home/r0b0tn11k/downloads/qbittorrent/complete/Music/ ${HOME}/Downloads/Torrents/Music/Staged/'
+abbr pushit='rsync -aPv "${HOME}/Downloads/Torrents/Music/Staged/" server:/mnt/usb/datablob/workspace/'
+
+# Mount commands
+abbr mblob='mount -t nfs -o port=2049,mountport=2049,vers=3,tcp,ro utility:/ ./
+{{- end }}
+
+{{ if and .target.ubuntu (lookPath "rclone") -}}
+# Mount commands
+abbr mblob='rclone serve nfs ./ --addr 0.0.0.0:2049 --vfs-cache-mode full --read-only --nfs-cache-type disk --buffer-size 4G --vfs-fast-fingerprint'
 {{- end }}
