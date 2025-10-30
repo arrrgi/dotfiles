@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.5.0](https://github.com/arrrgi/dotfiles/compare/v1.4.0...v1.5.0) (2025-10-30)
+
+
+### Features
+
+* add new MacOS casks and app config ([#121](https://github.com/arrrgi/dotfiles/issues/121)) ([c25117d](https://github.com/arrrgi/dotfiles/commit/c25117d1751289652ee44da7754a1eff8e03d943))
+* enhance zellij completion with session listing and improved arguments ([#113](https://github.com/arrrgi/dotfiles/issues/113)) ([5f70561](https://github.com/arrrgi/dotfiles/commit/5f705613e613c62efbd603bfd4b01411830c0d09))
+* make gemini-cli a universal package ([#110](https://github.com/arrrgi/dotfiles/issues/110)) ([7ab08f3](https://github.com/arrrgi/dotfiles/commit/7ab08f3757cca9073f06d9f06807051f9b6f0019))
+* update tool configs to latest ([#122](https://github.com/arrrgi/dotfiles/issues/122)) ([d2ab709](https://github.com/arrrgi/dotfiles/commit/d2ab709dfd419c8a784ad12d705e33d2b468ff16))
+
+
+### Bug Fixes
+
+* enable PR creation on approval in renovate configuration ([#100](https://github.com/arrrgi/dotfiles/issues/100)) ([79038ed](https://github.com/arrrgi/dotfiles/commit/79038edb956720e81aeba2ac2b78ad5bac7d9975))
+* update applications and superfile config ([#112](https://github.com/arrrgi/dotfiles/issues/112)) ([addb42c](https://github.com/arrrgi/dotfiles/commit/addb42c0eff0663ccfd91dfb267eb45ffcb85cf7))
+* update superfile configs and zsh-abbr shortcuts ([#109](https://github.com/arrrgi/dotfiles/issues/109)) ([c7870c4](https://github.com/arrrgi/dotfiles/commit/c7870c493a5fcd50a2c4311d1903fe491f80bc10))
+
 ## [1.4.0](https://github.com/arrrgi/dotfiles/compare/v1.3.1...v1.4.0) (2025-06-28)
 
 
