@@ -151,7 +151,7 @@ dev = [
 [package.metadata.requires-dev]
 dev = [
     { name = "commitizen", specifier = ">=4.8.3" },
-    { name = "mkdocs-material", specifier = ">=9.6.17" },
+    { name = "mkdocs-material", specifier = ">=9.6.22" },
     { name = "pre-commit", specifier = ">=4.3.0" },
 ]
 
@@ -304,12 +304,11 @@ wheels = [
 
 [[package]]
 name = "mkdocs-material"
-version = "9.6.18"
+version = "9.6.22"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "babel" },
     { name = "backrefs" },
-    { name = "click" },
     { name = "colorama" },
     { name = "jinja2" },
     { name = "markdown" },
@@ -320,9 +319,9 @@ dependencies = [
     { name = "pymdown-extensions" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e6/46/db0d78add5aac29dfcd0a593bcc6049c86c77ba8a25b3a5b681c190d5e99/mkdocs_material-9.6.18.tar.gz", hash = "sha256:a2eb253bcc8b66f8c6eaf8379c10ed6e9644090c2e2e9d0971c7722dc7211c05", size = 4034856, upload-time = "2025-08-22T08:21:47.575Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5f/5d/317e37b6c43325cb376a1d6439df9cc743b8ee41c84603c2faf7286afc82/mkdocs_material-9.6.22.tar.gz", hash = "sha256:87c158b0642e1ada6da0cbd798a3389b0bc5516b90e5ece4a0fb939f00bacd1c", size = 4044968, upload-time = "2025-10-15T09:21:15.409Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/22/0b/545a4f8d4f9057e77f1d99640eb09aaae40c4f9034707f25636caf716ff9/mkdocs_material-9.6.18-py3-none-any.whl", hash = "sha256:dbc1e146a0ecce951a4d84f97b816a54936cdc9e1edd1667fc6868878ac06701", size = 9232642, upload-time = "2025-08-22T08:21:44.52Z" },
+    { url = "https://files.pythonhosted.org/packages/cc/82/6fdb9a7a04fb222f4849ffec1006f891a0280825a20314d11f3ccdee14eb/mkdocs_material-9.6.22-py3-none-any.whl", hash = "sha256:14ac5f72d38898b2f98ac75a5531aaca9366eaa427b0f49fc2ecf04d99b7ad84", size = 9206252, upload-time = "2025-10-15T09:21:12.175Z" },
 ]
 
 [[package]]
