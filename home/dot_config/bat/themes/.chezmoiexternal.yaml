@@ -7,5 +7,5 @@ SPDX-License-Identifier: MIT
 
 "rose-pine.tmTheme":
   type: file
-  url: "https://raw.githubusercontent.com/rose-pine/tm-theme/main/dist/themes/rose-pine.tmTheme"
+  url: "https://raw.githubusercontent.com/rose-pine/tm-theme/main/dist/rose-pine-moon.tmTheme"
   refreshPeriod: {{ $refreshPeriod }}
