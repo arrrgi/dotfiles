@@ -1,5 +1,8 @@
 # EditorConfig is awesome: https://EditorConfig.org
 
+# top-most EditorConfig file
+root = true
+
 # Unix-style newlines with a newline ending every file
 [*]
 charset = utf-8
@@ -12,3 +15,7 @@ tab_width = 2
 
 [*.{yml,yml.tmpl,yaml,yaml.tmpl,md}]
 indent_style = space
+
+[*.{py,toml}]
+indent_style = space
+indent_size = 4
