@@ -5,19 +5,24 @@ SPDX-License-Identifier: MIT
 
 {{- $packages := splitList " " (includeTemplate "universal/brews.def" .) }}
 {{- $taps := list
+	"bellicose100xp/tap"
 	"olets/tap"
 -}}
 
 {{/* insert MacOS specific packages here */}}
 {{- $brews := concat $packages (list
+	"corepack"
 	"coreutils"
 	"doctl"
+	"gemini-cli"
 	"gh"
+	"glow"
 	"gnu-sed"
 	"gnu-tar"
 	"grep"
 	"hadolint"
 	"httpie"
+	"imagemagick"
 	"mise"
 	"qbittorrent-cli"
 	"shellcheck"
@@ -50,7 +55,6 @@ SPDX-License-Identifier: MIT
 	"telegram"
 	"todoist-app"
 	"visual-studio-code"
-	"wezterm"
 	"windows-app"
 	"zed"
 -}}
