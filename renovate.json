@@ -1,8 +1,18 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": [
-		"github>arrrgi/renovate-config:default",
-		"github>arrrgi/renovate-config:regexManager"
-	],
-	"prCreation": "approval"
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>arrrgi/renovate-config:default",
+    "github>arrrgi/renovate-config:regexManager"
+  ],
+  "enabledManagers": ["devcontainer", "github-actions", "pep621", "pyenv"],
+  "packageRules": [
+    {
+      "matchManagers": ["pep621", "pyenv"],
+      "matchPackageNames": ["python"],
+      "groupName": "Python grouped version updates"
+    }
+  ],
+  "constraints": {
+    "python": "3.13"
+  }
 }
