@@ -22,12 +22,15 @@ SPDX-License-Identifier: MIT
   gpgsign = true
   forceSignAnnotated = true
 
-[credential]
-    helper = /usr/local/share/gcm-core/git-credential-manager
-
+{{ if lookPath "gh" -}}
 [credential "https://github.com"]
-    username = arrrgi
-{{- end }}
+        helper =
+        helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+        helper =
+        helper = !/opt/homebrew/bin/gh auth git-credential
+{{- end -}}
+{{- end -}}
 
 {{ if and .function.work .target.wsl -}}
 [user]
