@@ -59,6 +59,9 @@ export VISUAL="vi"
 # GH
 export GH_TOKEN="{{ (awsSecretsManager "dotfiles/chezmoi/secrets").githubToken | trim}}"
 
+# Git
+export GIT_CONFIG_GLOBAL="${HOME}/.gitconfig"
+
 # GnuPG
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 export GPG_TTY=$TTY

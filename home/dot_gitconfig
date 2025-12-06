@@ -1,0 +1,3 @@
+[include]
+  path = ~/.config/git/config
+
