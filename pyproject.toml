@@ -7,7 +7,7 @@ authors = [
     { name = "Rowan Gillson", email = "devops@the.bald.engineer" }
 ]
 license = "MIT"
-requires-python = ">=3.13"
+requires-python = ">=3.13.11"
 dependencies = []
 
 [dependency-groups]
