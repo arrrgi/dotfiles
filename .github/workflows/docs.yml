@@ -22,7 +22,7 @@ jobs:
       - name: Setup Python runtime
         uses: actions/setup-python@v6
         with:
-          python-version: 3.13.9
+          python-version: 3.14.2
 
       - name: Set the date environment variable for cache keying
         run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
