@@ -17,7 +17,7 @@
 			"version": "os-provided"
 		},
 		"ghcr.io/devcontainers/features/python:1": {
-			"version": "3.13.9"
+			"version": "3.14.2"
 		},
 		"ghcr.io/va-h/devcontainers-features/uv:1": {
 			"version": "latest"
