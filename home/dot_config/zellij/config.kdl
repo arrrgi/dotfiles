@@ -316,7 +316,7 @@ default_cwd "${HOME}"
 // Default: default
 //
 // theme "default"
-theme "rose-pine"
+theme "aura-theme-dark"
 
 // The name of the default layout to load on startup
 // Default: "default"
