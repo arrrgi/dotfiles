@@ -5,7 +5,8 @@ SPDX-License-Identifier: MIT
 
 {{- $refreshPeriod := "168h" }}
 
-"aura-theme.tmTheme":
+"aura-theme-dark.yml":
   type: file
-  url: "https://raw.githubusercontent.com/arrrgi/aura-theme/refs/heads/feat/bat/packages/bat/aura-theme.tmTheme"
+  url: "https://raw.githubusercontent.com/arrrgi/aura-theme/refs/heads/feat/vivid/packages/vivid/aura-theme-dark.yml"
   refreshPeriod: {{ $refreshPeriod }}
+  path: "./aura-theme-dark.yml"

@@ -1,7 +1,16 @@
 #font-family = "JetBrainsMono Nerd Font Mono"
-font-family = "Maple Mono NF"
-font-size = 13
-theme = "Aura"
-#theme = "Dracula"
-background-opacity = 0.95
+font-family = Maple Mono NF
+font-size = 14
+theme = Aura
+#background-opacity = 0.9
 #background = "#1a1a1a"
+macos-titlebar-style = "native"
+macos-icon = retro
+shell-integration-features = no-cursor,sudo,title,ssh-env
+keybind = opt+arrow_left=unbind
+keybind = opt+arrow_right=unbind
+window-width = 340
+window-height = 64
+window-position-x = 185
+window-position-y = 77
+quit-after-last-window-closed = true
