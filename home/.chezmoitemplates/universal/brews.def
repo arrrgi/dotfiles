@@ -16,6 +16,7 @@ SPDX-License-Identifier: MIT
 	"git-delta"
 	"grc"
 	"helix"
+	"hyperfine"
 	"jless"
 	"jq"
 	"lsd"
