@@ -35,6 +35,12 @@ abbr pushit='rsync -aPv "${HOME}/Downloads/Torrents/Music/Staged/" server:/mnt/u
 
 # Mount commands
 abbr mblob='mount -t nfs -o port=2049,mountport=2049,vers=3,tcp,ro utility:/ ./
+
+{{ if lookPath "mise" -}}
+# Mise commands
+abbr mod='mise outdated --bump'
+abbr mud='mise upgrade'
+{{- end }}
 {{- end }}
 
 {{ if and .target.ubuntu (lookPath "rclone") -}}
