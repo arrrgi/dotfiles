@@ -128,7 +128,6 @@ path=(
 {{- else -}}
 path+=(
   "${HOME}/.local/bin"
-  ${path}
 )
 {{- end }}
 
@@ -142,6 +141,13 @@ fpath=(
 z4h source "${ZDOTDIR:-$HOME/.config/zsh}/.exports.sh"
 z4h source "${ZDOTDIR:-$HOME/.config/zsh}/.aliases.sh"
 z4h source "${ZDOTDIR:-$HOME/.config/zsh}/.functions.sh"
+
+# Set GOBIN in PATH after sourcing .exports.sh to allow overrides.
+path+=(
+	"${GOBIN}"
+)
+
+# Source convenience tools if they are installed.
 {{/* Source GRC only on targets where it is already available */}}
 {{- if lookPath "grc" -}}
 z4h source "${HOMEBREW_PREFIX}/etc/grc.zsh" <$TTY
