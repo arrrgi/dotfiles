@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.0.0](https://github.com/arrrgi/dotfiles/compare/v1.4.0...v2.0.0) (2026-01-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate-to-github-cli ([#140](https://github.com/arrrgi/dotfiles/issues/140))
+
+### Features
+
+* add and prune packages and taps for MacOS and Linux configurations ([#137](https://github.com/arrrgi/dotfiles/issues/137)) ([cc15f5e](https://github.com/arrrgi/dotfiles/commit/cc15f5e0d664167386f297ff31440965d7062ea9))
+* add new MacOS casks and app config ([#121](https://github.com/arrrgi/dotfiles/issues/121)) ([c25117d](https://github.com/arrrgi/dotfiles/commit/c25117d1751289652ee44da7754a1eff8e03d943))
+* enhance zellij completion with session listing and improved arguments ([#113](https://github.com/arrrgi/dotfiles/issues/113)) ([5f70561](https://github.com/arrrgi/dotfiles/commit/5f705613e613c62efbd603bfd4b01411830c0d09))
+* make gemini-cli a universal package ([#110](https://github.com/arrrgi/dotfiles/issues/110)) ([7ab08f3](https://github.com/arrrgi/dotfiles/commit/7ab08f3757cca9073f06d9f06807051f9b6f0019))
+* migrate-to-github-cli ([#140](https://github.com/arrrgi/dotfiles/issues/140)) ([13a3160](https://github.com/arrrgi/dotfiles/commit/13a31601bd6d21780bc292e994cb9686498a51a1))
+* update tool configs to latest ([#122](https://github.com/arrrgi/dotfiles/issues/122)) ([d2ab709](https://github.com/arrrgi/dotfiles/commit/d2ab709dfd419c8a784ad12d705e33d2b468ff16))
+* use aura theme for CLI tools ([#144](https://github.com/arrrgi/dotfiles/issues/144)) ([04e377c](https://github.com/arrrgi/dotfiles/commit/04e377c4005bf7254727e2732993f67f0c61632e))
+
+
+### Bug Fixes
+
+* correct typo in Renovate config for GitHub Action digest helper ([#142](https://github.com/arrrgi/dotfiles/issues/142)) ([0bed801](https://github.com/arrrgi/dotfiles/commit/0bed80121a1494f23a32ef25150f5a4691db7833))
+* enable PR creation on approval in renovate configuration ([#100](https://github.com/arrrgi/dotfiles/issues/100)) ([79038ed](https://github.com/arrrgi/dotfiles/commit/79038edb956720e81aeba2ac2b78ad5bac7d9975))
+* update applications and superfile config ([#112](https://github.com/arrrgi/dotfiles/issues/112)) ([addb42c](https://github.com/arrrgi/dotfiles/commit/addb42c0eff0663ccfd91dfb267eb45ffcb85cf7))
+* update superfile configs and zsh-abbr shortcuts ([#109](https://github.com/arrrgi/dotfiles/issues/109)) ([c7870c4](https://github.com/arrrgi/dotfiles/commit/c7870c493a5fcd50a2c4311d1903fe491f80bc10))
+* update URL for rose-pine theme to point to the correct file ([#135](https://github.com/arrrgi/dotfiles/issues/135)) ([caee117](https://github.com/arrrgi/dotfiles/commit/caee117b0a0e7dd5238b7798929db050c3f76e93))
+* update Zsh path configuration preferring UV Python versions ([#128](https://github.com/arrrgi/dotfiles/issues/128)) ([e3a33e6](https://github.com/arrrgi/dotfiles/commit/e3a33e60277086ca4766bdcfeb5d10dfe1808879))
+
 ## [1.4.0](https://github.com/arrrgi/dotfiles/compare/v1.3.1...v1.4.0) (2025-06-28)
 
 
