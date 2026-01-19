@@ -28,7 +28,7 @@ jobs:
         run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
 
       - name: Setup build cache
-        uses: actions/cache@v4
+        uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5
         with:
           key: mkdocs-material-${{ env.cache_id }}
           path: .cache
