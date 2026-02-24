@@ -1,8 +1,17 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": [
-		"github>arrrgi-labs/renovate-config",
-		"github>arrrgi-labs/renovate-config//presets/regexManager",
-		"github>arrrgi-labs/renovate-config//presets/groupPython"
-	]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>arrrgi-labs/renovate-config",
+    "github>arrrgi-labs/renovate-config//presets/regexManager",
+    "github>arrrgi-labs/renovate-config//presets/groupPython"
+  ],
+  "packageRules": [
+    // Define project package rule to restrict Python version updates to 3.13.x
+    {
+      "matchPackageNames": [
+        "**/python"
+      ],
+      "allowedVersions": ">=3.13 <3.14"
+    }
+  ]
 }
