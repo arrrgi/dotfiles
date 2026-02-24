@@ -1,19 +1,8 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": [
-		"github>arrrgi/renovate-config:default",
-		"github>arrrgi/renovate-config:regexManager",
-		"helpers:pinGitHubActionDigests"
-	],
-	"enabledManagers": ["devcontainer", "github-actions", "pep621", "pyenv"],
-	"packageRules": [
-		{
-			"matchManagers": ["devcontainer", "github-actions", "pep621", "pyenv"],
-			"matchPackageNames": ["python"],
-			"groupName": "Python grouped version updates"
-		}
-	],
-	"constraints": {
-		"python": "3.13"
-	}
+		"github>arrrgi-labs/renovate-config",
+		"github>arrrgi-labs/renovate-config//presets/regexManager",
+		"github>arrrgi-labs/renovate-config//presets/groupPython"
+	]
 }
