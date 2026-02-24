@@ -6,10 +6,9 @@
     "github>arrrgi-labs/renovate-config//presets/groupPython"
   ],
   "packageRules": [
-    // Define project package rule to restrict Python version updates to 3.13.x
     {
       "matchPackageNames": [
-        "**/python"
+        "/(^|\\/)python$/"
       ],
       "allowedVersions": ">=3.13 <3.14"
     }
