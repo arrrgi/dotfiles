@@ -164,7 +164,7 @@ dev = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "commitizen", specifier = ">=4.10.1" },
+    { name = "commitizen", specifier = ">=4.13.8" },
     { name = "mkdocs-material", specifier = ">=9.7.0" },
 ]
 
