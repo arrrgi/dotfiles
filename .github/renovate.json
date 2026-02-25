@@ -2,15 +2,23 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>arrrgi-labs/renovate-config",
-    "github>arrrgi-labs/renovate-config//presets/regexManager",
-    "github>arrrgi-labs/renovate-config//presets/groupPython"
+    "github>arrrgi-labs/renovate-config//presets/regexManager"
   ],
   "packageRules": [
     {
-      "matchPackageNames": [
-        "python"
+      "description": "Constrain Python to 3.13.x and reinforce grouping across all managers",
+      "matchManagers": [
+        "devcontainer",
+        "github-actions",
+        "pep621",
+        "pyenv"
       ],
-      "allowedVersions": ">=3.13 <3.14"
+      "matchPackageNames": [
+        "**/python"
+      ],
+      "allowedVersions": "/^3\\.13\\./",
+      "groupName": "Project Python version",
+      "groupSlug": "project-python-version"
     }
   ]
 }
