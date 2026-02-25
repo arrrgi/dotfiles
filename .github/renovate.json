@@ -8,7 +8,7 @@
   "packageRules": [
     {
       "matchPackageNames": [
-        "/(^|\\/)python$/"
+        "python"
       ],
       "allowedVersions": ">=3.13 <3.14"
     }
