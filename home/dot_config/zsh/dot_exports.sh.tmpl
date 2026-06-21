@@ -35,6 +35,10 @@ export BAT_THEME=aura-theme
 # Cargo
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 
+{{- if lookPath "codex" -}}
+export CODEX_HOME="${XDG_CONFIG_HOME}/codex"
+{{- end }}
+
 # Docker
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 
@@ -74,18 +78,23 @@ export GOBIN="${GOPATH}/bin"
 export HTTPIE_CONFIG_DIR="${XDG_CONFIG_HOME}/httpie"
 
 # Less
-export LESSKEY="${XDG_CONFIG_HOME}/less/lesskey"
-export LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
-export LESSHISTSIZE=1000
-export LESSCHARSET="utf-8"
+# export LESSKEY="${XDG_CONFIG_HOME}/less/lesskey"
+# export LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
+# export LESSHISTSIZE=1000
+# export LESSCHARSET="utf-8"
 
-# Neovim
-#export VIMDOTDIR="${XDG_CONFIG_HOME}/nvim"
-#export MYVIMRC="${VIMDOTDIR}/init.vim"
+# Paging
+{{- if and (lookPath "bat") (lookPath "moor") }}
+export PAGER="moor"
+export MANPAGER="moor"
+export BAT_PAGER="moor"
+export MOOR="--style=aura-theme-dark --quit-if-one-screen --statusbar=bold --no-linenumbers"
+{{ else }}
+export PAGER="less -isr"
+{{- end }}
 
 # Shell
 export BLOCK_SIZE="human-readable"
-export PAGER="less -isr"
 
 # SSH
 {{- if and .target.darwin .function.personal }}
