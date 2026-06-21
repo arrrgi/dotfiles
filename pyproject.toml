@@ -1,6 +1,6 @@
 [project]
 name = "dotfiles"
-version = "1.4.0"
+version = "2.0.0"
 description = "Opinionated dotfiles managed by Chezmoi"
 readme = "README.md"
 authors = [
@@ -18,7 +18,7 @@ dev = [
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "1.4.0"
+version = "2.0.0"
 tag_format = "$version"
 version_scheme = "semver"
 version_provider = "uv"
