@@ -29,13 +29,11 @@ if command -v lsd &> /dev/null; then
   alias lldd='ls --depth=2 --tree -l'
 fi
 
-# Bat is a modern replacement for cat
-if command -v bat &>/dev/null; then
-  alias cat='bat -pp'
-  alias less='bat --paging=always'
-  # override MANPAGER to colorize with bat
-  export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
-fi
+# Bat and Moor are modern replacements for displaying file contents and paging
+{{- if and (lookPath "bat") (lookPath "moor") }}
+alias cat='bat'
+alias less='moor'
+{{- end }}
 
 # fd is a modern replacement for find
 if command -v fd &>/dev/null; then

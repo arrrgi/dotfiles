@@ -8,4 +8,3 @@ tools:
       speedtest-cli: "2.1.3" # renovate: depName=speedtest-cli datasource=pypi versioning=pep440
   gh:
     - gennaro-tedesco/gh-f
-    - github/gh-copilot
