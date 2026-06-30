@@ -35,19 +35,29 @@ SPDX-License-Identifier: MIT
   {{- end -}}
 {{- else -}}
 {{/* As the user is in an interactive TTY session, test for the target environment */}}
-{{/* Notify the user that the session is interactive and prompt for the users full name */}}
+{{/* Notify the user that the session is interactive */}}
   {{- writeToStdout "Info: Session is interactive.\n" -}}
-  {{- writeToStdout "💡 Tip: You can re-enter prompted inputs with `chezmoi init --data=false`.\n" -}}
   {{/* Begin OS check conditionals and set context specific dictionary variables as true */}}
   {{/* Check for MacOS */}}
   {{- if eq .chezmoi.os "darwin" -}}
     {{/* Notify user the target is a personal MacOS device */}}
     {{- writeToStdout "Info: Target is MacOS-based personal device.\n" -}}
-    {{/* Get full name from user to populate Git config */}}
-    {{- $_ := set $git "name" (promptStringOnce $git "name" "What is your full name") -}}
-    {{/* prompt for additional Git config data */}}
-    {{- $_ := set $git "email" (promptStringOnce $git "email" "What is your Git associated email address") -}}
-    {{- $_ := set $git "gh_username" (promptStringOnce $git "gh_username" "What is your GitHub username") -}}
+    {{/* Get Git config data from environment variables */}}
+    {{- if not (env "GIT_NAME") -}}
+      {{- writeToStdout "🛑 Error: GIT_NAME environment variable is required for MacOS. Exiting.\n" -}}
+      {{- exit 1 -}}
+    {{- end -}}
+    {{- if not (env "GIT_EMAIL") -}}
+      {{- writeToStdout "🛑 Error: GIT_EMAIL environment variable is required for MacOS. Exiting.\n" -}}
+      {{- exit 1 -}}
+    {{- end -}}
+    {{- if not (env "GIT_GH_USERNAME") -}}
+      {{- writeToStdout "🛑 Error: GIT_GH_USERNAME environment variable is required for MacOS. Exiting.\n" -}}
+      {{- exit 1 -}}
+    {{- end -}}
+    {{- $_ := set $git "name" (env "GIT_NAME") -}}
+    {{- $_ := set $git "email" (env "GIT_EMAIL") -}}
+    {{- $_ := set $git "gh_username" (env "GIT_GH_USERNAME") -}}
     {{/* Set context specific dict values */}}
     {{- $_ := set $target "darwin" true -}}
     {{- $_ := set $function "personal" true -}}
@@ -63,12 +73,27 @@ SPDX-License-Identifier: MIT
     {{/* Check for WSL */}}
     {{- if and (eq .chezmoi.osRelease.id "ubuntu") (.chezmoi.kernel.osrelease | lower | contains "microsoft" ) -}}
       {{- writeToStdout "Info: Target is WSL-based work device.\n" -}}
-      {{/* Get full name from user to populate Git config */}}
-      {{- $_ := set $git "name" (promptStringOnce $git "name" "What is your full name") -}}
-      {{/* Prompt for additional Git config data */}}
-      {{- $_ := set $git "email" (promptStringOnce $git "email" "What is your Git associated email address") -}}
-      {{- $_ := set $git "ado_username" (promptStringOnce $git "ado_username" "What is your Azure DevOps username") -}}
-      {{- $_ := set $git "ado_org" (promptStringOnce $git "ado_org" "What is your Azure DevOps organization") -}}
+      {{/* Get Git config data from environment variables */}}
+      {{- if not (env "GIT_NAME") -}}
+        {{- writeToStdout "🛑 Error: GIT_NAME environment variable is required for WSL. Exiting.\n" -}}
+        {{- exit 1 -}}
+      {{- end -}}
+      {{- if not (env "GIT_EMAIL") -}}
+        {{- writeToStdout "🛑 Error: GIT_EMAIL environment variable is required for WSL. Exiting.\n" -}}
+        {{- exit 1 -}}
+      {{- end -}}
+      {{- if not (env "GIT_ADO_USERNAME") -}}
+        {{- writeToStdout "🛑 Error: GIT_ADO_USERNAME environment variable is required for WSL. Exiting.\n" -}}
+        {{- exit 1 -}}
+      {{- end -}}
+      {{- if not (env "GIT_ADO_ORG") -}}
+        {{- writeToStdout "🛑 Error: GIT_ADO_ORG environment variable is required for WSL. Exiting.\n" -}}
+        {{- exit 1 -}}
+      {{- end -}}
+      {{- $_ := set $git "name" (env "GIT_NAME") -}}
+      {{- $_ := set $git "email" (env "GIT_EMAIL") -}}
+      {{- $_ := set $git "ado_username" (env "GIT_ADO_USERNAME") -}}
+      {{- $_ := set $git "ado_org" (env "GIT_ADO_ORG") -}}
       {{/* Set context specific dict values */}}
       {{- $_ := set $target "wsl" true -}}
       {{- $_ := set $function "work" true -}}
@@ -154,12 +179,28 @@ env:
   BREW_PATH: "/home/linuxbrew/.linuxbrew/bin/brew"
 {{- end }}
 {{- if or $secrets.apikeys $secrets.sshkeys $secrets.storagekeys }}
-  {{- $_ := set $aws "accessKeyID" (promptStringOnce $aws "accessKeyID" "What is your AWS Access Key ID") }}
-  {{- $_ := set $aws "secretAccessKey" (promptStringOnce $aws "secretAccessKey" "What is your AWS Secret Access Key") }}
-  {{- $_ := set $aws "region" (promptStringOnce $aws "region" "What is your AWS Region" | default "ap-southeast-2") }}
+  {{- if not (env "AWS_ACCESS_KEY_ID") -}}
+    {{- writeToStdout "🛑 Error: AWS_ACCESS_KEY_ID environment variable is required for this configuration. Exiting.\n" -}}
+    {{- exit 1 -}}
+  {{- end -}}
+  {{- if not (env "AWS_SECRET_ACCESS_KEY") -}}
+    {{- writeToStdout "🛑 Error: AWS_SECRET_ACCESS_KEY environment variable is required for this configuration. Exiting.\n" -}}
+    {{- exit 1 -}}
+  {{- end -}}
+  {{- if not (env "AWS_REGION") -}}
+    {{- writeToStdout "🛑 Error: AWS_REGION environment variable is required for this configuration. Exiting.\n" -}}
+    {{- exit 1 -}}
+  {{- end -}}
+  {{- $_ := set $aws "accessKeyID" (env "AWS_ACCESS_KEY_ID") }}
+  {{- $_ := set $aws "secretAccessKey" (env "AWS_SECRET_ACCESS_KEY") }}
   AWS_ACCESS_KEY_ID: {{ $aws.accessKeyID | quote }}
   AWS_SECRET_ACCESS_KEY: {{ $aws.secretAccessKey | quote }}
 awsSecretsManager:
+  {{- if not (env "AWS_REGION") -}}
+    {{- writeToStdout "🛑 Error: AWS_REGION environment variable is required for this configuration. Exiting.\n" -}}
+    {{- exit 1 -}}
+  {{- end -}}
+  {{- $_ := set $aws "region" (env "AWS_REGION") }}
   region: {{ $aws.region | quote }}
 encryption: age
 age:
