@@ -13,7 +13,7 @@ dependencies = []
 [dependency-groups]
 dev = [
     "commitizen>=4.13.10",
-    "mkdocs-material>=9.7.6",
+    "mkdocs-material>=9.7.7",
 ]
 
 [tool.commitizen]
