@@ -1,15 +1,50 @@
-### Sensitive files
-*.crt
-*.key
+# File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,archive,archives,certificates,compressed,compressedarchive,compression,gpg,homebrew,osx,python,ssh,venv,virtualenv
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,macos,archive,archives,certificates,compressed,compressedarchive,compression,gpg,homebrew,osx,python,ssh,venv,virtualenv
+
+### certificates ###
 *.pem
+*.key
+*.crt
 *.cer
-id_ed25519
-id_rsa
+*.der
+*.priv
 
-### Project files
-.venv
-.cache
+### GPG ###
+secring.*
 
-## Work In Progress files
-scratch
+### macOS ###
+# General
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+### Python ###
+# Distribution / packaging
+.Python
+build/
+dist/
+downloads/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# mkdocs documentation
+/site
+
+### SSH ###
+**/.ssh/id_*
+**/.ssh/*_id_*
+**/.ssh/known_hosts

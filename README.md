@@ -5,149 +5,75 @@
 Opinionated dotfiles for \*nix based personal and work development environments,
 managed by [Chezmoi](https://www.chezmoi.io).
 
-## Installation
+## Setup
+
+Before running the installation, you need to configure environment variables with your credentials.
 
 **Requirements:**
 
 1. Ubuntu (VM, Baremetal or WSL) or MacOS target operating system
 2. curl installed in target operating system
+3. A text editor (vi, nano, etc.)
 
-**Run:**
+**Steps:**
+
+1. **Configure Bash to ignore commands with leading spaces** (temporary, for this session only):
+
+   ```bash
+   export HISTCONTROL=ignorespace
+   ```
+
+2. **Download the environment template**:
+
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/arrrgi/dotfiles/main/.env.example -o .env && chmod 0600 .env
+   ```
+
+3. **Edit the `.env` file** with your credentials:
+
+   ```bash
+   vi .env
+   ```
+
+   Replace the placeholder values with your actual credentials. See the file comments for which variables are required for your target environment:
+
+   - **MacOS**: GIT_NAME, GIT_EMAIL, GIT_GH_USERNAME, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION
+   - **WSL**: GIT_NAME, GIT_EMAIL, GIT_ADO_USERNAME, GIT_ADO_ORG, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION
+   - **Ubuntu Home Lab**: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION
+   - **Work/VPS/Media Servers**: No variables required
+
+4. **Load the values temporarily for the install** and keep them out of history and immediately cleanup the file:
+
+   ```bash
+   set -o allexport
+   source .env
+   set +o allexport
+   rm -f .env
+   ```
+
+> Note: Do not keep check in the `.env` file or store it in a shared location. Loading credentials only for the install and unsetting them immediately helps prevent secrets from leaking into long-lived shell sessions.
+
+1. **Run the installation immediately** while the variables are available:
+
+   ```bash
+   sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply arrrgi [--branch=ref] --use-builtin-git=true
+   ```
+
+2. **Clear sensitive environment variables after install**:
+
+   ```bash
+   unset GIT_NAME GIT_EMAIL GIT_GH_USERNAME GIT_ADO_USERNAME GIT_ADO_ORG AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_REGION
+   ```
+
+**Note:** The HISTCONTROL configuration and Bash shell are only needed for initial setup. Once Chezmoi applies your configuration, Zsh will become your default shell and Bash is no longer used.
+
+## Installation
 
 ```bash
 sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply arrrgi [--branch=ref] --use-builtin-git=true
 ```
 
-## Dotfiles Decision Tree
-
-Chezmoi runs context/OS specific scripts and applies relevant dotfiles using the
-high-level logic outlined.
-
-```mermaid
-graph TD
-  Start((Start))
-  Start --> TTY{Is the session a TTY?}
-  TTY -- False --> checkContainer{Is the session within<br>a Docker container?}
-  checkContainer -- True --> setContainer[Set Container<br>context Variables]
-  setContainer --> Success[End logic with<br>success message]
-  checkContainer -- False --> Error[Exit with error message]
-  Error --> Finish((Finish))
-  Success --> ApplyTemplate[Apply Chezmoi Template]
-  ApplyTemplate --> Finish
-  TTY -- True --> promptName[Prompt for full name]
-  promptName --> whichOS{Check OS Logic}
-  whichOS --> checkMacOS{Is the OS MacOS?}
-  whichOS --> checkWSL{Is the OS WSL?}
-  whichOS --> checkUbuntu{Is the OS Ubuntu?}
-  whichOS -- Other --> Error
-  checkWSL -- False --> Error
-  checkUbuntu -- False --> Error
-  checkMacOS -- True --> setMacOS[Set MacOS<br>context Variables]
-  checkMacOS -- False --> Error
-  checkWSL -- True --> setWSL[Set WSL<br>context Variables]
-  checkUbuntu -- True --> checkRootAccess{Do you have root access?}
-  checkRootAccess -- True --> setUbuntuRoot[Set Ubuntu with root<br>context Variables]
-  checkRootAccess -- False --> setUbuntuNormal[Set Ubuntu without root<br>context Variables]
-  setMacOS --> Success
-  setWSL --> Success
-  setUbuntuRoot --> Success
-  setUbuntuNormal --> Success
-```
-
-This could be interpreted as the following pseudo-Bash script which minimises
-the number of nested condition statements by using guard clauses. This aligns
-closely to the way the Chezmoi base template evaluates conditions, captures
-necessary inputs from _**stdin**_ during installation and then executes context
-and OS specific scripts and config to the target environment.
-
-Additional detail on the conditional logic and inputs required is available in
-the [documentation](https://dotfiles.bald.engineer) for this repo.
-
-```bash
-#!/bin/bash
-
-echo "Start"
-echo "-----"
-
-# Check if the session is a TTY
-echo "Is this a TTY session? (y/n)"
-read is_tty
-
-if [ "$is_tty" == "n" ]; then
-    # Check if the session is within a Docker container
-    echo "Is the session within a Docker container? (y/n)"
-    read is_container
-
-    if [ "$is_container" == "y" ]; then
-        # Set container context variables
-        echo "Setting Container context variables..."
-        # Perform necessary operations
-
-        echo "End logic with success message"
-        echo "Apply Chezmoi Template"
-    else
-        echo "Exit with error message"
-        echo "Finish"
-    fi
-else
-    echo "Is the OS MacOS? (y/n)"
-    read is_macos
-
-    if [ "$is_macos" == "y" ]; then
-        # Set MacOS context variables
-        echo "Setting MacOS context variables..."
-        # Perform necessary operations
-
-        echo "End logic with success message"
-        echo "Apply Chezmoi Template"
-    elif [ "$is_macos" == "n" ]; then
-        echo "Is the OS WSL? (y/n)"
-        read is_wsl
-
-        if [ "$is_wsl" == "y" ]; then
-            # Set WSL context variables
-            echo "Setting WSL context variables..."
-            # Perform necessary operations
-
-            echo "End logic with success message"
-            echo "Apply Chezmoi Template"
-        else
-            echo "Is the OS Ubuntu? (y/n)"
-            read is_ubuntu
-
-            if [ "$is_ubuntu" == "y" ]; then
-                echo "Do you have root access? (y/n)"
-                read has_root_access
-
-                if [ "$has_root_access" == "y" ]; then
-                    # Set Ubuntu context variables with root
-                    echo "Setting Ubuntu with root context variables..."
-                    # Perform necessary operations
-
-                    echo "End logic with success message"
-                    echo "Apply Chezmoi Template"
-                elif [ "$has_root_access" == "n" ]; then
-                    # Set Ubuntu context variables without root
-                    echo "Setting Ubuntu without root context variables..."
-                    # Perform necessary operations
-
-                    echo "End logic with success message"
-                    echo "Apply Chezmoi Template"
-                else
-                    echo "Exit with error message"
-                    echo "Finish"
-                fi
-            else
-                echo "Exit with error message"
-                echo "Finish"
-            fi
-        fi
-    else
-        echo "Exit with error message"
-        echo "Finish"
-    fi
-fi
-```
+> NOTE: using `--branch=ref` is optional but useful if you want to apply a config that diverges from the main branch
 
 ## License
 
