@@ -1,4 +1,3 @@
-#font-family = "JetBrainsMono Nerd Font Mono"
 font-family = Maple Mono NF
 font-size = 14
 theme = Aura
@@ -9,8 +8,10 @@ macos-icon = retro
 shell-integration-features = no-cursor,sudo,title,ssh-env
 keybind = opt+arrow_left=unbind
 keybind = opt+arrow_right=unbind
-window-width = 340
+window-width = 380
 window-height = 64
 window-position-x = 185
 window-position-y = 77
 quit-after-last-window-closed = true
+custom-shader = shaders/cursor_blaze_tapered.glsl
+custom-shader = shaders/sparks.glsl

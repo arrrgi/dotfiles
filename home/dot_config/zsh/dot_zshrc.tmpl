@@ -232,6 +232,10 @@ setopt SHARE_HISTORY        # Share history between all sessions.
 (( ${+commands[op]} )) && _evalcache op completion zsh && compdef _op op
 (( ${+commands[thefuck]} )) && _evalcache thefuck --alias
 (( ${+commands[mise]} )) && _evalcache mise activate zsh
+(( ${+commands[fnox]} )) && _evalcache fnox completion zsh
+(( ${+commands[hk]} )) && _evalcache hk completion zsh
+(( ${+commands[pkl]} )) && _evalcache pkl completion zsh
+(( ${+commands[uv]} )) && _evalcache uv generate-shell-completion zsh
 
 #{{- $ghExists := lookPath "gh" -}}
 #{{- $copilotExtensionInstalled := false -}}

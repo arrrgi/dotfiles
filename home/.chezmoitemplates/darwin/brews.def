@@ -7,6 +7,7 @@ SPDX-License-Identifier: MIT
 {{- $taps := list
   "bellicose100xp/tap"
   "olets/tap"
+  "tesslio/tap"
 -}}
 
 {{/* insert MacOS specific packages here */}}
@@ -22,9 +23,11 @@ SPDX-License-Identifier: MIT
   "httpie"
   "imagemagick"
   "mise"
+  "mole"
   "shellcheck"
   "thefuck"
   "yt-dlp"
+  "tesslio/tap/tessl"
 )
 -}}
 
@@ -37,6 +40,7 @@ SPDX-License-Identifier: MIT
   "1password-cli"
   "antinote"
   "arq"
+  "chatgpt"
   "cleanshot"
   "codex"
   "discord"
@@ -47,6 +51,8 @@ SPDX-License-Identifier: MIT
   "google-drive"
   "iina"
   "jordanbaird-ice"
+  "logi-options+"
+  "monitorcontrol"
   "obsidian"
   "orbstack"
   "raycast"
@@ -59,7 +65,7 @@ SPDX-License-Identifier: MIT
 -}}
 
 {{ range ($taps | sortAlpha | uniq) -}}
-tap "{{ . }}"
+tap "{{ . }}", trusted: true
 {{ end -}}
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"

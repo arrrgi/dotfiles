@@ -1,6 +1,8 @@
 tools:
   binaries:
     age: "1.2.1" # renovate: depName=FiloSottile/age datasource=github-releases versioning=semver
+    btop: "1.4.7" #renovate: depName=aristocratos/btop datasource=github-releases versioning=semver
+    fastcli: "0.3.5" # renovate: depName=mikkelam/fast-cli datasource=github-releases versioning=semver
   pypi:
     darwin:
       torf-cli: "5.2.1" # renovate: depName=torf-cli datasource=pypi versioning=pep440
