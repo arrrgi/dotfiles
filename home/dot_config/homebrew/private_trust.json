@@ -1,6 +1,7 @@
 {
   "trustedtaps": [
     "bellicose100xp/tap",
-    "olets/tap"
+    "olets/tap",
+    "tesslio/tap"
   ]
 }

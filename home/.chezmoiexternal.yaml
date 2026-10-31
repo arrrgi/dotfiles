@@ -18,3 +18,18 @@ SPDX-License-Identifier: MIT
 {{- end }}
 
 {{/* Darwin specific externals */}}
+
+{{/* Ubuntu specific externals */}}
+{{- if and .target.ubuntu .access.controlled }}
+".local/bin/btop":
+  type: archive-file
+  url: "https://github.com/aristocratos/btop/releases/download/v{{ .tools.binaries.btop }}/btop-x86_64-unknown-{{ .chezmoi.os }}-musl.tar.gz"
+  executable: true
+  path: btop/bin/btop
+
+".local/bin/fast-cli":
+  type: archive-file
+  url: "https://github.com/mikkelam/fast-cli/releases/download/v{{ .tools.binaries.fastcli }}/fast-cli-x86_64-{{ .chezmoi.os }}.tar.gz"
+  executable: true
+  path: fast-cli
+{{- end }}
