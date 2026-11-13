@@ -29,14 +29,28 @@ export XDG_RUNTIME_DIR=
 {{- end }}
 
 # Define settings and directories for various programs
+
+{{ if and .target.darwin .privacy.private .secrets.apikeys -}}
+# AWS Secret Manager access
+export AWS_ACCESS_KEY_ID="{{ .chezmoi.config.env.AWS_ACCESS_KEY_ID | trim }}"
+export AWS_SECRET_ACCESS_KEY="{{ .chezmoi.config.env.AWS_SECRET_ACCESS_KEY | trim }}"
+export AWS_REGION="{{ .chezmoi.config.awsSecretsManager.region | trim }}"
+{{- end }}
+
 # Bat
 export BAT_THEME=aura-theme
 
 # Cargo
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 
-{{- if lookPath "codex" -}}
+{{ if lookPath "codex" -}}
+# Codex specific environment variables
 export CODEX_HOME="${XDG_CONFIG_HOME}/codex"
+{{- end }}
+
+{{ if lookPath "copilot" -}}
+# Copilot specific environment variables
+export COPILOT_HOME="${XDG_CONFIG_HOME}/copilot"
 {{- end }}
 
 # Docker
@@ -59,9 +73,6 @@ export VISUAL="vi"
 
 # fzf
 # export FZF_DEFAULT_OPTS="--border=horizontal --color=hl:201,hl+:201 --ansi --exact --no-mouse --multi --cycle --tiebreak=length,begin,index --delimiter='\000' --layout=default "
-
-# GH
-export GH_TOKEN="{{ (awsSecretsManager "dotfiles/chezmoi/secrets").githubToken | trim}}"
 
 # Git
 export GIT_CONFIG_GLOBAL="${HOME}/.gitconfig"
@@ -96,9 +107,14 @@ export PAGER="less -isr"
 # Shell
 export BLOCK_SIZE="human-readable"
 
-# SSH
 {{- if and .target.darwin .function.personal }}
+# SSH
 export SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{- end }}
+
+{{- if (lookPath "tessl") }}
+# Tessl
+export TESSL_AUTO_UPDATE_INTERVAL_MINUTES=0
 {{- end }}
 
 # Terminfo

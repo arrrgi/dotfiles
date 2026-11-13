@@ -5,3 +5,4 @@ SPDX-License-Identifier: MIT
 
 .chezmoiscripts/linux/**
 .chezmoitemplates/linux/**
+.config/btop/**
