@@ -7,6 +7,7 @@ SPDX-License-Identifier: MIT
 {{- $taps := list
   "bellicose100xp/tap"
   "olets/tap"
+  "snyk/tap"
   "tesslio/tap"
 -}}
 
@@ -14,6 +15,7 @@ SPDX-License-Identifier: MIT
 {{- $brews := concat $packages (list
   "coreutils"
   "doctl"
+  "flyctl"
   "gh"
   "glow"
   "gnu-sed"
@@ -25,14 +27,11 @@ SPDX-License-Identifier: MIT
   "mise"
   "mole"
   "shellcheck"
+  "snyk"
   "thefuck"
   "yt-dlp"
   "tesslio/tap/tessl"
 )
--}}
-
-{{- $crates := list
-  "tokenusage"
 -}}
 
 {{- $casks := list
@@ -69,9 +68,6 @@ tap "{{ . }}", trusted: true
 {{ end -}}
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
-{{ end -}}
-{{ range ($crates | sortAlpha | uniq) -}}
-cargo "{{ . }}"
 {{ end -}}
 {{ range ($casks | sortAlpha | uniq) -}}
 cask "{{ . }}"
