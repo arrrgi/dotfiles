@@ -29,10 +29,15 @@ if command -v lsd &> /dev/null; then
   alias lldd='ls --depth=2 --tree -l'
 fi
 
-# Bat and Moor are modern replacements for displaying file contents and paging
 {{- if and (lookPath "bat") (lookPath "moor") }}
+# Bat and Moor are modern replacements for displaying file contents and paging
 alias cat='bat'
 alias less='moor'
+{{- end }}
+
+{{- if lookPath "codex" }}
+# Codex should start with no shared daemon to avoid environment pollution across sessions
+alias codex='codex --no-daemon'
 {{- end }}
 
 # fd is a modern replacement for find

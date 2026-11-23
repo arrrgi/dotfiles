@@ -43,6 +43,11 @@ export BAT_THEME=aura-theme
 # Cargo
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 
+{{ if lookPath "claude" -}}
+# Claude specific environment variables
+export CLAUDE_CONFIG_DIR="${XDG_CONFIG_HOME}/claude"
+{{- end }}
+
 {{ if lookPath "codex" -}}
 # Codex specific environment variables
 export CODEX_HOME="${XDG_CONFIG_HOME}/codex"
@@ -69,6 +74,11 @@ export VISUAL="hx"
 {{ else }}
 export EDITOR="vi"
 export VISUAL="vi"
+{{- end }}
+
+{{ if lookPath "fnox" -}}
+# Fnox specific environment variables
+export FNOX_CONFIG_DIR="${XDG_CONFIG_HOME}/fnox"
 {{- end }}
 
 # fzf

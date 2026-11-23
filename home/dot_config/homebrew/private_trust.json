@@ -2,6 +2,8 @@
   "trustedtaps": [
     "bellicose100xp/tap",
     "olets/tap",
-    "tesslio/tap"
+    "snyk/tap",
+    "tesslio/tap",
+    "dicklesworthstone/tap"
   ]
 }

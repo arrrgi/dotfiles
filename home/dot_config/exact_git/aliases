@@ -1,5 +1,23 @@
 [alias]
   co = checkout
-  br = branch
-  st = status
-  ls = log --oneline --graph
+  br   = branch
+  st   = status
+  ls   = log --oneline --graph
+  # pretty format
+  his  = log --pretty=\"%C(auto)[%h:%ad] %s%d \" --date=short
+  # long pretty format
+  lgl  = log --pretty=\"%C(auto)[%h:%ad] %an %d%n%s%n%w(72,4,4)%b\" --date=short --graph --decorate
+  lg   = !git his --decorate --graph # full short log
+  lgs  = !git his -5 # log only the last five commits
+  lst  = !git lg --stat # log including which files changed
+  lpa  = !git lg -p # log including every individual changed line
+  last = !git lgl -1 --patch # show everything about the head commit
+  lgh  = !git lgl -1 --stat
+  lgt  = !git lg --all --simplify-by-decoration # show relationships between branches
+  sl   = !git lgs && git st # show stats and last 5 commits
+
+  # file logging commands
+  fl   = !git his --follow -- # commits including desired files
+  fll  = !git lgl --follow -- # long-format commits
+  fst  = !git lst --follow -- # stat-style commits
+  fpa  = !git lpa --follow -- # full patch commits

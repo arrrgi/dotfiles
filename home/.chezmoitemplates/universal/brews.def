@@ -13,6 +13,7 @@ SPDX-License-Identifier: MIT
   "fclones"
   "fd"
   "fetch"
+  "fzf"
   "git"
   "git-delta"
   "grc"

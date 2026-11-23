@@ -6,6 +6,7 @@ SPDX-License-Identifier: MIT
 {{- $packages := splitList " " (includeTemplate "universal/brews.def" .) }}
 {{- $taps := list
   "bellicose100xp/tap"
+  "dicklesworthstone/tap"
   "olets/tap"
   "snyk/tap"
   "tesslio/tap"
@@ -14,6 +15,7 @@ SPDX-License-Identifier: MIT
 {{/* insert MacOS specific packages here */}}
 {{- $brews := concat $packages (list
   "coreutils"
+  "dcg"
   "doctl"
   "flyctl"
   "gh"
@@ -40,6 +42,8 @@ SPDX-License-Identifier: MIT
   "antinote"
   "arq"
   "chatgpt"
+  "claude"
+  "claude-code"
   "cleanshot"
   "codex"
   "discord"
