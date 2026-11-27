@@ -40,3 +40,8 @@ function spf() {
 	}
 }
 {{- end }}
+
+# Shell function to apply Chezmoi changes and re-source the Zsh configuration
+function chezmoi_apply_reload() {
+  command chezmoi apply "$@" && exec zsh
+}

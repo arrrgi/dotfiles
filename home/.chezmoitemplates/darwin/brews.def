@@ -6,13 +6,19 @@ SPDX-License-Identifier: MIT
 {{- $packages := splitList " " (includeTemplate "universal/brews.def" .) }}
 {{- $taps := list
   "bellicose100xp/tap"
+  "bradygaster/squad"
+  "dicklesworthstone/tap"
   "olets/tap"
+  "snyk/tap"
+  "tesslio/tap"
 -}}
 
 {{/* insert MacOS specific packages here */}}
 {{- $brews := concat $packages (list
   "coreutils"
+  "dcg"
   "doctl"
+  "flyctl"
   "gh"
   "glow"
   "gnu-sed"
@@ -22,14 +28,13 @@ SPDX-License-Identifier: MIT
   "httpie"
   "imagemagick"
   "mise"
+  "mole"
   "shellcheck"
+  "snyk"
   "thefuck"
   "yt-dlp"
+  "tesslio/tap/tessl"
 )
--}}
-
-{{- $crates := list
-  "tokenusage"
 -}}
 
 {{- $casks := list
@@ -37,18 +42,23 @@ SPDX-License-Identifier: MIT
   "1password-cli"
   "antinote"
   "arq"
+  "chatgpt"
+  "claude"
+  "claude-code"
   "cleanshot"
   "codex"
   "discord"
   "fastmail"
   "firefox"
+  "fluidvoice"
   "font-maple-mono-nf"
-  "ghostty"
   "google-drive"
   "iina"
   "jordanbaird-ice"
-  "obsidian"
+  "logi-options+"
+  "monitorcontrol"
   "orbstack"
+  "squad"
   "raycast"
   "tailscale-app"
   "telegram"
@@ -59,13 +69,10 @@ SPDX-License-Identifier: MIT
 -}}
 
 {{ range ($taps | sortAlpha | uniq) -}}
-tap "{{ . }}"
+tap "{{ . }}", trusted: true
 {{ end -}}
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
-{{ end -}}
-{{ range ($crates | sortAlpha | uniq) -}}
-cargo "{{ . }}"
 {{ end -}}
 {{ range ($casks | sortAlpha | uniq) -}}
 cask "{{ . }}"

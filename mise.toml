@@ -1,3 +1,0 @@
-[tools]
-pre-commit = "latest"
-uv = "latest"

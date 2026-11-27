@@ -16,6 +16,9 @@ set -euo pipefail
 # any changes. NOTE: Packages added manually to the target are removed by the `cleanup` option.
 
 if [ -x ${BREW_PATH} ]; then
+  # Ensure Homebrew reads/writes user config in XDG location that Zsh will use
+  export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+
   # Source Homebrew environment variables
   eval "$(${BREW_PATH} shellenv)"
 
