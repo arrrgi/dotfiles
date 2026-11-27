@@ -1,9 +1,10 @@
 {
   "trustedtaps": [
     "bellicose100xp/tap",
+    "bradygaster/squad",
+    "dicklesworthstone/tap",
     "olets/tap",
     "snyk/tap",
-    "tesslio/tap",
-    "dicklesworthstone/tap"
+    "tesslio/tap"
   ]
 }

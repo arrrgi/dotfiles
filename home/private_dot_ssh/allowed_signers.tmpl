@@ -1,7 +1,7 @@
-{{/*
+{{- /*
 SPDX-FileCopyrightText: (c) 2025 Rowan Gillson <devops@the.bald.engineer>
 SPDX-License-Identifier: MIT
-*/}}
+*/ -}}
 {{- if and .function.personal .target.darwin -}}
   {{ .git.email }} namespaces="git" {{ (awsSecretsManager "dotfiles/chezmoi/secrets").sshSigningKeyPersonal | trim }}
 {{- end -}}
